@@ -1,0 +1,809 @@
+﻿using APIMuhasibat.Data;
+using APIMuhasibat.Models;
+using APIMuhasibat.Services;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
+namespace APIMuhasibat.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class _AyarlarController : ControllerBase
+    {
+        private readonly IRepository<Tipler> _ti = null;
+        private readonly IRepository<Qrup> _qr = null;
+        private readonly IRepository<Activler> _bol = null;
+        private readonly IRepository<Hesab> _he = null;
+        private readonly IRepository<Madde> _mad = null;
+        private readonly IRepository<Shirket> _shi = null;
+        private readonly IRepository<Mushteri> _mush = null;
+        private readonly IRepository<Vahid> _va = null;
+        private readonly IRepository<Valyuta> _val = null;
+        private readonly IRepository<Vergi> _ver = null;
+        public _AyarlarController(IRepository<Tipler> ti, IRepository<Qrup> qr, IRepository<Activler> bol, IRepository<Hesab> he,
+            IRepository<Madde> mad, IRepository<Shirket> shi, IRepository<Mushteri> mush, IRepository<Vahid> va, IRepository<Valyuta> val, IRepository<Vergi> ver)
+        {
+            _ti = ti;
+            _qr = qr;
+            _bol = bol;
+            _he = he;
+            _mad = mad;
+            _shi = shi;
+            _mush = mush;
+            _va = va;
+            _val = val;
+            _ver = ver;
+        }
+        #region tip
+        // GET: api/hazirla
+        [HttpGet]
+        [Route("_gettip")]
+        public IEnumerable<Tipler> _gettip(string id)
+        {            
+            if (id != null)
+            {
+                return _ti.GetAll().Where(g => g.TipId== id);
+            }
+            else
+            {              
+                return _ti.GetAll().OrderByDescending(c => c.TipId).OrderBy(k => k.TipId);
+            }
+        }
+        // POST: api/hazirla/_postmov
+        [HttpPost]
+        [Route("_posttip")]
+        public async Task<IActionResult> _posttip([FromBody] Tipler ti)
+        {
+            if (!ModelState.IsValid) { return BadRequest(ModelState); }
+            try
+            {
+                if (ti.TipId == "")
+                {
+                    ti.TipId =Guid.NewGuid().ToString();
+                    ti.TipName = ti.TipName;
+
+                    await _ti.InsertAsync(ti);
+                    return Ok();
+                }
+                else
+                {
+                    var _m = _ti.GetAll().FirstOrDefault(x => x.TipId == ti.TipId);
+                    _m.TipId = ti.TipId;
+                    _m.TipName = ti.TipName;
+                    await _ti.EditAsync(_m);
+                    return Ok();
+                }
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return BadRequest();
+            }
+        }
+        // DELETE: api/hazirla/5
+        [HttpDelete]
+        [Route("_deletetip")]
+        public async Task<IActionResult> _deletetip(string id)
+        {
+            if (!ModelState.IsValid) { return BadRequest(ModelState); }
+            var ti = await _ti.GetAll().SingleOrDefaultAsync(m => m.TipId == id);
+            if (ti == null)
+            {
+                return NotFound();
+            }
+
+            await _ti.DeleteAsync(ti);
+            // await _context.SaveChangesAsync();
+
+            return Ok(ti);
+        }
+        #endregion
+        #region qrup
+        // GET: api/hazirla
+        [HttpGet]
+        [Route("_getqrup")]
+        public IEnumerable<Qrup> _getqrup(string id)
+        {
+            // int vv = _mov.GetAll().OrderByDescending(c => c.mnom).Count()if (id != null)
+            if (id != null)
+            {
+                return _qr.GetAll().Where(g => g.QId == id);
+            }
+            else
+            {
+                return _qr.GetAll().OrderByDescending(c => c.QId).OrderBy(k => k.QId);
+            }
+           
+
+        }
+        // POST: api/hazirla/_postmov
+        [HttpPost]
+        [Route("_postqrup")]
+        public async Task<IActionResult> _postqrup([FromBody] Qrup qr)
+        {
+            if (!ModelState.IsValid) { return BadRequest(ModelState); }
+            try
+            {
+                if (qr.QId =="")
+                {
+                    qr.QId =Guid.NewGuid().ToString();
+                    qr.Qrupname = qr.Qrupname;
+                    qr.Description = qr.Description;
+                    await _qr.InsertAsync(qr);
+                    return Ok();
+                }
+                else
+                {
+                    var _m = _qr.GetAll().FirstOrDefault(x => x.QId == qr.QId);
+                    _m.Qrupname = qr.Qrupname;
+                    _m.Description = qr.Description;
+                    await _qr.EditAsync(_m);
+                    return Ok();
+                }
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return BadRequest();
+            }
+        }
+        // DELETE: api/hazirla/5
+        [HttpDelete]
+        [Route("_deleteqrup")]
+        public async Task<IActionResult> _deleteqrup(Qrup qrr)
+        {
+            if (!ModelState.IsValid) { return BadRequest(ModelState); }
+            var qr = await _qr.GetAll().SingleOrDefaultAsync(m => m.QId ==qrr.QId);
+            if (qr == null)
+            {
+                return NotFound();
+            }
+
+            await _qr.DeleteAsync(qr);
+            // await _context.SaveChangesAsync();
+            return Ok(qr);
+        }
+        #endregion
+        #region bol aktiv
+        // GET: api/hazirla
+        [HttpGet]
+        [Route("_getbol")]
+        public IEnumerable<Activler> _getbol(string id)
+        {
+            if (id != null)
+            {
+                return _bol.GetAll().Where(g => g.ActivId == id);
+            }
+            else
+            {
+                return _bol.GetAll().OrderByDescending(c => c.ActivId).OrderBy(k => k.ActivId);
+            }
+            
+
+        }
+        // POST: api/hazirla/_postmov
+        [HttpPost]
+        [Route("_postbol")]
+        public async Task<IActionResult> _postbol([FromBody] Activler ti)
+        {
+            if (!ModelState.IsValid) { return BadRequest(ModelState); }
+            try
+            {
+                if (ti.ActivId == "")
+                {
+                    ti.ActivId = Guid.NewGuid().ToString();
+                    ti.ActivName = ti.ActivName;
+                    await _bol.InsertAsync(ti);
+                    return Ok();
+                }
+                else
+                {
+                    var _m = _bol.GetAll().FirstOrDefault(x => x.ActivId == ti.ActivId);
+                    _m.ActivId = ti.ActivId;
+                    _m.ActivName = ti.ActivName;
+                    await _bol.EditAsync(_m);
+                    return Ok();
+                }
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return BadRequest();
+            }
+        }
+        // DELETE: api/hazirla/5
+        [HttpDelete]
+        [Route("_deletebol")]
+        public async Task<IActionResult> _deletebol(string id)
+        {
+            if (!ModelState.IsValid) { return BadRequest(ModelState); }
+            var ti = await _ti.GetAll().SingleOrDefaultAsync(m => m.TipId == id);
+            if (ti == null)
+            {
+                return NotFound();
+            }
+
+            await _ti.DeleteAsync(ti);
+            // await _context.SaveChangesAsync();
+
+            return Ok(ti);
+        }
+        #endregion
+        #region hesab
+        // GET: api/hazirla
+        [HttpGet]
+        [Route("_gethesab")]
+        public IEnumerable<Hesab> _gethesab(string id)
+        {
+            if (id != null)
+            {
+                return _he.GetAll().Where(g => g.HesId == id);
+            }
+            else
+            {
+                return _he.GetAll().OrderByDescending(c => c.HesId).OrderBy(k => k.HesId);
+            }
+        }
+        // POST: api/hazirla/_postmov
+        [HttpPost]
+        [Route("_posthesab")]
+        public async Task<IActionResult> _posthesab([FromBody] Hesab ti)
+        {
+            if (!ModelState.IsValid) { return BadRequest(ModelState); }
+            try
+            {
+                if (ti.HesId == "")
+                {
+                    ti.HesId = ti.HesId;
+                    ti.TipId = ti.TipId;
+                    ti.Hesname = ti.Hesname;
+                    ti.Hesnom = ti.Hesnom;
+                    ti.MId = ti.MId;
+                    ti.BId = ti.BId;
+                    await _he.InsertAsync(ti);
+                    return Ok();
+                }
+                else
+                {
+                    var _m = _he.GetAll().FirstOrDefault(x => x.HesId == ti.HesId);
+                    _m.HesId = ti.HesId;
+                    _m.TipId = ti.TipId;
+                    _m.Hesname = ti.Hesname;
+                    _m.Hesnom = ti.Hesnom;
+                    _m.MId = ti.MId;
+                    _m.BId = ti.BId;
+                    await _he.EditAsync(_m);
+                    return Ok();
+                }
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return BadRequest();
+            }
+        }
+        // DELETE: api/hazirla/5
+        [HttpDelete]
+        [Route("_deletehesab")]
+        public async Task<IActionResult> _deletehesab(string id)
+        {
+            if (!ModelState.IsValid) { return BadRequest(ModelState); }
+            var ti = await _he.GetAll().SingleOrDefaultAsync(m => m.HesId == id);
+            if (ti == null)
+            {
+                return NotFound();
+            }
+
+            await _he.DeleteAsync(ti);
+            // await _context.SaveChangesAsync();
+
+            return Ok(ti);
+        }
+        #endregion
+        #region madde
+        // GET: api/hazirla
+        [HttpGet]
+        [Route("_getmad")]
+        public IEnumerable<Madde> _getmad(string id)
+        {
+            if (id != null)
+            {
+                return _mad.GetAll().Where(g => g.MId == id);
+            }
+            else
+            {
+                return _mad.GetAll().OrderByDescending(c => c.MId).OrderBy(k => k.MId);
+            }
+        }
+        // POST: api/hazirla/_postmov
+        [HttpPost]
+        [Route("_postmad")]
+        public async Task<IActionResult> _postmad([FromBody] Madde ti)
+        {
+            if (!ModelState.IsValid) { return BadRequest(ModelState); }
+            try
+            {
+                if (ti.MId == "")
+                {
+                    ti.MId = Guid.NewGuid().ToString();
+                    ti.MaddeName = ti.MaddeName;
+                    await _mad.InsertAsync(ti);
+                    return Ok();
+                }
+                else
+                {
+                    var _m = _mad.GetAll().FirstOrDefault(x => x.MId == ti.MId);
+                    _m.MId = ti.MId;
+                    _m.MaddeName = ti.MaddeName;
+                    await _mad.EditAsync(_m);
+                    return Ok();
+                }
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return BadRequest();
+            }
+        }
+        // DELETE: api/hazirla/5
+        [HttpDelete]
+        [Route("_deletemad")]
+        public async Task<IActionResult> _deletemad(string id)
+        {
+            if (!ModelState.IsValid) { return BadRequest(ModelState); }
+            var ti = await _mad.GetAll().SingleOrDefaultAsync(m => m.MId == id);
+            if (ti == null)
+            {
+                return NotFound();
+            }
+
+            await _mad.DeleteAsync(ti);
+            // await _context.SaveChangesAsync();
+
+            return Ok(ti);
+        }
+        #endregion
+        #region shirket
+        // GET: api/hazirla
+        [HttpGet]
+        [Route("_getshirket")]
+        public IEnumerable<Shirket> _getshirket(string id)
+        {
+            if (id != null)
+            {
+                return _shi.GetAll().Where(c => c.ShId == id);
+            }
+            else
+            {
+               // int d = _shi.GetAll().Count();
+                return _shi.GetAll().OrderByDescending(c => c.ShId).OrderBy(k => k.ShId);
+            }
+            
+
+        }
+        // POST: api/hazirla/_postmov
+        [HttpPost]
+        [Route("_postshirket")]
+        public async Task<IActionResult> _postshirket([FromBody] Shirket ti)
+        {
+            if (!ModelState.IsValid) { return BadRequest(ModelState); }
+            try
+            {
+                if (ti.ShId =="")
+                {
+                    ti.ShId = Guid.NewGuid().ToString();
+                    ti.Bankadi = ti.Bankadi;
+                    ti.Bankvoen = ti.Bankvoen;
+                    ti.SWIFT = ti.SWIFT;
+                    ti.Bankkodu = ti.Bankkodu;
+                    ti.Muxbirhesab = ti.Muxbirhesab;
+                    ti.Aznhesab = ti.Aznhesab;
+                    ti.Shiricrachi = ti.Shiricrachi;
+                    ti.Shirvoen = ti.Shirvoen;
+                    ti.Cavabdehshexs = ti.Cavabdehshexs;
+                    ti.Email = ti.Email;
+                    ti.Unvan = ti.Unvan;
+                    ti.Shirpercent = ti.Shirpercent;
+                    await _shi.InsertAsync(ti);
+                    return Ok();
+                }
+                else
+                {
+                    var _m = _shi.GetAll().FirstOrDefault(x => x.ShId == ti.ShId);
+                    _m.Bankadi = ti.Bankadi;
+                    _m.Bankvoen = ti.Bankvoen;
+                    _m.SWIFT = ti.SWIFT;
+                    _m.Bankkodu = ti.Bankkodu;
+                    _m.Muxbirhesab = ti.Muxbirhesab;
+                    _m.Aznhesab = ti.Aznhesab;
+                    _m.Shiricrachi = ti.Shiricrachi;
+                    _m.Shirvoen = ti.Shirvoen;
+                    _m.Cavabdehshexs = ti.Cavabdehshexs;
+                    _m.Email = ti.Email;
+                    _m.Unvan = ti.Unvan;
+                    _m.Shirpercent = ti.Shirpercent;
+                    await _shi.EditAsync(_m);
+                    return Ok();
+                }
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return BadRequest();
+            }
+        }
+        // DELETE: api/hazirla/5
+        [HttpGet]
+        [Route("_deleteshirket")]
+        public async Task<IActionResult> _deleteshirket(string id)
+        {
+            if (!ModelState.IsValid) { return BadRequest(ModelState); }
+            var ti = await _shi.GetAll().SingleOrDefaultAsync(m => m.ShId == id);
+            if (ti == null)
+            {
+                return NotFound();
+            }
+
+            await _shi.DeleteAsync(ti);
+            // await _context.SaveChangesAsync();
+
+            return Ok(ti);
+        }
+        #endregion
+        #region mushteri
+        // GET: api/hazirla
+        [HttpGet]
+        [Route("_getmushteri")]
+        public IEnumerable<Mushteri> _getmushteri(string id)
+        {           
+            if (id != null)
+            {
+                return _mush.GetAll().Where(c => c.MushId==id);
+            }
+            else
+            {
+                // int d= _va.GetAll().Count();
+                return _mush.GetAll().OrderByDescending(c => c.MushId).OrderBy(k => k.MushId);
+            }
+          
+
+        }
+        // POST: api/hazirla/_postmov
+        [HttpPost]
+        [Route("_postmushteri")]
+        public async Task<IActionResult> _postmushteri([FromBody] Mushteri ti)
+        {
+            if (!ModelState.IsValid) { return BadRequest(ModelState); }
+            try
+            {
+                if (ti.MushId == "")
+                {
+                    ti.MushId = Guid.NewGuid().ToString();
+                    ti.Firma = ti.Firma;
+                    ti.Voen = ti.Voen;
+                    ti.Muqavilenom = ti.Muqavilenom;
+                    ti.Muqaviletar = ti.Muqaviletar;
+                    ti.Valyuta = ti.Valyuta;
+                    ti.Odemesherti = ti.Odemesherti;
+                    ti.Temsilchi = ti.Temsilchi;
+                    await _mush.InsertAsync(ti);
+                    return Ok();
+                }
+                else
+                {
+                    var _m = _mush.GetAll().FirstOrDefault(x => x.MushId == ti.MushId);
+                    _m.Firma = ti.Firma;
+                    _m.Voen = ti.Voen;
+                    _m.Muqavilenom = ti.Muqavilenom;
+                    _m.Muqaviletar = ti.Muqaviletar;
+                    _m.Valyuta = ti.Valyuta;
+                    _m.Odemesherti = ti.Odemesherti;
+                    _m.Temsilchi = ti.Temsilchi;
+                    await _mush.EditAsync(_m);
+                    return Ok();
+                }
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return BadRequest();
+            }
+        }
+        // DELETE: api/hazirla/5
+        [HttpGet]
+        [Route("_deletemushteri")]
+        public async Task<IActionResult> _deletemushteri(string id)
+        {
+            if (!ModelState.IsValid) { return BadRequest(ModelState); }
+            var ti = await _mush.GetAll().SingleOrDefaultAsync(m => m.MushId == id);
+            if (ti == null)
+            {
+                return NotFound();
+            }
+
+            await _mush.DeleteAsync(ti);
+            // await _context.SaveChangesAsync();
+
+            return Ok(ti);
+        }
+        #endregion
+        #region Vahid
+        // GET: api/hazirla
+        [HttpGet]
+        [Route("_getvahid")]
+        public IEnumerable _getvahid(string id)
+        {
+            
+            if (id != null)
+            {
+                return _va.GetAll().Where(c => c.Vahidadi == id);
+            }
+            else
+            {
+               // int d= _va.GetAll().Count();
+                return _va.GetAll().OrderByDescending(c => c.VId).OrderBy(k => k.VId);                 
+            }
+            
+        }
+        // POST: api/hazirla/_postmov
+        [HttpPost]
+        [Route("_postvahid")]
+        public async Task<IActionResult> _postvahid([FromBody] Vahid va)
+        {
+            if (!ModelState.IsValid) { return BadRequest(ModelState); }
+            try
+            {
+                if (va.VId == "")
+                {                  
+                    var ff = _va.GetAll().FirstOrDefault(k => k.Vahidadi.Trim().Contains(va.Vahidadi.Trim()));
+                    if (ff == null )
+                    {
+                       va.VId = Guid.NewGuid().ToString();
+                       va.Vahidadi = va.Vahidadi.Trim();
+                       await _va.InsertAsync(va);
+                    }
+                    return Ok();
+                }
+                else
+                {
+                    var _m = _va.GetAll().FirstOrDefault(x => x.VId == va.VId);
+                    _m.VId = va.VId;
+                    _m.Vahidadi = va.Vahidadi;
+                    await _va.EditAsync(_m);
+                    return Ok();
+                }
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return BadRequest();
+            }
+        }
+        // DELETE: api/hazirla/5
+        [HttpDelete]
+        [Route("_deletevahid")]
+        public async Task<IActionResult> _deletevahid(string id)
+        {
+            if (!ModelState.IsValid) { return BadRequest(ModelState); }
+            var va = await _va.GetAll().SingleOrDefaultAsync(m => m.VId == id);
+            if (va == null)
+            {
+                return NotFound();
+            }
+
+            await _va.DeleteAsync(va);
+            // await _context.SaveChangesAsync();
+
+            return Ok(va);
+        }
+        #endregion
+        #region Vergi kodu
+        // GET: api/hazirla
+        [HttpGet]
+        [Route("_getvergi")]
+        public IEnumerable _getvergi(string id)
+        {
+            
+            var res = (from a in _ver.GetAll()
+                      // join b in _va.GetAll() on a.vId equals b.vId                      
+                       select new
+                       {
+                           a.VergiId,
+                           a.Vergikodu,
+                           a.Vergikodununadi,
+                           a.VId,
+                           a.Edv_tar
+                           // b.vahidadi
+                       });
+            if (id != null)
+            {
+                 res = (from a in _ver.GetAll()
+                         //  join b in _va.GetAll() on a.vId equals b.vId
+                           where a.Vergikodu == id
+                           select new
+                           {
+                               a.VergiId,
+                               a.Vergikodu,
+                               a.Vergikodununadi,
+                               a.VId,
+                               a.Edv_tar
+                             //  b.vahidadi
+                           });
+            }          
+            int dd = res.Count();
+            return res.OrderBy(o => o.VergiId).ToList();
+        }
+        // POST: api/hazirla/_postmov
+        [HttpPost]
+        [Route("_postvergi")]
+        public async Task<IActionResult> _postvergi([FromBody] Vergi ver)
+        {
+            if (!ModelState.IsValid) { return BadRequest(ModelState);    }
+            try
+            {
+                if (ver.VergiId == "")
+                {               
+
+                    ver.VergiId = Guid.NewGuid().ToString();
+                    ver.Vergikodu = ver.Vergikodu;
+                    ver.Vergikodununadi = ver.Vergikodununadi.ToUpper().TrimEnd();
+                    //var x = _va.GetAll().FirstOrDefault(k => k.vahidadi.Trim() == ver.vId.Trim());
+                    //if (x == null)
+                    //{
+                    //    _vahid va = new _vahid();
+                    //    va.vId = Guid.NewGuid().ToString();
+                    //    va.vahidadi = ver.vId.Trim();
+                    //    await _va.InsertAsync(va);
+                    //    ver.vId = va.vId;
+
+                    //}
+                    //else
+                    //{
+                    //  ver.vId = _va.GetAll().FirstOrDefault(k => k.vahidadi.Trim().Contains(ver.vId.Trim())).vId;
+                    //}               
+
+                    ver.VId = ver.VId;                   
+                    ver.Edv_tar =Convert.ToDateTime( "0001-01-01 01:01:01");                   
+                    await _ver.InsertAsync(ver);
+                    return Ok();
+                }
+                else
+                {
+                    var _m = _ver.GetAll().FirstOrDefault(x => x.VergiId == ver.VergiId);
+                    _m.VergiId = ver.VergiId;
+                    _m.Vergikodu = ver.Vergikodu;
+                    _m.Vergikodununadi =ver.Vergikodununadi;
+                    _m.VId = ver.VId;
+                   
+                    await _ver.EditAsync(_m);
+                    return Ok();
+                }
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return BadRequest();
+            }
+        }
+        // DELETE: api/hazirla/5
+        [HttpGet]
+        [Route("_deletevergi")]
+        public async Task<IActionResult> _deletevergi(string id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var vergi = await _ver.GetAll().SingleOrDefaultAsync(m => m.VergiId == id);
+            if (vergi == null)
+            {
+                return NotFound();
+            }
+
+            await _ver.DeleteAsync(vergi);
+            // await _context.SaveChangesAsync();
+
+            return Ok(vergi);
+        }
+        #endregion
+
+        #region Valyuta
+        // GET: api/hazirla
+        [HttpGet]
+        [Route("_getvalyuta")]
+        public IEnumerable _getvalyuta(string id)
+        {
+
+            if (id != null)
+            {
+                return _val.GetAll().Where(c => c.ValId == id);
+            }
+            else
+            {
+                // int d= _va.GetAll().Count();
+                return _val.GetAll().OrderByDescending(c => c.ValId).OrderBy(k => k.ValId);
+            }
+
+        }
+        // POST: api/hazirla/_postmov
+        [HttpPost]
+        [Route("_postvalyuta")]
+        public async Task<IActionResult> _postvalyuta([FromBody] Valyuta va)
+        {
+            if (!ModelState.IsValid) { return BadRequest(ModelState); }
+            try
+            {
+                if (va.ValId == "")
+                {
+                    var ff = _val.GetAll().FirstOrDefault(k => k.Valname.Trim().Contains(va.Valname.Trim()));
+                    if (ff == null)
+                    {
+                        va.ValId = Guid.NewGuid().ToString();
+                        va.Valname = va.Valname.Trim();
+                        await _val.InsertAsync(va);
+                    }
+                    return Ok();
+                }
+                else
+                {
+                    var _m = _val.GetAll().FirstOrDefault(x => x.ValId == va.ValId);
+                    _m.ValId = va.ValId;
+                    _m.Valname = va.Valname;
+                    await _val.EditAsync(_m);
+                    return Ok();
+                }
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return BadRequest();
+            }
+        }
+        // DELETE: api/hazirla/5
+        [HttpDelete]
+        [Route("_deletevalyuta")]
+        public async Task<IActionResult> _deletevalyuta(string id)
+        {
+            if (!ModelState.IsValid) { return BadRequest(ModelState); }
+            var va = await _val.GetAll().SingleOrDefaultAsync(m => m.ValId == id);
+            if (va == null)
+            {
+                return NotFound();
+            }
+
+            await _val.DeleteAsync(va);
+            // await _context.SaveChangesAsync();
+
+            return Ok(va);
+        }
+        #endregion
+        // GET: api/<_AyarlarController>
+        [HttpGet]
+        public IEnumerable<string> Get()
+        {
+            return new string[] { "value1", "value2" };
+        }
+
+        // GET api/<_AyarlarController>/5
+        [HttpGet("{id}")]
+        public string Get(int id)
+        {
+            return "value";
+        }
+
+        // POST api/<_AyarlarController>
+        [HttpPost]
+        public void Post([FromBody] string value)
+        {
+        }
+
+        // PUT api/<_AyarlarController>/5
+        [HttpPut("{id}")]
+        public void Put(int id, [FromBody] string value)
+        {
+        }
+
+        // DELETE api/<_AyarlarController>/5
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
+        }
+    }
+}
