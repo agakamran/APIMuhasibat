@@ -34,6 +34,7 @@ namespace APIMuhasibat.Controllers
         private IPasswordValidator<ApplicationUser> passwordValidator;
         private IPasswordHasher<ApplicationUser> passwordHasher;
         private readonly IEmailSender _emailSender;
+        private readonly IRepository<logger> _log = null;
         private readonly ILogger _logger;
         //private readonly IAntiforgery _antiforgery;
         //  private readonly IRepository<payment> _pa = null; //imkani
@@ -53,7 +54,8 @@ namespace APIMuhasibat.Controllers
             IConfiguration config, IEmailSender emailSender, ILogger<AccountController> logger,
             IUserValidator<ApplicationUser> userValid,
             IPasswordValidator<ApplicationUser> passValid,
-            IPasswordHasher<ApplicationUser> passwordHash
+            IPasswordHasher<ApplicationUser> passwordHash,
+            IRepository<logger> log
              //IAntiforgery antiforgery, IRepository<payment> pa,  IRepository<Customer> cu, IRepository<Price> pr,  IRepository<invoice> inv,     IHostingEnvironment hostingEnvironment,
             )
         {
@@ -68,8 +70,9 @@ namespace APIMuhasibat.Controllers
             userValidator = userValid;
             passwordValidator = passValid;
             passwordHasher = passwordHash;
+            _log = log;
             // _pa = pa; _cu = cu;  _pr = pr;  _inv = inv;    _hostingEnvironment = hostingEnvironment;
-             //_antiforgery = antiforgery;
+            //_antiforgery = antiforgery;
         }
         //[HttpGet]
         //[Route("antGet")]
@@ -268,7 +271,23 @@ namespace APIMuhasibat.Controllers
                         pp.userId = user.Id;
                         pp.Shirpercent=0;
                         await _firma.InsertAsync(pp);
+                       /*
+                        var ll = new logger();
+                        ll.createdate = DateTime.Now;
+                        ll.entityname = "contract";
+                        ll.createduser = "test";
 
+                        var contold = _cont.GetAll().FirstOrDefault(k => k.kId == contract.kId);
+                        if (contold.kId.ToString().Trim() != contract.kId.ToString().Trim()) { ll.description = "kId " + contold.kId.ToString() + "=>" + contract.kId.ToString(); }
+                        if (contold.userID.ToString().Trim() != contract.userID.ToString().Trim()) { ll.description += "userID " + contold.userID.ToString() + "=>" + contract.userID.ToString(); }
+                        if (contold.clientID.ToString().Trim() != contract.clientID.ToString().Trim()) { ll.description += "clientID " + contold.clientID.ToString() + "=>" + contract.clientID.ToString(); }
+                        if (contold.info.ToString().Trim() != contract.info.ToString().Trim()) { ll.description += "info " + contold.info.ToString() + "=>" + contract.info.ToString(); }
+                        if (contold.kontrakt.ToString().Trim() != contract.kontrakt.ToString().Trim()) { ll.description += "kontrakt " + contold.kontrakt.ToString() + "=>" + contract.kontrakt.ToString(); }
+                        if (contold.StartDate.ToString().Trim() != contract.StartDate.ToString().Trim()) { ll.description += "StartDate " + contold.StartDate.ToString() + "=>" + contract.StartDate.ToString(); }
+                        if (contold.EndDate.ToString().Trim() != contract.EndDate.ToString().Trim()) { ll.description += "EndDate " + contold.EndDate.ToString() + "=>" + contract.EndDate.ToString(); }
+                        ll.opername = "Edit";
+                        await _log.InsertAsync(ll);
+                        */
                     }
                     //   Url = _config["ClientDomain"]; 
                     var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);

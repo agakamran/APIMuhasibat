@@ -276,10 +276,11 @@ namespace APIMuhasibat.Controllers
                        join b in _bol.GetAll().ToList() on he.BId equals b.bId
                        join m in _mad.GetAll().ToList() on he.MId equals m.MId //into mad
                        join t in _ti.GetAll().ToList() on he.TipId equals t.TipId
-                      // from _mmad in mad.DefaultIfEmpty()
+                       join a in _act.GetAll().ToList() on he.ActivId equals a.ActivId
+                       // from _mmad in mad.DefaultIfEmpty()
                        select new
                        {
-                           he.HesId, he.Hesnom, he.Hesname, he.BId,b.bolmeName, m.MId, m.MaddeName, t.TipId, t.TipName
+                           he.HesId, he.Hesnom, he.Hesname, he.BId,b.bolmeName, m.MId, m.MaddeName, t.TipId, t.TipName,he.ActivId,a.ActivName
                        });
             if (id != null)
             {

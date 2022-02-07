@@ -41,6 +41,7 @@ namespace APIMuhasibat
         {
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
              Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddDbContext<ApplicationDbContext>(ServiceLifetime.Transient);
             services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {

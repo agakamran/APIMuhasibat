@@ -34,7 +34,7 @@ namespace APIMuhasibat.Data
         public DbSet<Vahid> vahids { get; set; }
         public DbSet<Emeliyyatdet> emeliyyatdets { get; set; }
         public DbSet<Valyuta> valyutas { get; set; }
-
+        public DbSet<logger> loggers { get; set; }
         // public DbSet<Cart> Carts { get; set; }
         // public DbSet<vido> vidos { get; set; }
         // public DbSet<Cont> conts { get; set; }

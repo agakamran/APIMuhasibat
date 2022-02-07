@@ -87,6 +87,7 @@ namespace APIMuhasibat.Controllers
                     va.Edvye_celbedilen = va.Edvye_celbedilen;
                     va.Edvye_celbedilmeyen = va.Edvye_celbedilmeyen;
                     va.Miqdar = va.Miqdar;
+                    
                     va.Vahidqiymeti_alish = va.Vahidqiymeti_alish;
                     va.Vahidqiymeti_satish = va.Vahidqiymeti_satish;
                     va.Edv = va.Edv;
