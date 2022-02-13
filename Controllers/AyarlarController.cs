@@ -1,10 +1,13 @@
 ﻿using APIMuhasibat.Models;
 using APIMuhasibat.Services;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -27,9 +30,14 @@ namespace APIMuhasibat.Controllers
         private readonly IRepository<Vahid> _va = null;
         private readonly IRepository<Valyuta> _val = null;
         private readonly IRepository<Vergi> _ver = null;
-        public AyarlarController(IRepository<Tipler> ti, IRepository<Qrup> qr, IRepository<Activler> act, IRepository<Hesab> he, IRepository<Bolme> bol,
-        IRepository<Madde> mad, IRepository<Shirket> shi, IRepository<Mushteri> mush, IRepository<Vahid> va, IRepository<Valyuta> val, IRepository<Vergi> ver)
+        private readonly IRepository<fealsahe> _feal = null;
+        private readonly IRepository<Emeliyyatdet> _emel = null;
+        private static IWebHostEnvironment _host;
+        public AyarlarController(IWebHostEnvironment host, IRepository<Tipler> ti, IRepository<Qrup> qr, IRepository<Activler> act, IRepository<Hesab> he, IRepository<Bolme> bol,
+        IRepository<Madde> mad, IRepository<Shirket> shi, IRepository<Mushteri> mush, IRepository<Vahid> va, IRepository<Valyuta> val,
+        IRepository<Vergi> ver, IRepository<fealsahe> feal, IRepository<Emeliyyatdet> emel)
         {
+            _host = host;
             _ti = ti;
             _qr = qr;
             _act = act;
@@ -41,6 +49,8 @@ namespace APIMuhasibat.Controllers
             _val = val;
             _ver = ver;
             _bol = bol;
+            _feal = feal;
+            _emel = emel;
         }
         /*
    select *from Tiplers
@@ -748,24 +758,76 @@ namespace APIMuhasibat.Controllers
         [Route("_getvergi")]
         public IEnumerable _getvergi()
         {
+            //if(emel == "ALIŞ")
+            //{
+                var res = (from a in _ver.GetAll()
+                           join b in _va.GetAll() on a.VId equals b.VId
+                           select new
+                           {
+                               a.VergiId,
+                               a.Vergikodu,
+                               a.Vergikodununadi,
+                               a.VId,
+                               a.Edv_tar,
+                               a.State,
+                               b.Vahidadi
+                           });
 
-            var res = (from a in _ver.GetAll()
-                       join b in _va.GetAll() on a.VId equals b.VId                      
-                       select new
-                       {
-                           a.VergiId,
-                           a.Vergikodu,
-                           a.Vergikodununadi,
-                           a.VId,
-                           a.Edv_tar,
-                           a.State,
-                           b.Vahidadi
-                       });
-           
-            int dd = res.Count();
-            return res.OrderBy(o => o.VergiId).ToList();
+                int dd = res.Count();
+                return res.OrderBy(o => o.VergiId).ToList();
+            //}
+            //else if (emel == "SATIŞ")
+            //{
+            //    var res = (from e in _emel.GetAll()
+            //               join a in _ver.GetAll() on e.VergiId equals a.VergiId
+            //               join b in _va.GetAll() on e.VId equals b.VId
+            //             //  join e in _emel.GetAll()
+            //               select new
+            //               {
+            //                   a.VergiId,
+            //                   a.Vergikodu,
+            //                   a.Vergikodununadi,
+            //                   e.VId,
+            //                   a.Edv_tar,
+            //                   a.State,
+            //                   b.Vahidadi
+            //               });
+
+            //    int dd = res.Count();
+            //    return res.OrderBy(o => o.VergiId).ToList();
+            //}
+            //return null;
         }
         // POST: api/hazirla/_postmov
+        [HttpPost]
+        [Route("postvergilist")]
+        public async Task<IActionResult> postvergilist(Vergi[] ver)
+        {
+            if (!ModelState.IsValid) { return BadRequest(ModelState); }
+            try
+            {
+                foreach (var v in ver)
+                {
+                    v.VergiId = Guid.NewGuid().ToString();
+                    v.Vergikodu = v.Vergikodu;
+                    if (v.Vergikodununadi != null)
+                    {
+                        v.Vergikodununadi = v.Vergikodununadi.ToUpper().TrimEnd();
+                    }
+
+                    v.VId = _va.GetAll().FirstOrDefault(c => c.Vahidadi == v.VId).VId;
+                    v.Edv_tar = null;// Convert.ToDateTime("0001-01-01 01:01:01");
+                    v.State = v.State;
+                    await _ver.InsertAsync(v);
+                }
+                return Ok();
+
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return BadRequest();
+            }
+        }
         [HttpPost]
         [Route("postvergi")]
         public async Task<IActionResult> postvergi([FromBody] Vergi ver)
@@ -775,13 +837,21 @@ namespace APIMuhasibat.Controllers
             {
                 if (ver.VergiId == "")
                 {
+
                     ver.VergiId = Guid.NewGuid().ToString();
                     ver.Vergikodu = ver.Vergikodu;
-                    ver.Vergikodununadi = ver.Vergikodununadi.ToUpper().TrimEnd();
-                    ver.VId = _va.GetAll().FirstOrDefault(c => c.Vahidadi == ver.VId).VId;
+                    if (ver.Vergikodununadi != null)
+                    {
+                        ver.Vergikodununadi = ver.Vergikodununadi.ToUpper().TrimEnd();
+                    }
+                    if (ver.VId != null)
+                    {
+                        ver.VId = _va.GetAll().FirstOrDefault(c => c.Vahidadi == ver.VId).VId;
+                    }
                     ver.Edv_tar = null;// Convert.ToDateTime("0001-01-01 01:01:01");
                     ver.State = ver.State;
                     await _ver.InsertAsync(ver);
+
                     return Ok();
                 }
                 else
@@ -789,7 +859,11 @@ namespace APIMuhasibat.Controllers
                     var _m = _ver.GetAll().FirstOrDefault(x => x.VergiId == ver.VergiId);
                     _m.VergiId = ver.VergiId;
                     _m.Vergikodu = ver.Vergikodu;
-                    _m.Vergikodununadi = ver.Vergikodununadi;
+                    if (ver.Vergikodununadi != null)
+                    {
+                        _m.Vergikodununadi = ver.Vergikodununadi.ToUpper().TrimEnd();
+                    }
+                    //_m.Vergikodununadi = ver.Vergikodununadi;
                     _m.VId = _va.GetAll().FirstOrDefault(c => c.Vahidadi == ver.VId).VId;
                     _m.State = ver.State;
                     await _ver.EditAsync(_m);
@@ -820,6 +894,71 @@ namespace APIMuhasibat.Controllers
             // await _context.SaveChangesAsync();
 
             return Ok(vergi);
+        }
+        #endregion
+        #region fealiyyet sahesi
+        // GET: api/hazirla
+        [HttpGet]
+        [Route("_getfeal")]
+        public IEnumerable<fealsahe> _getfeal(string id)
+        {
+            // int vv = _mov.GetAll().OrderByDescending(c => c.mnom).Count()if (id != null)
+            if (id != null)
+            {
+                return _feal.GetAll().Where(g => g.fsId == id);
+            }
+            else
+            {
+                return _feal.GetAll().OrderByDescending(c => c.fsId).OrderBy(k => k.fsId);
+            }
+
+
+        }
+        // POST: api/hazirla/_postmov
+        [HttpPost]
+        [Route("_postfeal")]
+        public async Task<IActionResult> _postfeal([FromBody] fealsahe qr)
+        {
+            if (!ModelState.IsValid) { return BadRequest(ModelState); }
+            try
+            {
+                if (qr.fsId == "")
+                {
+                    qr.fsId = Guid.NewGuid().ToString();
+                    qr.fsADI = qr.fsADI;
+                    qr.fs_CODE = qr.fs_CODE;
+                    await _feal.InsertAsync(qr);
+                    return Ok();
+                }
+                else
+                {
+                    var _m = _feal.GetAll().FirstOrDefault(x => x.fsId == qr.fsId);
+                    _m.fsADI = qr.fsADI;
+                    _m.fs_CODE = qr.fs_CODE;
+                    await _feal.EditAsync(_m);
+                    return Ok();
+                }
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return BadRequest();
+            }
+        }
+        // DELETE: api/hazirla/5
+        [HttpDelete]
+        [Route("_deletefeal")]
+        public async Task<IActionResult> _deletefeal(fealsahe qrr)
+        {
+            if (!ModelState.IsValid) { return BadRequest(ModelState); }
+            var qr = await _feal.GetAll().SingleOrDefaultAsync(m => m.fsId == qrr.fsId);
+            if (qr == null)
+            {
+                return NotFound();
+            }
+
+            await _feal.DeleteAsync(qr);
+            // await _context.SaveChangesAsync();
+            return Ok(qr);
         }
         #endregion
         #region Valyuta
@@ -895,6 +1034,7 @@ namespace APIMuhasibat.Controllers
             return Ok(va);
         }
         #endregion
+
         // GET: api/<AyarlarController>
         [HttpGet]
         public IEnumerable<string> Get()
@@ -911,8 +1051,200 @@ namespace APIMuhasibat.Controllers
 
         // POST api/<AyarlarController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        [Route("posthazirla")]
+        public async Task<IActionResult> posthazirla([FromBody] string value)
         {
+            if (!ModelState.IsValid) { return BadRequest(ModelState); }
+            else
+            {
+                if (value.Length > 0)
+                {
+                    string fullPath = "", jsonData = "";
+                    var rootPath = _host.ContentRootPath; //get the root path
+                    switch (value)
+                    {
+                        case "vergi":
+                            #region
+                            fullPath = Path.Combine(rootPath, "Uploade//eqm_mal_kodlari-v1.json"); //combine the root path with that of our json file inside mydata directory
+                            jsonData = System.IO.File.ReadAllText(fullPath); //read all the content inside the file
+                            if (string.IsNullOrWhiteSpace(jsonData)) return null; //if no data is present then return null or error if you wish
+                            if (_ver.GetAll().Count() == 0)
+                            {
+                                var verg = JsonConvert.DeserializeObject<List<verg>>(jsonData); //deserialize object as a list of users in accordance with your json file
+                                foreach (var item in verg)
+                                {
+                                    var ve = new Vergi();
+                                    ve.VergiId = "";
+                                    ve.Edv_tar = null;
+                                    ve.VId = item.VAHID;
+                                    ve.Vergikodu = item.CODE;
+                                    if (item.ADI != null) { ve.Vergikodununadi = item.ADI; }
+                                    if (item.STATE != null) { ve.State = int.Parse(item.STATE); }
+                                    await postvergi(ve);
+                                }
+                            }
+                            #endregion
+                            break;
+                        case "hesab":
+                            fullPath = Path.Combine(rootPath, "Uploade//hesablar.json");
+                            jsonData = System.IO.File.ReadAllText(fullPath);
+                            if (string.IsNullOrWhiteSpace(jsonData)) return null;
+                            var hes = JsonConvert.DeserializeObject<List<hesb>>(jsonData);
+                            #region aktiv
+                            if (_act.GetAll().Count() == 0)
+                            {
+                                IEnumerable<string> a = hes.Select(x => x.activId);
+                                foreach (var k in a)
+                                {
+                                    var p = new Activler() { ActivId = "", ActivName = k, Description = "" };
+                                    await _postaktivler(p);
+                                }
+                            }
+
+                            #endregion
+                            #region tip
+                            if (_ti.GetAll().Count() == 0)
+                            {
+                                IEnumerable<string> t = hes.Select(x => x.tipId);
+                                foreach (var k in t)
+                                {
+                                    var p = new Tipler() { TipId = "", TipName = k };
+                                    await _postip(p);
+                                }
+                            }
+                            #endregion
+                            #region bolme
+                            if (_bol.GetAll().Count() == 0)
+                            {
+                                IEnumerable<int> b = hes.Select(x => x.bId);
+                                foreach (var k in b)
+                                {
+                                    var p = new Bolme() { bId = "", bolmeName = k.ToString() };
+                                    await _postbolme(p);
+                                }
+                            }
+                            #endregion
+                            #region madd
+                            if (_mad.GetAll().Count() == 0)
+                            {
+                                IEnumerable<string> m = hes.Select(x => x.mId);
+                                foreach (var k in m)
+                                {
+                                    var p = new Madde() { MId = "", MaddeName = k };
+                                    await _postmad(p);
+                                }
+                            }
+                            #endregion
+                            #region hesab
+                            if (_he.GetAll().Count() == 0)
+                            {
+                                foreach (var item in hes)
+                                {
+                                    var ve = new Hesab()
+                                    {
+                                        HesId = "",
+                                        BId = item.bId.ToString(),
+                                        MId = item.mId,
+                                        Hesnom = item.hesnom,
+                                        Hesname = item.hesname,
+                                        TipId = item.tipId,
+                                        ActivId = item.activId
+                                        //if (item.ADI != null) { ve.Vergikodununadi = item.ADI; }
+                                        //if (item.STATE != null) { ve.State = int.Parse(item.STATE); }
+                                    };
+                                    await _posthesab(ve);
+                                }
+                            }
+                            #endregion                           
+                            break;
+                        case "Mushteri":
+                            #region
+                            fullPath = Path.Combine(rootPath, "Uploade//mushteri.json");
+                            jsonData = System.IO.File.ReadAllText(fullPath);
+                            if (string.IsNullOrWhiteSpace(jsonData)) return null;
+                            var mush = JsonConvert.DeserializeObject<List<Mushteri>>(jsonData);
+                            if (_mush.GetAll().Count() == 0)
+                            {
+                                foreach (var mm in mush)
+                                {
+                                    var p = new Mushteri()
+                                    {
+                                        MushId = "",
+                                        Firma = mm.Firma,
+                                        Voen = mm.Voen,
+                                        Muqavilenom = mm.Muqavilenom,
+                                        Valyuta = mm.Valyuta,
+                                        Odemesherti = mm.Odemesherti,
+                                        Temsilchi = mm.Temsilchi
+                                    };
+
+                                    await _postmushteri(p);
+                                }
+                            }
+                            #endregion
+                            break;
+                        case "shirket":
+                            #region
+                            fullPath = Path.Combine(rootPath, "Uploade//shirket.json");
+                            jsonData = System.IO.File.ReadAllText(fullPath);
+                            if (string.IsNullOrWhiteSpace(jsonData)) return null;
+                            var shir = JsonConvert.DeserializeObject<List<Shirket>>(jsonData);
+                            if (_shi.GetAll().Count() == 0)
+                            {
+                                foreach (var s in shir)
+                                {
+                                    var p = new Shirket()
+                                    {
+                                        ShId = "",
+                                        Bankadi = s.Bankadi,
+                                        Bankvoen = s.Bankvoen,
+                                        SWIFT = s.SWIFT,
+                                        Muxbirhesab = s.Muxbirhesab,
+                                        Bankkodu = s.Bankkodu,
+                                        Aznhesab = s.Aznhesab,
+                                        Shiricrachi = s.Shiricrachi,
+                                        Shirvoen = s.Shirvoen,
+                                        Cavabdehshexs = s.Cavabdehshexs,
+                                        Email = "",
+                                        Unvan = s.Unvan,
+                                        userId = "",
+                                        Shirpercent = 0
+                                    };
+                                    await _postshirket(p);
+                                }
+                            }
+                            #endregion
+                            break;
+                        case "fealiyet":
+                            #region
+                            fullPath = Path.Combine(rootPath, "Uploade//fk-v1.json");
+                            jsonData = System.IO.File.ReadAllText(fullPath);
+                            if (string.IsNullOrWhiteSpace(jsonData)) return null;
+                            var feal = JsonConvert.DeserializeObject<List<fealsahe>>(jsonData);
+                            if (_feal.GetAll().Count() == 0)
+                            {
+                                int f = feal.Count;
+                                foreach (var k in feal)
+                                {
+                                    try
+                                    {
+                                        var p = new fealsahe() { fsId = "", fs_CODE = k.fs_CODE, fsADI = k.fsADI };
+                                        await _postfeal(p);
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        Console.WriteLine(ex);
+                                    }
+                                }
+                            }
+                            #endregion
+                            break;
+                    }
+
+                }
+                else { return BadRequest("Failed"); }
+                return Ok();
+            }
         }
 
         // PUT api/<AyarlarController>/5

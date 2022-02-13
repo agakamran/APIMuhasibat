@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace APIMuhasibat.Models
 {
     [Table("Hesabs")]
-   public class Hesab
+    public class Hesab
     {
         string _hesId = null, _hesnom = null, _hesname = null,
             _bId = null, _mId = null, _tipId = null, _activId = null;
@@ -32,7 +32,8 @@ namespace APIMuhasibat.Models
             }
         }
         [MaxLength(10)]
-        public string Hesnom {
+        public string Hesnom
+        {
             get { return _hesnom; }
             set
             {
@@ -40,7 +41,8 @@ namespace APIMuhasibat.Models
             }
         }
         [MaxLength(100)]
-        public string Hesname {
+        public string Hesname
+        {
             get { return _hesname; }
             set
             {
@@ -48,7 +50,8 @@ namespace APIMuhasibat.Models
             }
         }
         [MaxLength(36)]
-        public string BId {
+        public string BId
+        {
             get { return _bId; }
             set
             {
@@ -56,7 +59,8 @@ namespace APIMuhasibat.Models
             }
         }
         [MaxLength(36)]
-        public string MId {
+        public string MId
+        {
             get { return _mId; }
             set
             {
@@ -79,7 +83,8 @@ namespace APIMuhasibat.Models
         //    }
         //}
         [MaxLength(36)]
-        public string TipId {
+        public string TipId
+        {
             get { return _tipId; }
             set
             {
@@ -94,5 +99,16 @@ namespace APIMuhasibat.Models
         //        if (value != null) { _tipler = value; }
         //    }
         //}
+    }
+    public class hesb
+    {
+        public string hesId { get; set; }
+        public string hesnom { get; set; }
+        public string hesname { get; set; }
+        public int bId { get; set; }
+        public string mId { get; set; }
+        public string tipId { get; set; }
+        public string activId { get; set; }
+
     }
 }

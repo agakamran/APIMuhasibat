@@ -14,7 +14,7 @@ namespace APIMuhasibat.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EmeliyyatController : ControllerBase
+    public class EmeliyyatController : BaseController
     {
         private readonly IRepository<Emeliyyatdet> _emel = null;
         private readonly IRepository<Tipler> _ti = null;
@@ -55,8 +55,41 @@ namespace APIMuhasibat.Controllers
             }
             else
             {
+                var res = (from e in _emel.GetAll()
+                           join a in _ver.GetAll() on e.VergiId equals a.VergiId
+                           join b in _va.GetAll() on e.VId equals b.VId
+                           //  join e in _emel.GetAll()
+                           select new
+                           {
+                               e.EmdetId,
+                               e.UserId,
+                               e.QId,
+                               e.AId,
+                               e.DhesId,
+                               e.KhesId,
+                               e.MushId,
+                               e.VergiId,
+                               e.VId,
+                               e.Miqdar,
+                               e.Submiqdar,
+                               e.Vahidqiymeti_alish,
+                               e.Vahidqiymeti_satish,
+                               e.Edv,
+                               e.Edvye_celbedilen,
+                               e.Edvye_celbedilmeyen,
+                               e.Emeltarixi,
+                               e.ValId,
+                               e.Qeyd,
+                               e.Kurs,
+                               a.Vergikodu,
+                               a.Vergikodununadi,
+                               //               e.VId,
+                               //               a.Edv_tar,
+                               //               a.State,
+                               //b.Vahidadi
+                           });
                 // int d= _va.GetAll().Count();
-                return _emel.GetAll().OrderByDescending(c => c.EmdetId).OrderBy(k => k.EmdetId);
+                return res.OrderByDescending(c => c.EmdetId);
             }
 
         }
@@ -72,35 +105,49 @@ namespace APIMuhasibat.Controllers
                 {
                     // var ff = _val.GetAll().FirstOrDefault(k => k.Valname.Trim().Contains(va.Valname.Trim()));
                     //  if (ff == null)
-                    // {                    
+                    // {
+                    //switch (va.QId)//'ALIŞ','SATIŞ','HESABLAŞMALAR','VERGİLƏR','ÖHDƏLİKLƏR','KAPİTALLAR','GƏLİRLƏR','XƏRCLƏR','DVIDENTLƏR'
+                    //{
+                    //    case "ALIŞ":
+                    //        va.Miqdar = va.Miqdar;
+                    //        break;
+                    //    case "SATIŞ":
+                    //        va.Miqdar = -va.Miqdar;
+                    //        break;
+                    //    case "HESABLAŞMALAR":
+                    //        break;
+                    //}
+                    va.Miqdar = va.Miqdar;
                     va.EmdetId = Guid.NewGuid().ToString();
                     va.QId = va.QId;
-                    va.UserId = va.UserId;
+                    va.UserId = _GeteId();
                     va.MushId = va.MushId;
-                    va.VergiId= va.VergiId;
+                    va.VergiId = va.VergiId;
                     va.VId = va.VId;
                     va.Qeyd = va.Qeyd;
                     va.ValId = va.ValId;
-                    va.DhesId = va.KhesId;
+                    va.DhesId = va.DhesId;
                     va.KhesId = va.KhesId;
-                    va.Submiqdar = va.Submiqdar;                  
+                    va.Submiqdar = va.Submiqdar;
                     va.Edvye_celbedilen = va.Edvye_celbedilen;
-                    va.Edvye_celbedilmeyen = va.Edvye_celbedilmeyen;
-                    va.Miqdar = va.Miqdar;
-                    
+                    va.Edvye_celbedilmeyen = va.Edvye_celbedilmeyen;                   
                     va.Vahidqiymeti_alish = va.Vahidqiymeti_alish;
                     va.Vahidqiymeti_satish = va.Vahidqiymeti_satish;
                     va.Edv = va.Edv;
-                    va.Kurs = va.Kurs;
-                        await _emel.InsertAsync(va);
-                   // }
+                   // var tt = _val.GetAll().FirstOrDefault(k => k.Valname == va.ValId); //.Max(t => t.Tarix);
+                    //if (tt != null)                    
+                        va.Kurs = va.Kurs;                    
+                   // else
+                    //    va.Kurs = 1;
+                    await _emel.InsertAsync(va);
+                    // }
                     return Ok();
                 }
                 else
                 {
                     var _m = _val.GetAll().FirstOrDefault(x => x.ValId == va.ValId);
-                   // _m.ValId = va.ValId;
-                  //  _m.Valname = va.Valname;
+                    // _m.ValId = va.ValId;
+                    //  _m.Valname = va.Valname;
                     await _val.EditAsync(_m);
                     return Ok();
                 }

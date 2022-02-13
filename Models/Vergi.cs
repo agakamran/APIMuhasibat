@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 namespace APIMuhasibat.Models
 {
     [Table("Vergis")]
-   public class Vergi
+    public class Vergi
     {
         string _vergiId = null, _vergikodu = null, _vergikodununadi = null, _vId = null;
-         Nullable<DateTime> _edv_tar =null;int _STATE = 0;
+        Nullable<DateTime> _edv_tar = null; int _STATE = 0;
         public Vergi() { }
         public Vergi(string vergiId, string vergikodununadi)
         {
@@ -47,12 +47,20 @@ namespace APIMuhasibat.Models
         public int State
         {
             get { return _STATE; }
-            set { if (value >0) { _STATE = value; } }
+            set { if (value > 0) { _STATE = value; } }
         }
         public Nullable<DateTime> Edv_tar
         {
             get { return _edv_tar; }
             set { if (value != null) { _edv_tar = value; } }
         }
+    }
+
+    public class verg
+    {
+        public string CODE { get; set; }
+        public string ADI { get; set; }
+        public string VAHID { get; set; }
+        public string STATE { get; set; }
     }
 }

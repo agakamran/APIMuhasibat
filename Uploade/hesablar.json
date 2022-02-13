@@ -1,0 +1,1757 @@
+﻿[
+  {
+    "bId": "1",
+    "mId": "10",
+    "hesnom": "",
+    "hessubnom": "",
+    "hesname": "Qeyri-maddi aktivlər",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "1",
+    "mId": "10",
+    "hesnom": "101",
+    "hessubnom": "",
+    "hesname": "Qeyri-maddi aktivlərin dəyəri",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "1",
+    "mId": "10",
+    "hesnom": "102",
+    "hessubnom": "",
+    "hesname": "Qeyri-maddi aktivlər üzrə yığılmış amortizasiya və qiymətdəndüşmə zərərləri",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "1",
+    "mId": "10",
+    "hesnom": "103",
+    "hessubnom": "",
+    "hesname": "Qeyri-maddi aktivlərlə bağlı məsrəflərin kapitallaşdırılması",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "1",
+    "mId": "11",
+    "hesnom": "",
+    "hessubnom": "",
+    "hesname": "Torpaq, tikili və avadanlıqlar",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "1",
+    "mId": "11",
+    "hesnom": "111",
+    "hessubnom": "",
+    "hesname": "Torpaq, tikili və avadanlıqların dəyəri",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "1",
+    "mId": "11",
+    "hesnom": "112",
+    "hessubnom": "",
+    "hesname": "Torpaq, tikili və avadanlıqlar üzrə yığılmış amortizasiya və qiymətdəndüşmə zərərləri",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "1",
+    "mId": "11",
+    "hesnom": "113",
+    "hessubnom": "",
+    "hesname": "Torpaq, tikili və avadanlıqlarla bağlı məsrəflərin kapitallaşdırılması",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "1",
+    "mId": "12",
+    "hesnom": "",
+    "hessubnom": "",
+    "hesname": "İnvestisiya mülkiyyəti",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "1",
+    "mId": "12",
+    "hesnom": "121",
+    "hessubnom": "",
+    "hesname": "İnvestisiya mülkiyyətinin dəyəri",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "1",
+    "mId": "12",
+    "hesnom": "122",
+    "hessubnom": "",
+    "hesname": "İnvestisiya mülkiyyəti üzrə yığılmış amortizasiya və qiymətdəndüşmə zərərləri",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "1",
+    "mId": "12",
+    "hesnom": "123",
+    "hessubnom": "",
+    "hesname": "İnvestisiya mülkiyyəti ilə bağlı məsrəflərin kapitallaşdırılması",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "1",
+    "mId": "13",
+    "hesnom": "",
+    "hessubnom": "",
+    "hesname": "Bioloji aktivlər",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "1",
+    "mId": "13",
+    "hesnom": "131",
+    "hessubnom": "",
+    "hesname": "Bioloji aktivlərin dəyəri",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "1",
+    "mId": "13",
+    "hesnom": "132",
+    "hessubnom": "",
+    "hesname": "Bioloji aktivlər üzrə yığılmış amortizasiya və qiymətdəndüşmə zərərləri",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "1",
+    "mId": "14",
+    "hesnom": "",
+    "hessubnom": "",
+    "hesname": "Təbii sərvətlər",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "1",
+    "mId": "14",
+    "hesnom": "141",
+    "hessubnom": "",
+    "hesname": "Təbii sərvətlərin (ehtiyatların) dəyəri",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "1",
+    "mId": "14",
+    "hesnom": "142",
+    "hessubnom": "",
+    "hesname": "Təbii sərvətlərin (ehtiyatların) tükənməsi",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "1",
+    "mId": "15",
+    "hesnom": "",
+    "hessubnom": "",
+    "hesname": "İştirak payı metodu ilə uçota alınmış investisiyalar",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "1",
+    "mId": "15",
+    "hesnom": "151",
+    "hessubnom": "",
+    "hesname": "Asılı müəssisələrə investisiyalar",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "1",
+    "mId": "15",
+    "hesnom": "152",
+    "hessubnom": "",
+    "hesname": "Birgə müəssisələrə investisiyalar",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "1",
+    "mId": "15",
+    "hesnom": "153",
+    "hessubnom": "",
+    "hesname": "Asılı və birgə müəssisələrə investisiyaların dəyərinin azalmasına görə düzəlişlər",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "1",
+    "mId": "16",
+    "hesnom": "",
+    "hessubnom": "",
+    "hesname": "Təxirə salınmış vergi aktivləri",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "1",
+    "mId": "16",
+    "hesnom": "161",
+    "hessubnom": "",
+    "hesname": "Mənfəət vergisi üzrə təxirə salınmış vergi aktivləri",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "1",
+    "mId": "16",
+    "hesnom": "162",
+    "hessubnom": "",
+    "hesname": "Digər təxirə salınmış vergi aktivləri",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "1",
+    "mId": "17",
+    "hesnom": "",
+    "hessubnom": "",
+    "hesname": "Uzunmüddətli debitor borcları",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "1",
+    "mId": "17",
+    "hesnom": "171",
+    "hessubnom": "",
+    "hesname": "Alıcıların və sifarişçilərin uzunmüddətli debitor borcları",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "1",
+    "mId": "17",
+    "hesnom": "172",
+    "hessubnom": "",
+    "hesname": "Törəmə (asılı) müəssisələrin uzunmüddətli debitor borcları",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "1",
+    "mId": "17",
+    "hesnom": "173",
+    "hessubnom": "",
+    "hesname": "Əsas idarəetmə heyətinin uzunmüddətli debitor borcları",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "1",
+    "mId": "17",
+    "hesnom": "174",
+    "hessubnom": "",
+    "hesname": "İcarə üzrə uzunmüddətli debitor borcları",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "1",
+    "mId": "17",
+    "hesnom": "175",
+    "hessubnom": "",
+    "hesname": "Tikinti müqavilələri üzrə uzunmüddətli debitor borcları",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "1",
+    "mId": "17",
+    "hesnom": "176",
+    "hessubnom": "",
+    "hesname": "Faizlər üzrə uzunmüddətli debitor borcları",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "1",
+    "mId": "17",
+    "hesnom": "177",
+    "hessubnom": "",
+    "hesname": "Digər uzunmüddətli debitor borcları",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "1",
+    "mId": "18",
+    "hesnom": "",
+    "hessubnom": "",
+    "hesname": "Sair uzunmüddətli maliyyə aktivləri",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "1",
+    "mId": "18",
+    "hesnom": "181",
+    "hessubnom": "",
+    "hesname": "Ödənişə qədər saxlanılan uzunmüddətli investisiyalar",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "1",
+    "mId": "18",
+    "hesnom": "182",
+    "hessubnom": "",
+    "hesname": "Verilmiş uzunmüddətli borclar",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "1",
+    "mId": "18",
+    "hesnom": "183",
+    "hessubnom": "",
+    "hesname": "Digər uzunmüddətli investisiyalar",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "1",
+    "mId": "18",
+    "hesnom": "184",
+    "hessubnom": "",
+    "hesname": "Sair uzunmüddətli maliyyə aktivlərinin dəyərinin azalmasına görə düzəlişlər",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "1",
+    "mId": "19",
+    "hesnom": "",
+    "hessubnom": "",
+    "hesname": "Sair uzunmüddətli aktivlər",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "1",
+    "mId": "19",
+    "hesnom": "191",
+    "hessubnom": "",
+    "hesname": "Gələcək hesabat dövrlərinin xərcləri",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "1",
+    "mId": "19",
+    "hesnom": "192",
+    "hessubnom": "",
+    "hesname": "Verilmiş uzunmüddətli avanslar",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "1",
+    "mId": "19",
+    "hesnom": "193",
+    "hessubnom": "",
+    "hesname": "Digər uzunmüddətli aktivlər",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ AKTİVLƏR"
+  },    
+  {
+    "bId": "2",
+    "mId": "20",
+    "hesnom": "",
+    "hessubnom": "",
+    "hesname": "Ehtiyatlar",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "2",
+    "mId": "20",
+    "hesnom": "201",
+    "hessubnom": "",
+    "hesname": "Material ehtiyatları",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "2",
+    "mId": "20",
+    "hesnom": "202",
+    "hessubnom": "",
+    "hesname": "İstehsalat (iş və xidmət) məsrəfləri",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "2",
+    "mId": "20",
+    "hesnom": "203",
+    "hessubnom": "",
+    "hesname": "Tikinti müqavilələri üzrə məsrəflər",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "2",
+    "mId": "20",
+    "hesnom": "204",
+    "hessubnom": "",
+    "hesname": "Hazır məhsul",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "2",
+    "mId": "20",
+    "hesnom": "205",
+    "hessubnom": "",
+    "hesname": "Mallar",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "2",
+    "mId": "20",
+    "hesnom": "206",
+    "hessubnom": "",
+    "hesname": "Satış məqsədi ilə saxlanılan digər aktivlər",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "2",
+    "mId": "20",
+    "hesnom": "207",
+    "hessubnom": "",
+    "hesname": "Digər ehtiyatlar",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "2",
+    "mId": "20",
+    "hesnom": "208",
+    "hessubnom": "",
+    "hesname": "Ehtiyatların dəyərinin azalmasına görə düzəlişlər",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "2",
+    "mId": "21",
+    "hesnom": "",
+    "hessubnom": "",
+    "hesname": "Qısamüddətli debitor borcları",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "2",
+    "mId": "21",
+    "hesnom": "211",
+    "hessubnom": "",
+    "hesname": "Alıcıların və sifarişçilərin qısamüddətli debitor borcları",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "2",
+    "mId": "21",
+    "hesnom": "212",
+    "hessubnom": "",
+    "hesname": "Törəmə (asılı) müəssisələrin qısamüddətli debitor borcları",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "2",
+    "mId": "21",
+    "hesnom": "213",
+    "hessubnom": "",
+    "hesname": "Əsas idarəetmə heyətinin qısamüddətli debitor borcları",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "2",
+    "mId": "21",
+    "hesnom": "214",
+    "hessubnom": "",
+    "hesname": "İcarə üzrə qısamüddətli debitor borcları",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "2",
+    "mId": "21",
+    "hesnom": "215",
+    "hessubnom": "",
+    "hesname": "Tikinti müqavilələri üzrə qısamüddətli debitor borcları",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "2",
+    "mId": "21",
+    "hesnom": "216",
+    "hessubnom": "",
+    "hesname": "Faizlər üzrə qısamüddətli debitor borcları",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "2",
+    "mId": "21",
+    "hesnom": "217",
+    "hessubnom": "",
+    "hesname": "Digər qısamüddətli debitor borcları",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "2",
+    "mId": "21",
+    "hesnom": "218",
+    "hessubnom": "",
+    "hesname": "Şübhəli borclar üzrə düzəlişlər",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "2",
+    "mId": "22",
+    "hesnom": "",
+    "hessubnom": "",
+    "hesname": "Pul vəsaitləri və onların ekvivalentləri",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "2",
+    "mId": "22",
+    "hesnom": "221",
+    "hessubnom": "",
+    "hesname": "Kassa",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "2",
+    "mId": "22",
+    "hesnom": "222",
+    "hessubnom": "",
+    "hesname": "Yolda olan pul köçürmələri",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "2",
+    "mId": "22",
+    "hesnom": "223",
+    "hessubnom": "",
+    "hesname": "Bank hesablaşma hesabları",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "2",
+    "mId": "22",
+    "hesnom": "224",
+    "hessubnom": "",
+    "hesname": "Tələblərə əsasən açılan digər bank hesabları",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "2",
+    "mId": "22",
+    "hesnom": "225",
+    "hessubnom": "",
+    "hesname": "Pul vəsaitlərinin ekvivalentləri",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "2",
+    "mId": "22",
+    "hesnom": "226",
+    "hessubnom": "",
+    "hesname": "ƏDV sub-uçot hesabı",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "2",
+    "mId": "23",
+    "hesnom": "",
+    "hessubnom": "",
+    "hesname": "Sair qısamüddətli maliyyə aktivləri",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "2",
+    "mId": "23",
+    "hesnom": "231",
+    "hessubnom": "",
+    "hesname": "Satış məqsədi ilə saxlanılan qısamüddətli investisiyalar",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "2",
+    "mId": "23",
+    "hesnom": "232",
+    "hessubnom": "",
+    "hesname": "Ödənişə qədər saxlanılan qısamüddətli investisiyalar",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "2",
+    "mId": "23",
+    "hesnom": "233",
+    "hessubnom": "",
+    "hesname": "Verilmiş qısamüddətli borclar",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "2",
+    "mId": "23",
+    "hesnom": "234",
+    "hessubnom": "",
+    "hesname": "Digər qısamüddətli investisiyalar",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "2",
+    "mId": "23",
+    "hesnom": "235",
+    "hessubnom": "",
+    "hesname": "Sair qısamüddətli maliyyə aktivlərinin dəyərinin azalmasına görə düzəlişlər",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "2",
+    "mId": "24",
+    "hesnom": "",
+    "hessubnom": "",
+    "hesname": "Sair qısamüddətli aktivlər",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "2",
+    "mId": "24",
+    "hesnom": "241",
+    "hessubnom": "",
+    "hesname": "Əvəzləşdirilən vergilər",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "2",
+    "mId": "",
+    "hesnom": "242",
+    "hessubnom": "",
+    "hesname": "Gələcək hesabat dövrünün xərcləri",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "2",
+    "mId": "24",
+    "hesnom": "243",
+    "hessubnom": "",
+    "hesname": "Verilmiş qısamüddətli avanslar",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "2",
+    "mId": "24",
+    "hesnom": "244",
+    "hessubnom": "",
+    "hesname": "Təhtəlhesab məbləğlər",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "2",
+    "mId": "24",
+    "hesnom": "245",
+    "hessubnom": "",
+    "hesname": "Digər qısamüddətli aktivlər",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ AKTİVLƏR"
+  },
+  {
+    "bId": "3",
+    "mId": "30",
+    "hesnom": "",
+    "hessubnom": "",
+    "hesname": "Ödənilmiş nizamnamə (nominal) kapital",
+    "tipId": "AKTİV",
+    "activId":"KAPİTAL"
+  },
+  {
+    "bId": "3",
+    "mId": "30",
+    "hesnom": "301",
+    "hessubnom": "",
+    "hesname": "Nizamnamə (nominal) kapitalı",
+    "tipId": "AKTİV",
+    "activId":"KAPİTAL"
+  },
+  {
+    "bId": "3",
+    "mId": "30",
+    "hesnom": "302",
+    "hessubnom": "",
+    "hesname": "Nizamnamə (nominal) kapitalın ödənilməmiş hissəsi",
+    "tipId": "AKTİV",
+    "activId":"KAPİTAL"
+  },
+  {
+    "bId": "3",
+    "mId": "31",
+    "hesnom": "",
+    "hessubnom": "",
+    "hesname": "Emissiya gəliri",
+    "tipId": "AKTİV",
+    "activId":"KAPİTAL"
+  },
+  {
+    "bId": "3",
+    "mId": "31",
+    "hesnom": "311",
+    "hessubnom": "",
+    "hesname": "Emissiya gəliri",
+    "tipId": "AKTİV",
+    "activId":"KAPİTAL"
+  },
+  {
+    "bId": "3",
+    "mId": "32",
+    "hesnom": "",
+    "hessubnom": "",
+    "hesname": "Geri alınmış kapital (səhmlər)",
+    "tipId": "AKTİV",
+    "activId":"KAPİTAL"
+  },
+  {
+    "bId": "3",
+    "mId": "32",
+    "hesnom": "321",
+    "hessubnom": "",
+    "hesname": "Geri alınmış kapital (səhmlər)",
+    "tipId": "AKTİV",
+    "activId":"KAPİTAL"
+  },
+  {
+    "bId": "3",
+    "mId": "33",
+    "hesnom": "",
+    "hessubnom": "",
+    "hesname": "Kapital ehtiyatları",
+    "tipId": "AKTİV",
+    "activId":"KAPİTAL"
+  },
+  {
+    "bId": "3",
+    "mId": "33",
+    "hesnom": "331",
+    "hessubnom": "",
+    "hesname": "Yenidən qiymətləndirilmə üzrə ehtiyat",
+    "tipId": "AKTİV",
+    "activId":"KAPİTAL"
+  },
+  {
+    "bId": "3",
+    "mId": "33",
+    "hesnom": "332",
+    "hessubnom": "",
+    "hesname": "Məzənnə fərgləri üzrə ehtiyat",
+    "tipId": "AKTİV",
+    "activId":"KAPİTAL"
+  },
+  {
+    "bId": "3",
+    "mId": "33",
+    "hesnom": "333",
+    "hessubnom": "",
+    "hesname": "Qanunvericilik üzrə ehtiyat",
+    "tipId": "AKTİV",
+    "activId":"KAPİTAL"
+  },
+  {
+    "bId": "3",
+    "mId": "33",
+    "hesnom": "334",
+    "hessubnom": "",
+    "hesname": "Nizamnamə üzrə ehtiyat",
+    "tipId": "AKTİV",
+    "activId":"KAPİTAL"
+  },
+  {
+    "bId": "3",
+    "mId": "33",
+    "hesnom": "335",
+    "hessubnom": "",
+    "hesname": "Digər ehtiyatlar",
+    "tipId": "AKTİV",
+    "activId":"KAPİTAL"
+  },
+  {
+    "bId": "3",
+    "mId": "34",
+    "hesnom": "",
+    "hessubnom": "",
+    "hesname": "Bölüşdürülməmiş mənfəət (ödənilməmiş zərər)",
+    "tipId": "AKTİV",
+    "activId":"KAPİTAL"
+  },
+  {
+    "bId": "3",
+    "mId": "34",
+    "hesnom": "341",
+    "hessubnom": "",
+    "hesname": "Hesabat dövründə xalis mənfəət (zərər)",
+    "tipId": "AKTİV",
+    "activId":"KAPİTAL"
+  },
+  {
+    "bId": "3",
+    "mId": "34",
+    "hesnom": "342",
+    "hessubnom": "",
+    "hesname": "Mühasibat uçotu siyasətində dəyişikliklərlə bağlı mənfəət (zərər) üzrə düzəlişlər",
+    "tipId": "AKTİV",
+    "activId":"KAPİTAL"
+  },
+  {
+    "bId": "3",
+    "mId": "34",
+    "hesnom": "343",
+    "hessubnom": "",
+    "hesname": "Keçmiş illər üzrə bölühdürülməmiş mənfəət (ödənilməmiş zərər)",
+    "tipId": "AKTİV",
+    "activId":"KAPİTAL"
+  },
+  {
+    "bId": "3",
+    "mId": "34",
+    "hesnom": "344",
+    "hessubnom": "",
+    "hesname": "Elan edilmiş dividentlər",
+    "tipId": "AKTİV",
+    "activId":"KAPİTAL"
+  },
+  {
+    "bId": "4",
+    "mId": "40",
+    "hesnom": "",
+    "hessubnom": "",
+    "hesname": "Uzunmüddətli faiz xərcləri yaradan öhdəliklər",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "4",
+    "mId": "40",
+    "hesnom": "401",
+    "hessubnom": "",
+    "hesname": "Uzunmüddətli bank kreditləri",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "4",
+    "mId": "40",
+    "hesnom": "402",
+    "hessubnom": "",
+    "hesname": "İşçilər üçün uzunmüddətli bank kreditləri",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "4",
+    "mId": "40",
+    "hesnom": "403",
+    "hessubnom": "",
+    "hesname": "Uzunmüddətli konvertasiya olunan istiqrazlar",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "4",
+    "mId": "40",
+    "hesnom": "404",
+    "hessubnom": "",
+    "hesname": "Uzunmüddətli borclar",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "4",
+    "mId": "40",
+    "hesnom": "405",
+    "hessubnom": "",
+    "hesname": "Geri alınan məhdud tədavül müddətli imtiyazlı səhmlər(uzunmüddətli)",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "4",
+    "mId": "40",
+    "hesnom": "406",
+    "hessubnom": "",
+    "hesname": "Maliyyə icarəsi üzrə uzunmüddətli öhdəliklər",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "4",
+    "mId": "40",
+    "hesnom": "407",
+    "hessubnom": "",
+    "hesname": "Törəmə(asılı) müəssisələrə uzunmüddətli faiz xərcləri yaradan öhdəliklər",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "4",
+    "mId": "40",
+    "hesnom": "408",
+    "hessubnom": "",
+    "hesname": "Digər uzunmüddətli faiz xərcləri yaradan öhdəliklər",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "4",
+    "mId": "41",
+    "hesnom": "",
+    "hessubnom": "",
+    "hesname": "Uzunmüddətli qiymətləndirilmiş öhdəliklər",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "4",
+    "mId": "41",
+    "hesnom": "411",
+    "hessubnom": "",
+    "hesname": "İşdən azad olma ilə bağlı uzunmüddətli müavinətlər və öhdəliklər",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "4",
+    "mId": "41",
+    "hesnom": "412",
+    "hessubnom": "",
+    "hesname": "Uzunmüddətli zəmanət öhdəlikləri",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "4",
+    "mId": "41",
+    "hesnom": "413",
+    "hessubnom": "",
+    "hesname": "Uzunmüddətli hüquqi öhdəliklər",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "4",
+    "mId": "41",
+    "hesnom": "414",
+    "hessubnom": "",
+    "hesname": "Digər uzunmüddətli qiymətləndirilmiş öhdəliklər",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "4",
+    "mId": "41",
+    "hesnom": "",
+    "hessubnom": "414-1",
+    "hesname": "Sığorta müqavilələri üzrə uzunmüddətli öhdəliklər",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "4",
+    "mId": "42",
+    "hesnom": "",
+    "hessubnom": "",
+    "hesname": "Təxirə salınmış vergi öhdəlikləri",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "4",
+    "mId": "42",
+    "hesnom": "421",
+    "hessubnom": "",
+    "hesname": "Mənfəət vergisi üzrə təxirə salınmış vergi öhdəlikləri",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "4",
+    "mId": "42",
+    "hesnom": "422",
+    "hessubnom": "",
+    "hesname": "Digər təxirə salınmış vergi öhdəliklər",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "4",
+    "mId": "43",
+    "hesnom": "",
+    "hessubnom": "",
+    "hesname": "Uzunmüddətli kreditor borcları",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "4",
+    "mId": "43",
+    "hesnom": "431",
+    "hessubnom": "",
+    "hesname": "Malsatan və podratçılara uzunmüddətli kreditor borcları",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "4",
+    "mId": "43",
+    "hesnom": "432",
+    "hessubnom": "",
+    "hesname": "Törəmə(asılı) cəmiyyətlərə uzunmüddətli kreditor borcları",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "4",
+    "mId": "43",
+    "hesnom": "433",
+    "hessubnom": "",
+    "hesname": "Tikinti müqavilələri üzrə uzunmüddətli kreditor borcları",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "4",
+    "mId": "43",
+    "hesnom": "434",
+    "hessubnom": "",
+    "hesname": "Faizlər üzrə uzunmüddətli kreditor borcları",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "4",
+    "mId": "43",
+    "hesnom": "435",
+    "hessubnom": "",
+    "hesname": "Digər uzunmüddətli kreditor borcları",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "4",
+    "mId": "44",
+    "hesnom": "",
+    "hessubnom": "",
+    "hesname": "Sair uzunmüddətli öhdəliklər",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "4",
+    "mId": "44",
+    "hesnom": "441",
+    "hessubnom": "",
+    "hesname": "Uzunmüddətli pensiya öhdəlikləri",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "4",
+    "mId": "44",
+    "hesnom": "442",
+    "hessubnom": "",
+    "hesname": "Gələcək hesabat dövrlərinin gəlirləri",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "4",
+    "mId": "44",
+    "hesnom": "443",
+    "hessubnom": "",
+    "hesname": "Alınmış uzunmüddətli avanslar",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "4",
+    "mId": "44",
+    "hesnom": "444",
+    "hessubnom": "",
+    "hesname": "Uzunmüddətli məqsədli maliyyələşmələr və daxilolmalar",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "4",
+    "mId": "44",
+    "hesnom": "445",
+    "hessubnom": "",
+    "hesname": "Digər uzunmüddətli öhdəliklər",
+    "tipId": "AKTİV",
+    "activId":"UZUNMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "5",
+    "mId": "50",
+    "hesnom": "",
+    "hessubnom": "",
+    "hesname": "Qısamüddətli faiz xərcləri yaradan öhdəliklər",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "5",
+    "mId": "50",
+    "hesnom": "501",
+    "hessubnom": "",
+    "hesname": "Qısamüddətli bank kreditləri",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "5",
+    "mId": "50",
+    "hesnom": "",
+    "hessubnom": "501-1",
+    "hesname": "Bank overdraftı",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "5",
+    "mId": "50",
+    "hesnom": "502",
+    "hessubnom": "",
+    "hesname": "İşçilər üçün qısamüddətli bank kreditləri",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "5",
+    "mId": "50",
+    "hesnom": "503",
+    "hessubnom": "",
+    "hesname": "Qısamüddətli konvertasiya olunan istiqrazlar",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "5",
+    "mId": "50",
+    "hesnom": "504",
+    "hessubnom": "",
+    "hesname": "Qısamüddətli borclar",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "5",
+    "mId": "50",
+    "hesnom": "505",
+    "hessubnom": "",
+    "hesname": "Geri alınan məhdud tədavül müddətli imtiyazlı səhmlər(qısamüddətli)",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "5",
+    "mId": "50",
+    "hesnom": "506",
+    "hessubnom": "",
+    "hesname": "Törəmə(asılı) müəssisələrə qısamüddətli faiz xərcləri yaradan öhdəliklər",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "5",
+    "mId": "50",
+    "hesnom": "507",
+    "hessubnom": "",
+    "hesname": "Digər qısamüddətli faiz xərcləri yaradan öhdəliklər",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "5",
+    "mId": "51",
+    "hesnom": "",
+    "hessubnom": "",
+    "hesname": "Qısamüddətli qiymətləndirilmiş öhdəliklər",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "5",
+    "mId": "51",
+    "hesnom": "511",
+    "hessubnom": "",
+    "hesname": "İşdən azad olma ilə bağlı qısamüddətli müavinətlər və öhdəliklər",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "5",
+    "mId": "51",
+    "hesnom": "512",
+    "hessubnom": "",
+    "hesname": "Qısamüddətli zəmanət öhdəlikləri",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "5",
+    "mId": "51",
+    "hesnom": "513",
+    "hessubnom": "",
+    "hesname": "Qısamüddətli hüquqi öhdəliklər",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "5",
+    "mId": "51",
+    "hesnom": "514",
+    "hessubnom": "",
+    "hesname": "Mənfəətdə iştirak planı və müavinət planları",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "5",
+    "mId": "51",
+    "hesnom": "515",
+    "hessubnom": "",
+    "hesname": "Digər qısamüddətli qiymətləndirilmiş öhdəliklər",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "5",
+    "mId": "51",
+    "hesnom": "",
+    "hessubnom": "515-1",
+    "hesname": "Sığorta müqavilələri üzrə qısamüddətli öhdəliklər",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "5",
+    "mId": "52",
+    "hesnom": "",
+    "hessubnom": "",
+    "hesname": "Vergi və sair məcburi ödənişlər üzrə öhdəliklər",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "5",
+    "mId": "52",
+    "hesnom": "521",
+    "hessubnom": "",
+    "hesname": "Vergi öhdəlikləri",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "5",
+    "mId": "52",
+    "hesnom": "522",
+    "hessubnom": "",
+    "hesname": "Sosial sığorta və təminat üzrə öhdəliklər",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "5",
+    "mId": "52",
+    "hesnom": "523",
+    "hessubnom": "",
+    "hesname": "Digər məcburi ödənişlər üzrə öhdəliklər",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "5",
+    "mId": "53",
+    "hesnom": "",
+    "hessubnom": "",
+    "hesname": "Qısamüddətli kreditor borcları",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "5",
+    "mId": "53",
+    "hesnom": "531",
+    "hessubnom": "",
+    "hesname": "Malsatan və podratçılara qısamüddətli kreditor borcları",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "5",
+    "mId": "53",
+    "hesnom": "532",
+    "hessubnom": "",
+    "hesname": "Törəmə(asılı) müəssisələrə qısamüddətli kreditor borcları",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "5",
+    "mId": "53",
+    "hesnom": "533",
+    "hessubnom": "",
+    "hesname": "Əməyin ödənişi üzrə işçi heyətinə olan borclar",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "5",
+    "mId": "53",
+    "hesnom": "534",
+    "hessubnom": "",
+    "hesname": "Dividendlərin ödənilməsi üzrə təsisçilərə kreditor borcları",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "5",
+    "mId": "53",
+    "hesnom": "535",
+    "hessubnom": "",
+    "hesname": "İcarə üzrə qısamüddətli kreditor borcları",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "5",
+    "mId": "53",
+    "hesnom": "536",
+    "hessubnom": "",
+    "hesname": "Tikinti müqavilələri üzrə qısamüddətli kreditor borcları",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "5",
+    "mId": "53",
+    "hesnom": "537",
+    "hessubnom": "",
+    "hesname": "Faizlər üzrə qısamüddətli kreditor borcları",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "5",
+    "mId": "53",
+    "hesnom": "538",
+    "hessubnom": "",
+    "hesname": "Digər qısamüddətli kreditor borcları",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "5",
+    "mId": "54",
+    "hesnom": "",
+    "hessubnom": "",
+    "hesname": "Sair qısamüddətli öhdəliklər",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "5",
+    "mId": "54",
+    "hesnom": "541",
+    "hessubnom": "",
+    "hesname": "Qısamüddətli pensiya öhdəlikləri",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "5",
+    "mId": "54",
+    "hesnom": "542",
+    "hessubnom": "",
+    "hesname": "Gələcək hesabat dövrünün gəlirləri",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "5",
+    "mId": "54",
+    "hesnom": "543",
+    "hessubnom": "",
+    "hesname": "Alınmış qısamüddətli avanslar",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "5",
+    "mId": "54",
+    "hesnom": "544",
+    "hessubnom": "",
+    "hesname": "Qisamüddətli məqsədli maliyyələşmələr və daxilolmalar",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "5",
+    "mId": "54",
+    "hesnom": "545",
+    "hessubnom": "",
+    "hesname": "Digər qısamüddətli öhdəliklər",
+    "tipId": "AKTİV",
+    "activId":"QISAMÜDDƏTLİ ÖHDƏLİKLƏR"
+  },
+  {
+    "bId": "6",
+    "mId": "60",
+    "hesnom": "",
+    "hessubnom": "",
+    "hesname": "Əsas əməliyyat gəliri",
+    "tipId": "AKTİV",
+    "activId":"GƏLİRLƏR"
+  },
+  {
+    "bId": "6",
+    "mId": "60",
+    "hesnom": "601",
+    "hessubnom": "",
+    "hesname": "Satış",
+    "tipId": "AKTİV",
+    "activId":"GƏLİRLƏR"
+  },
+  {
+    "bId": "6",
+    "mId": "60",
+    "hesnom": "602",
+    "hessubnom": "",
+    "hesname": "Satılmış malların qaytarılması və ucuzlaşdırılması",
+    "tipId": "AKTİV",
+    "activId":"GƏLİRLƏR"
+  },
+  {
+    "bId": "6",
+    "mId": "60",
+    "hesnom": "603",
+    "hessubnom": "",
+    "hesname": "Verilmiş güzəştlər",
+    "tipId": "AKTİV",
+    "activId":"GƏLİRLƏR"
+  },
+  {
+    "bId": "6",
+    "mId": "61",
+    "hesnom": "",
+    "hessubnom": "",
+    "hesname": "Sair əməliyyat gəlirləri",
+    "tipId": "AKTİV",
+    "activId":"GƏLİRLƏR"
+  },
+  {
+    "bId": "6",
+    "mId": "61",
+    "hesnom": "611",
+    "hessubnom": "",
+    "hesname": "Sair əməliyyat gəlirləri",
+    "tipId": "AKTİV",
+    "activId":"GƏLİRLƏR"
+  },
+  {
+    "bId": "6",
+    "mId": "62",
+    "hesnom": "",
+    "hessubnom": "",
+    "hesname": "Fəaliyyətin dayandırılmasından yaranan gəlirlər",
+    "tipId": "AKTİV",
+    "activId":"GƏLİRLƏR"
+  },
+  {
+    "bId": "6",
+    "mId": "62",
+    "hesnom": "621",
+    "hessubnom": "",
+    "hesname": "Fəaliyyətin dayandırılmasından yaranan gəlirlər",
+    "tipId": "AKTİV",
+    "activId":"GƏLİRLƏR"
+  },
+  {
+    "bId": "6",
+    "mId": "63",
+    "hesnom": "",
+    "hessubnom": "",
+    "hesname": "Maliyyə gəlirləri",
+    "tipId": "AKTİV",
+    "activId":"GƏLİRLƏR"
+  },
+  {
+    "bId": "6",
+    "mId": "63",
+    "hesnom": "631",
+    "hessubnom": "",
+    "hesname": "Maliyyə gəlirləri",
+    "tipId": "AKTİV",
+    "activId":"GƏLİRLƏR"
+  },
+  {
+    "bId": "6",
+    "mId": "64",
+    "hesnom": "",
+    "hessubnom": "",
+    "hesname": "Fövqəladə gəlirlər",
+    "tipId": "AKTİV",
+    "activId":"GƏLİRLƏR"
+  },
+  {
+    "bId": "6",
+    "mId": "64",
+    "hesnom": "641",
+    "hessubnom": "",
+    "hesname": "Fövqəladə gəlirlər",
+    "tipId": "AKTİV",
+    "activId":"GƏLİRLƏR"
+  },
+  {
+    "bId": "7",
+    "mId": "70",
+    "hesnom": "",
+    "hessubnom": "",
+    "hesname": "Satışın maya dəyəri üzrə xərclər",
+    "tipId": "AKTİV",
+    "activId":"XƏRCLƏR"
+  },
+  {
+    "bId": "7",
+    "mId": "70",
+    "hesnom": "701",
+    "hessubnom": "",
+    "hesname": "Satışın maya dəyəri üzrə xərclər",
+    "tipId": "AKTİV",
+    "activId":"XƏRCLƏR"
+  },
+  {
+    "bId": "7",
+    "mId": "71",
+    "hesnom": "",
+    "hessubnom": "",
+    "hesname": "Kommersiya xərcləri",
+    "tipId": "AKTİV",
+    "activId":"XƏRCLƏR"
+  },
+  {
+    "bId": "7",
+    "mId": "71",
+    "hesnom": "711",
+    "hessubnom": "",
+    "hesname": "Kommersiya xərcləri",
+    "tipId": "AKTİV",
+    "activId":"XƏRCLƏR"
+  },
+  {
+    "bId": "7",
+    "mId": "72",
+    "hesnom": "",
+    "hessubnom": "",
+    "hesname": "İnzibati xərclər",
+    "tipId": "AKTİV",
+    "activId":"XƏRCLƏR"
+  },
+  {
+    "bId": "7",
+    "mId": "72",
+    "hesnom": "721",
+    "hessubnom": "",
+    "hesname": "İnzibati xərclər",
+    "tipId": "AKTİV",
+    "activId":"XƏRCLƏR"
+  },
+  {
+    "bId": "7",
+    "mId": "73",
+    "hesnom": "",
+    "hessubnom": "",
+    "hesname": "Sair əməliyyat xərcləri",
+    "tipId": "AKTİV",
+    "activId":"XƏRCLƏR"
+  },
+  {
+    "bId": "7",
+    "mId": "73",
+    "hesnom": "731",
+    "hessubnom": "",
+    "hesname": "Sair əməliyyat xərcləri",
+    "tipId": "AKTİV",
+    "activId":"XƏRCLƏR"
+  },
+  {
+    "bId": "7",
+    "mId": "74",
+    "hesnom": "",
+    "hessubnom": "",
+    "hesname": "Fəaliyyətin dayandırılmasından yaranan xərclər",
+    "tipId": "AKTİV",
+    "activId":"XƏRCLƏR"
+  },
+  {
+    "bId": "7",
+    "mId": "74",
+    "hesnom": "741",
+    "hessubnom": "",
+    "hesname": "Fəaliyyətin dayandırılmasından yaranan xərclər",
+    "tipId": "AKTİV",
+    "activId":"XƏRCLƏR"
+  },
+  {
+    "bId": "7",
+    "mId": "75",
+    "hesnom": "",
+    "hessubnom": "",
+    "hesname": "Maliyyə xərcləri",
+    "tipId": "AKTİV",
+    "activId":"XƏRCLƏR"
+  },
+  {
+    "bId": "7",
+    "mId": "75",
+    "hesnom": "751",
+    "hessubnom": "",
+    "hesname": "Maliyyə xərcləri",
+    "tipId": "AKTİV",
+    "activId":"XƏRCLƏR"
+  },
+  {
+    "bId": "7",
+    "mId": "76",
+    "hesnom": "",
+    "hessubnom": "",
+    "hesname": "Fövqəladə xərclər",
+    "tipId": "AKTİV",
+    "activId":"XƏRCLƏR"
+  },
+  {
+    "bId": "7",
+    "mId": "76",
+    "hesnom": "761",
+    "hessubnom": "",
+    "hesname": "Fövqəladə xərclər",
+    "tipId": "AKTİV",
+    "activId":"XƏRCLƏR"
+  },
+  {
+    "bId": "8",
+    "mId": "80",
+    "hesnom": "",
+    "hessubnom": "",
+    "hesname": "Ümumi mənfəət (zərər)",
+    "tipId": "AKTİV",
+    "activId":"MƏNFƏƏTLƏR (ZƏRƏRLƏR)"
+  },
+  {
+    "bId": "8",
+    "mId": "80",
+    "hesnom": "801",
+    "hessubnom": "",
+    "hesname": "Ümumi mənfəət (zərər)",
+    "tipId": "AKTİV",
+    "activId":"MƏNFƏƏTLƏR (ZƏRƏRLƏR)"
+  },
+  {
+    "bId": "8",
+    "mId": "81",
+    "hesnom": "",
+    "hessubnom": "",
+    "hesname": "Asılı və birgə müəssisələrin mənfəətlərində(zərərlərində) pay",
+    "tipId": "AKTİV",
+    "activId":"MƏNFƏƏTLƏR (ZƏRƏRLƏR)"
+  },
+  {
+    "bId": "8",
+    "mId": "81",
+    "hesnom": "811",
+    "hessubnom": "",
+    "hesname": "Asılı və birgə müəssisələrin mənfəətlərində(zərərlərində) pay",
+    "tipId": "AKTİV",
+    "activId":"MƏNFƏƏTLƏR (ZƏRƏRLƏR)"
+  },
+  {
+    "bId": "9",
+    "mId": "90",
+    "hesnom": "",
+    "hessubnom": "",
+    "hesname": "Mənfəət vergisi",
+    "tipId": "AKTİV",
+    "activId":"MƏNFƏƏT VERGİSİ"
+  },
+  {
+    "bId": "9",
+    "mId": "90",
+    "hesnom": "901",
+    "hessubnom": "",
+    "hesname": "Cari mənfəət vergisi üzrə xərclər",
+    "tipId": "AKTİV",
+    "activId":"MƏNFƏƏT VERGİSİ"
+  },
+  {
+    "bId": "9",
+    "mId": "90",
+    "hesnom": "902",
+    "hessubnom": "",
+    "hesname": "Təxirə salınmış mənfəət vergisi üzrə xərclər",
+    "tipId": "AKTİV",
+    "activId":"MƏNFƏƏT VERGİSİ"
+  }
+]

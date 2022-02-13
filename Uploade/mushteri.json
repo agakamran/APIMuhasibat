@@ -1,0 +1,54 @@
+﻿[
+  {
+    "mushId": "1",
+    "firma": "Veysəloölu MMC",
+    "voen": "1111111111",
+    "muqavilenom": "00001",
+    "muqaviletar": "07.01.2021",
+    "valyuta": "AZN",
+    "odemesherti": "10 gun Ərzində",
+    "temsilchi": "Kamran"
+  },
+  {
+    "mushId": "2",
+    "firma": "Ulduz Şakalad fabriki",
+    "voen": "1111111112",
+    "muqavilenom": "00002",
+    "muqaviletar": "02.01.2021",
+    "valyuta": "AZN",
+    "odemesherti": "15 gun Ərzində",
+    "temsilchi": "Hesen"
+  },
+  {
+    "mushId": "3",
+    "firma": "ETİ şirkəti",
+    "voen": "1111111113",
+    "muqavilenom": "00003",
+    "muqaviletar": "07.01.2021",
+    "valyuta": "AZN",
+    "odemesherti": "5 gun Ərzində",
+    "temsilchi": "Memed"
+  },
+  {
+    "mushId": "4",
+    "firma": "Murad MMC",
+    "voen": "1111111114",
+    "muqavilenom": "00004",
+    "muqaviletar": "07.01.2021",
+    "valyuta": "AZN",
+    "odemesherti": "3 gun Ərzində",
+    "temsilchi": "Şirin"
+  },
+  {
+    "mushId": "5",
+    "firma": "Araz Qrup",
+    "voen": "1111111111",
+    "muqavilenom": "00005",
+    "muqaviletar": "07.01.2021",
+    "valyuta": "AZN",
+    "odemesherti": "10 gun Ərzində",
+    "temsilchi": "Nadir"
+  }
+]
+
+       

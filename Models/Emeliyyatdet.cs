@@ -12,11 +12,12 @@ namespace APIMuhasibat.Models
    public class Emeliyyatdet
     {
         string _emdetId = null, _qId = null, _aId = null, _userId = null,
-         _mushId = null, _vergiId = null, _vId = null, _qeyd = null, _valId = null;
-        Nullable<int> _dhesId = null, _khesId = null, _submiqdar = null,
+         _mushId = null, _vergiId = null, _vId = null, _qeyd = null, _valId = null,
+            _dhesId = null, _khesId = null, _edv = null;
+        Nullable<int>  _submiqdar = null,
         _edvye_celbedilen = null, _edvye_celbedilmeyen = null;
         Nullable<decimal> _miqdar =null, _vahidqiymeti_alish = null,
-            _vahidqiymeti_satish = null, _edv = null;
+            _vahidqiymeti_satish = null;
         decimal _kurs = 0;
         Nullable<DateTime> _emeltarixi = DateTime.Now;
         ICollection<Qrup> _qrups = null;
@@ -72,12 +73,14 @@ namespace APIMuhasibat.Models
             get { return _activs; }
             set { if (value != null) { _activs = value; } }
         }
-        public Nullable<int> DhesId //alacaq +
+        [MaxLength(36)]
+        public string DhesId //alacaq +
         {
             get { return _dhesId; }
             set { if (value != null) { _dhesId = value; } }
         }
-        public Nullable<int> KhesId //verecek -
+        [MaxLength(36)]
+        public string KhesId //verecek -
         {
             get { return _khesId; }
             set { if (value != null) { _khesId = value; } }
@@ -138,7 +141,8 @@ namespace APIMuhasibat.Models
             get { return _vahidqiymeti_satish; }
             set { if (value !=null) { _vahidqiymeti_satish = value; } }
         }   //   hemde mebleg
-        public Nullable<decimal> Edv
+        [MaxLength(10)]
+        public string Edv
         {
             get { return _edv; }
             set { if (value !=null) { _edv = value; } }

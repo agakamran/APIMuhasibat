@@ -1,0 +1,47 @@
+﻿[
+   {
+      "activId":"1",
+      "activName":"UZUNMÜDDƏTLİ AKTİVLƏR",
+      "description":null
+   },
+   {
+      "activId":"2",
+      "activName":"QISAMÜDDƏTLİ AKTİVLƏR",
+      "description":null
+   },
+   {
+      "activId":"3",
+      "activName":"KAPİTAL",
+      "description":null
+   },
+   {
+      "activId":"4",
+      "activName":"UZUNMÜDDƏTLİ ÖHDƏLİKLƏR",
+      "description":null
+   },
+   {
+      "activId":"5",
+      "activName":"QISAMÜDDƏTLİ ÖHDƏLİKLƏR",
+      "description":null
+   },
+   {
+      "activId":"6",
+      "activName":"GƏLİRLƏR",
+      "description":null
+   },
+   {
+      "activId":"7",
+      "activName":"XƏRCLƏR",
+      "description":null
+   },
+   {
+      "activId":"8",
+      "activName":"MƏNFƏƏTLƏR (ZƏRƏRLƏR)",
+      "description":null
+   },
+  {
+    "activId": "9",
+    "activName": "MƏNFƏƏT VERGİSİ",
+    "description":null
+  }
+]

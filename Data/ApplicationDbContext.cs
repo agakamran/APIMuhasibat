@@ -30,6 +30,7 @@ namespace APIMuhasibat.Data
         public DbSet<Activler> aktivs { get; set; }
         public DbSet<Tipler> tips { get; set; }
         public DbSet<Vergi> vergis { get; set; }
+        public DbSet<fealsahe> fealsahes { get; set; }
         public DbSet<Qrup> qrups { get; set; }        
         public DbSet<Vahid> vahids { get; set; }
         public DbSet<Emeliyyatdet> emeliyyatdets { get; set; }

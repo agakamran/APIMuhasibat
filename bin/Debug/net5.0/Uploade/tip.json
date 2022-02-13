@@ -1,0 +1,18 @@
+﻿[
+  {
+    "tipId": 1,
+    "tipName": "AKTİV"
+  },
+  {
+    "tipId": 2,
+    "tipName": "ƏKS AKTİV"
+  },
+  {
+    "tipId": 3,
+    "tipName": "PASSİV"
+  },
+  {
+    "tipId": 4,
+    "tipName": "ƏKS PASSİV"
+  }
+] 
