@@ -881,9 +881,9 @@ namespace APIMuhasibat.Migrations
                 {
                     b.Navigation("activs");
 
-                    b.Navigation("mushteris");
-
                     b.Navigation("qrups");
+
+                    b.Navigation("mushteris");
 
                     b.Navigation("vahids");
 

@@ -320,6 +320,11 @@ namespace APIMuhasibat.Controllers
                     ti.HesId = Guid.NewGuid().ToString();
                     ti.Hesname = ti.Hesname;
                     ti.Hesnom = ti.Hesnom;
+                    if (ti.Hesnom == "")
+                    {
+                        ti.Hesnom = ti.MId;
+                    }
+                    
                     var tt = _ti.GetAll().FirstOrDefault(x => x.TipName == ti.TipId);
                     if (tt != null) { ti.TipId = tt.TipId; }
                     else { ti.TipId = null; }                  
@@ -799,35 +804,7 @@ namespace APIMuhasibat.Controllers
             //return null;
         }
         // POST: api/hazirla/_postmov
-        [HttpPost]
-        [Route("postvergilist")]
-        public async Task<IActionResult> postvergilist(Vergi[] ver)
-        {
-            if (!ModelState.IsValid) { return BadRequest(ModelState); }
-            try
-            {
-                foreach (var v in ver)
-                {
-                    v.VergiId = Guid.NewGuid().ToString();
-                    v.Vergikodu = v.Vergikodu;
-                    if (v.Vergikodununadi != null)
-                    {
-                        v.Vergikodununadi = v.Vergikodununadi.ToUpper().TrimEnd();
-                    }
-
-                    v.VId = _va.GetAll().FirstOrDefault(c => c.Vahidadi == v.VId).VId;
-                    v.Edv_tar = null;// Convert.ToDateTime("0001-01-01 01:01:01");
-                    v.State = v.State;
-                    await _ver.InsertAsync(v);
-                }
-                return Ok();
-
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                return BadRequest();
-            }
-        }
+       
         [HttpPost]
         [Route("postvergi")]
         public async Task<IActionResult> postvergi([FromBody] Vergi ver)
@@ -1063,6 +1040,38 @@ namespace APIMuhasibat.Controllers
                     var rootPath = _host.ContentRootPath; //get the root path
                     switch (value)
                     {
+                        case "aktiv":
+                            fullPath = Path.Combine(rootPath, "Uploade//aktiv.json");
+                            jsonData = System.IO.File.ReadAllText(fullPath);
+                            if (string.IsNullOrWhiteSpace(jsonData)) return null;
+                            var acti = JsonConvert.DeserializeObject<List<Activler>>(jsonData);
+                            #region aktiv
+                            if (_act.GetAll().Count() == 0)
+                            {
+                                foreach (var k in acti)
+                                {
+                                    var p = new Activler() { ActivId = "", ActivName = k.ActivName.ToString(), Description = "" };
+                                    await _postaktivler(p);
+                                }
+                            }
+                            #endregion
+                            break;
+                        case "tip":
+                            fullPath = Path.Combine(rootPath, "Uploade//tip.json");
+                            jsonData = System.IO.File.ReadAllText(fullPath);
+                            if (string.IsNullOrWhiteSpace(jsonData)) return null;
+                            var tip = JsonConvert.DeserializeObject<List<Tipler>>(jsonData);
+                            #region tip
+                            if (_ti.GetAll().Count() == 0)
+                            {                               
+                                foreach (var k in tip)
+                                {
+                                    var p = new Tipler() { TipId = "", TipName = k.TipName.ToString() };
+                                    await _postip(p);
+                                }
+                            }
+                            #endregion
+                            break;
                         case "vergi":
                             #region
                             fullPath = Path.Combine(rootPath, "Uploade//eqm_mal_kodlari-v1.json"); //combine the root path with that of our json file inside mydata directory
@@ -1071,6 +1080,18 @@ namespace APIMuhasibat.Controllers
                             if (_ver.GetAll().Count() == 0)
                             {
                                 var verg = JsonConvert.DeserializeObject<List<verg>>(jsonData); //deserialize object as a list of users in accordance with your json file
+
+                                IEnumerable<string> a = verg.Select(x => x.VAHID);
+                                var aa=a.Distinct().ToList();
+                                foreach (var k in aa)
+                                {
+                                    if (k != null)
+                                    {
+                                        var p = new Vahid() { VId = "", Vahidadi = k };
+                                        await _postvahid(p);
+                                    }
+                                }
+
                                 foreach (var item in verg)
                                 {
                                     var ve = new Vergi();
@@ -1090,37 +1111,18 @@ namespace APIMuhasibat.Controllers
                             jsonData = System.IO.File.ReadAllText(fullPath);
                             if (string.IsNullOrWhiteSpace(jsonData)) return null;
                             var hes = JsonConvert.DeserializeObject<List<hesb>>(jsonData);
-                            #region aktiv
-                            if (_act.GetAll().Count() == 0)
-                            {
-                                IEnumerable<string> a = hes.Select(x => x.activId);
-                                foreach (var k in a)
-                                {
-                                    var p = new Activler() { ActivId = "", ActivName = k, Description = "" };
-                                    await _postaktivler(p);
-                                }
-                            }
-
-                            #endregion
-                            #region tip
-                            if (_ti.GetAll().Count() == 0)
-                            {
-                                IEnumerable<string> t = hes.Select(x => x.tipId);
-                                foreach (var k in t)
-                                {
-                                    var p = new Tipler() { TipId = "", TipName = k };
-                                    await _postip(p);
-                                }
-                            }
-                            #endregion
                             #region bolme
                             if (_bol.GetAll().Count() == 0)
                             {
                                 IEnumerable<int> b = hes.Select(x => x.bId);
-                                foreach (var k in b)
+                                var bb = b.Distinct().ToList();
+                                foreach (var k in bb)
                                 {
-                                    var p = new Bolme() { bId = "", bolmeName = k.ToString() };
-                                    await _postbolme(p);
+                                    if (k != 0)
+                                    {
+                                        var p = new Bolme() { bId = "", bolmeName = k.ToString() };
+                                        await _postbolme(p);
+                                    }
                                 }
                             }
                             #endregion
@@ -1128,13 +1130,19 @@ namespace APIMuhasibat.Controllers
                             if (_mad.GetAll().Count() == 0)
                             {
                                 IEnumerable<string> m = hes.Select(x => x.mId);
-                                foreach (var k in m)
+                                var mm = m.Distinct().ToList();
+                                foreach (var k in mm)
                                 {
-                                    var p = new Madde() { MId = "", MaddeName = k };
-                                    await _postmad(p);
+                                    if (k != "")
+                                    {
+                                        var p = new Madde() { MId = "", MaddeName = k };
+                                        await _postmad(p);
+                                    }
                                 }
                             }
                             #endregion
+                           
+                            
                             #region hesab
                             if (_he.GetAll().Count() == 0)
                             {

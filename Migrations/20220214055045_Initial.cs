@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace APIMuhasibat.Migrations
 {
-    public partial class initial : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -73,8 +73,8 @@ namespace APIMuhasibat.Migrations
                     UserId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: true),
                     QId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: true),
                     AId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: true),
-                    DhesId = table.Column<int>(type: "int", nullable: true),
-                    KhesId = table.Column<int>(type: "int", nullable: true),
+                    DhesId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: true),
+                    KhesId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: true),
                     MushId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: true),
                     VergiId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: true),
                     VId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: true),
@@ -82,7 +82,7 @@ namespace APIMuhasibat.Migrations
                     Submiqdar = table.Column<int>(type: "int", nullable: true),
                     Vahidqiymeti_alish = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     Vahidqiymeti_satish = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    Edv = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    Edv = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
                     Edvye_celbedilen = table.Column<int>(type: "int", nullable: true),
                     Edvye_celbedilmeyen = table.Column<int>(type: "int", nullable: true),
                     Emeltarixi = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -101,7 +101,7 @@ namespace APIMuhasibat.Migrations
                 {
                     fsId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
                     fs_CODE = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
-                    fsADI = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: true)
+                    fsADI = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -375,6 +375,26 @@ namespace APIMuhasibat.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Qrups",
+                columns: table => new
+                {
+                    QId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
+                    Qrupname = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    EmeliyyatdetEmdetId = table.Column<string>(type: "nvarchar(36)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Qrups", x => x.QId);
+                    table.ForeignKey(
+                        name: "FK_Qrups_Emeliyyatdets_EmeliyyatdetEmdetId",
+                        column: x => x.EmeliyyatdetEmdetId,
+                        principalTable: "Emeliyyatdets",
+                        principalColumn: "EmdetId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Mushteris",
                 columns: table => new
                 {
@@ -393,26 +413,6 @@ namespace APIMuhasibat.Migrations
                     table.PrimaryKey("PK_Mushteris", x => x.MushId);
                     table.ForeignKey(
                         name: "FK_Mushteris_Emeliyyatdets_EmeliyyatdetEmdetId",
-                        column: x => x.EmeliyyatdetEmdetId,
-                        principalTable: "Emeliyyatdets",
-                        principalColumn: "EmdetId",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Qrups",
-                columns: table => new
-                {
-                    QId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
-                    Qrupname = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    EmeliyyatdetEmdetId = table.Column<string>(type: "nvarchar(36)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Qrups", x => x.QId);
-                    table.ForeignKey(
-                        name: "FK_Qrups_Emeliyyatdets_EmeliyyatdetEmdetId",
                         column: x => x.EmeliyyatdetEmdetId,
                         principalTable: "Emeliyyatdets",
                         principalColumn: "EmdetId",
@@ -527,13 +527,13 @@ namespace APIMuhasibat.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Mushteris_EmeliyyatdetEmdetId",
-                table: "Mushteris",
+                name: "IX_Qrups_EmeliyyatdetEmdetId",
+                table: "Qrups",
                 column: "EmeliyyatdetEmdetId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Qrups_EmeliyyatdetEmdetId",
-                table: "Qrups",
+                name: "IX_Mushteris_EmeliyyatdetEmdetId",
+                table: "Mushteris",
                 column: "EmeliyyatdetEmdetId");
 
             migrationBuilder.CreateIndex(
@@ -587,6 +587,9 @@ namespace APIMuhasibat.Migrations
                 name: "Hesabs");
 
             migrationBuilder.DropTable(
+                name: "Qrups");
+
+            migrationBuilder.DropTable(
                 name: "loggers");
 
             migrationBuilder.DropTable(
@@ -600,9 +603,6 @@ namespace APIMuhasibat.Migrations
 
             migrationBuilder.DropTable(
                 name: "Navroles");
-
-            migrationBuilder.DropTable(
-                name: "Qrups");
 
             migrationBuilder.DropTable(
                 name: "RefreshToken");

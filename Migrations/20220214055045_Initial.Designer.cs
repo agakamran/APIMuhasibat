@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace APIMuhasibat.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220212084803_kam1")]
-    partial class kam1
+    [Migration("20220214055045_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -70,11 +70,13 @@ namespace APIMuhasibat.Migrations
                         .HasMaxLength(36)
                         .HasColumnType("nvarchar(36)");
 
-                    b.Property<int?>("DhesId")
-                        .HasColumnType("int");
+                    b.Property<string>("DhesId")
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
 
-                    b.Property<decimal?>("Edv")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<string>("Edv")
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<int?>("Edvye_celbedilen")
                         .HasColumnType("int");
@@ -85,8 +87,9 @@ namespace APIMuhasibat.Migrations
                     b.Property<DateTime?>("Emeltarixi")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("KhesId")
-                        .HasColumnType("int");
+                    b.Property<string>("KhesId")
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
 
                     b.Property<decimal>("Kurs")
                         .HasColumnType("decimal(18,2)");
@@ -880,9 +883,9 @@ namespace APIMuhasibat.Migrations
                 {
                     b.Navigation("activs");
 
-                    b.Navigation("mushteris");
-
                     b.Navigation("qrups");
+
+                    b.Navigation("mushteris");
 
                     b.Navigation("vahids");
 
