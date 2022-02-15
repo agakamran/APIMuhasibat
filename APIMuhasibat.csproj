@@ -6,13 +6,12 @@
 
   <ItemGroup>
     <Compile Remove="Controllers\AccountController1.cs" />
-    <Compile Remove="Controllers\NewFolder\_AyarlarController.cs" />
-    <Compile Remove="Controllers\VergiKoduController.cs" />
     <Compile Remove="Controllers\_AyarlarController.cs" />
     <Compile Remove="Models\_Client.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AngleSharp" Version="1.0.0-alpha-844" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.4" />
@@ -31,7 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\NewFolder\" />
+    <Folder Include="Uploade\eqaime\" />
   </ItemGroup>
 
 </Project>

@@ -1038,10 +1038,11 @@ namespace APIMuhasibat.Controllers
                 {
                     string fullPath = "", jsonData = "";
                     var rootPath = _host.ContentRootPath; //get the root path
+                    string path = "Uploade//ayarlar";
                     switch (value)
                     {
                         case "aktiv":
-                            fullPath = Path.Combine(rootPath, "Uploade//aktiv.json");
+                            fullPath = Path.Combine(rootPath, path+"//aktiv.json");
                             jsonData = System.IO.File.ReadAllText(fullPath);
                             if (string.IsNullOrWhiteSpace(jsonData)) return null;
                             var acti = JsonConvert.DeserializeObject<List<Activler>>(jsonData);
@@ -1051,13 +1052,14 @@ namespace APIMuhasibat.Controllers
                                 foreach (var k in acti)
                                 {
                                     var p = new Activler() { ActivId = "", ActivName = k.ActivName.ToString(), Description = "" };
-                                    await _postaktivler(p);
+                                    await _postaktivler(p);                                    
                                 }
+                                Console.WriteLine("Yazilan aktiv sayi=" + _act.GetAll().Count());
                             }
                             #endregion
                             break;
                         case "tip":
-                            fullPath = Path.Combine(rootPath, "Uploade//tip.json");
+                            fullPath = Path.Combine(rootPath, path + "//tip.json");
                             jsonData = System.IO.File.ReadAllText(fullPath);
                             if (string.IsNullOrWhiteSpace(jsonData)) return null;
                             var tip = JsonConvert.DeserializeObject<List<Tipler>>(jsonData);
@@ -1069,12 +1071,13 @@ namespace APIMuhasibat.Controllers
                                     var p = new Tipler() { TipId = "", TipName = k.TipName.ToString() };
                                     await _postip(p);
                                 }
+                                Console.WriteLine("Yazilan tip sayi=" + _ti.GetAll().Count());
                             }
                             #endregion
                             break;
                         case "vergi":
                             #region
-                            fullPath = Path.Combine(rootPath, "Uploade//eqm_mal_kodlari-v1.json"); //combine the root path with that of our json file inside mydata directory
+                            fullPath = Path.Combine(rootPath, path + "//eqm_mal_kodlari-v1.json"); //combine the root path with that of our json file inside mydata directory
                             jsonData = System.IO.File.ReadAllText(fullPath); //read all the content inside the file
                             if (string.IsNullOrWhiteSpace(jsonData)) return null; //if no data is present then return null or error if you wish
                             if (_ver.GetAll().Count() == 0)
@@ -1090,6 +1093,7 @@ namespace APIMuhasibat.Controllers
                                         var p = new Vahid() { VId = "", Vahidadi = k };
                                         await _postvahid(p);
                                     }
+                                    Console.WriteLine("Yazilan vahid sayi=" + aa.Count());
                                 }
 
                                 foreach (var item in verg)
@@ -1103,11 +1107,12 @@ namespace APIMuhasibat.Controllers
                                     if (item.STATE != null) { ve.State = int.Parse(item.STATE); }
                                     await postvergi(ve);
                                 }
+                                Console.WriteLine("Yazilan vergi sayi=" + _ver.GetAll().Count());
                             }
                             #endregion
                             break;
                         case "hesab":
-                            fullPath = Path.Combine(rootPath, "Uploade//hesablar.json");
+                            fullPath = Path.Combine(rootPath, path + "//hesablar.json");
                             jsonData = System.IO.File.ReadAllText(fullPath);
                             if (string.IsNullOrWhiteSpace(jsonData)) return null;
                             var hes = JsonConvert.DeserializeObject<List<hesb>>(jsonData);
@@ -1124,6 +1129,7 @@ namespace APIMuhasibat.Controllers
                                         await _postbolme(p);
                                     }
                                 }
+                                Console.WriteLine("Yazilan bolme sayi=" + bb.Count());
                             }
                             #endregion
                             #region madd
@@ -1139,10 +1145,9 @@ namespace APIMuhasibat.Controllers
                                         await _postmad(p);
                                     }
                                 }
+                                Console.WriteLine("Yazilan madde sayi=" + mm.Count());
                             }
-                            #endregion
-                           
-                            
+                            #endregion                          
                             #region hesab
                             if (_he.GetAll().Count() == 0)
                             {
@@ -1162,12 +1167,13 @@ namespace APIMuhasibat.Controllers
                                     };
                                     await _posthesab(ve);
                                 }
+                                Console.WriteLine("Yazilan hesab sayi=" + _he.GetAll().Count());
                             }
                             #endregion                           
                             break;
                         case "Mushteri":
                             #region
-                            fullPath = Path.Combine(rootPath, "Uploade//mushteri.json");
+                            fullPath = Path.Combine(rootPath, path + "//mushteri.json");
                             jsonData = System.IO.File.ReadAllText(fullPath);
                             if (string.IsNullOrWhiteSpace(jsonData)) return null;
                             var mush = JsonConvert.DeserializeObject<List<Mushteri>>(jsonData);
@@ -1188,12 +1194,13 @@ namespace APIMuhasibat.Controllers
 
                                     await _postmushteri(p);
                                 }
+                                Console.WriteLine("Yazilan mushteri sayi=" + _mush.GetAll().Count());
                             }
                             #endregion
                             break;
                         case "shirket":
                             #region
-                            fullPath = Path.Combine(rootPath, "Uploade//shirket.json");
+                            fullPath = Path.Combine(rootPath, path + "//shirket.json");
                             jsonData = System.IO.File.ReadAllText(fullPath);
                             if (string.IsNullOrWhiteSpace(jsonData)) return null;
                             var shir = JsonConvert.DeserializeObject<List<Shirket>>(jsonData);
@@ -1220,12 +1227,13 @@ namespace APIMuhasibat.Controllers
                                     };
                                     await _postshirket(p);
                                 }
+                                Console.WriteLine("Yazilan shirket sayi=" + _shi.GetAll().Count());
                             }
                             #endregion
                             break;
                         case "fealiyet":
                             #region
-                            fullPath = Path.Combine(rootPath, "Uploade//fk-v1.json");
+                            fullPath = Path.Combine(rootPath, path + "//fk-v1.json");
                             jsonData = System.IO.File.ReadAllText(fullPath);
                             if (string.IsNullOrWhiteSpace(jsonData)) return null;
                             var feal = JsonConvert.DeserializeObject<List<fealsahe>>(jsonData);
@@ -1244,6 +1252,7 @@ namespace APIMuhasibat.Controllers
                                         Console.WriteLine(ex);
                                     }
                                 }
+                                Console.WriteLine("Yazilan fealiyyet sayi=" + _feal.GetAll().Count());
                             }
                             #endregion
                             break;
