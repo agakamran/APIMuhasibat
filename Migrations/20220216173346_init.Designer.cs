@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace APIMuhasibat.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220214055045_Initial")]
-    partial class Initial
+    [Migration("20220216173346_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -70,6 +70,13 @@ namespace APIMuhasibat.Migrations
                         .HasMaxLength(36)
                         .HasColumnType("nvarchar(36)");
 
+                    b.Property<decimal>("Aksizderecesi")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Barkod")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
                     b.Property<string>("DhesId")
                         .HasMaxLength(36)
                         .HasColumnType("nvarchar(36)");
@@ -93,6 +100,10 @@ namespace APIMuhasibat.Migrations
 
                     b.Property<decimal>("Kurs")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Maladi")
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
 
                     b.Property<decimal?>("Miqdar")
                         .HasColumnType("decimal(18,2)");
@@ -133,6 +144,9 @@ namespace APIMuhasibat.Migrations
                     b.Property<string>("VergiId")
                         .HasMaxLength(36)
                         .HasColumnType("nvarchar(36)");
+
+                    b.Property<decimal>("Yolvergisi")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("EmdetId");
 
@@ -883,9 +897,9 @@ namespace APIMuhasibat.Migrations
                 {
                     b.Navigation("activs");
 
-                    b.Navigation("qrups");
-
                     b.Navigation("mushteris");
+
+                    b.Navigation("qrups");
 
                     b.Navigation("vahids");
 

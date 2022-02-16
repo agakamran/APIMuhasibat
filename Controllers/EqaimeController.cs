@@ -73,13 +73,13 @@ namespace APIMuhasibat.Controllers
                 #region
                 string path = "";
                
-                var aId = Request.Form.Files["aId"];
-                var dhesId = Request.Form.Files["dhesId"];
-                var khesId = Request.Form.Files["khesId"];               
-                var QId = Request.Form.Files["QId"];
-                var pars = Request.Form.Files["pars"];
-                var ValId = Request.Form.Files["ValId"];
-                var Kurs= Request.Form.Files["Kurs"];
+                var aId = Request.Form["aId"];
+                var dhesId = Request.Form["dhesId"];
+                var khesId = Request.Form["khesId"];               
+                var QId = Request.Form["QId"];
+                var pars = Request.Form["pars"];
+                var ValId = Request.Form["ValId"];
+                var Kurs= Request.Form["Kurs"];
                 var file = Request.Form.Files["file"];
                 #endregion
                 if (file != null && file.Length > 0)
@@ -107,7 +107,7 @@ namespace APIMuhasibat.Controllers
                             des = rootNode["des"].InnerText,
                             des2 =rootNode["des2"].InnerText
                         };
-                        if (_cryp.Cry(qaime.des2))
+                        if (!_cryp.Cry(qaime.des))
                         {
                             
                         }
@@ -130,7 +130,7 @@ namespace APIMuhasibat.Controllers
                             ti.Unvan = ti.Unvan;
                             ti.userId = _GeteId();
                             ti.Shirpercent = 0;
-                          //  await _shi.InsertAsync(ti);
+                            await _shi.InsertAsync(ti);
                         }
                         #endregion
                         #region qaimeKimden
@@ -146,7 +146,7 @@ namespace APIMuhasibat.Controllers
                             mi.Valyuta = "1";
                             mi.Odemesherti ="";
                             mi.Temsilchi ="";
-                            //await _mush.InsertAsync(mi);
+                            await _mush.InsertAsync(mi);
                            
                         }
                         #endregion
@@ -225,7 +225,7 @@ namespace APIMuhasibat.Controllers
                                 Em.Edvye_celbedilmeyen = 1;
                             } 
                             Em.Qeyd = null;
-                            // await _emel.InsertAsync(Em);
+                             await _emel.InsertAsync(Em);
                         }
 
 

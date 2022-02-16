@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace APIMuhasibat.Migrations
 {
-    public partial class Initial : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -87,7 +87,11 @@ namespace APIMuhasibat.Migrations
                     Edvye_celbedilmeyen = table.Column<int>(type: "int", nullable: true),
                     Emeltarixi = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ValId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: true),
+                    Maladi = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: true),
+                    Barkod = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     Kurs = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Aksizderecesi = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Yolvergisi = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Qeyd = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true)
                 },
                 constraints: table =>
@@ -375,26 +379,6 @@ namespace APIMuhasibat.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Qrups",
-                columns: table => new
-                {
-                    QId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
-                    Qrupname = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    EmeliyyatdetEmdetId = table.Column<string>(type: "nvarchar(36)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Qrups", x => x.QId);
-                    table.ForeignKey(
-                        name: "FK_Qrups_Emeliyyatdets_EmeliyyatdetEmdetId",
-                        column: x => x.EmeliyyatdetEmdetId,
-                        principalTable: "Emeliyyatdets",
-                        principalColumn: "EmdetId",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Mushteris",
                 columns: table => new
                 {
@@ -413,6 +397,26 @@ namespace APIMuhasibat.Migrations
                     table.PrimaryKey("PK_Mushteris", x => x.MushId);
                     table.ForeignKey(
                         name: "FK_Mushteris_Emeliyyatdets_EmeliyyatdetEmdetId",
+                        column: x => x.EmeliyyatdetEmdetId,
+                        principalTable: "Emeliyyatdets",
+                        principalColumn: "EmdetId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Qrups",
+                columns: table => new
+                {
+                    QId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
+                    Qrupname = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    EmeliyyatdetEmdetId = table.Column<string>(type: "nvarchar(36)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Qrups", x => x.QId);
+                    table.ForeignKey(
+                        name: "FK_Qrups_Emeliyyatdets_EmeliyyatdetEmdetId",
                         column: x => x.EmeliyyatdetEmdetId,
                         principalTable: "Emeliyyatdets",
                         principalColumn: "EmdetId",
@@ -527,13 +531,13 @@ namespace APIMuhasibat.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Qrups_EmeliyyatdetEmdetId",
-                table: "Qrups",
+                name: "IX_Mushteris_EmeliyyatdetEmdetId",
+                table: "Mushteris",
                 column: "EmeliyyatdetEmdetId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Mushteris_EmeliyyatdetEmdetId",
-                table: "Mushteris",
+                name: "IX_Qrups_EmeliyyatdetEmdetId",
+                table: "Qrups",
                 column: "EmeliyyatdetEmdetId");
 
             migrationBuilder.CreateIndex(
@@ -587,9 +591,6 @@ namespace APIMuhasibat.Migrations
                 name: "Hesabs");
 
             migrationBuilder.DropTable(
-                name: "Qrups");
-
-            migrationBuilder.DropTable(
                 name: "loggers");
 
             migrationBuilder.DropTable(
@@ -603,6 +604,9 @@ namespace APIMuhasibat.Migrations
 
             migrationBuilder.DropTable(
                 name: "Navroles");
+
+            migrationBuilder.DropTable(
+                name: "Qrups");
 
             migrationBuilder.DropTable(
                 name: "RefreshToken");
