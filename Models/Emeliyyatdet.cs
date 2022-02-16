@@ -13,12 +13,12 @@ namespace APIMuhasibat.Models
     {
         string _emdetId = null, _qId = null, _aId = null, _userId = null,
          _mushId = null, _vergiId = null, _vId = null, _qeyd = null, _valId = null,
-            _dhesId = null, _khesId = null, _edv = null;
+            _dhesId = null, _khesId = null, _edv = null, _maladi=null,_barkod=null;
         Nullable<int>  _submiqdar = null,
         _edvye_celbedilen = null, _edvye_celbedilmeyen = null;
         Nullable<decimal> _miqdar =null, _vahidqiymeti_alish = null,
             _vahidqiymeti_satish = null;
-        decimal _kurs = 0;
+        decimal _kurs = 0, _aksizderecesi=0, _yolvergisi=0;
         Nullable<DateTime> _emeltarixi = DateTime.Now;
         ICollection<Qrup> _qrups = null;
         ICollection<Activler> _activs = null;
@@ -167,6 +167,18 @@ namespace APIMuhasibat.Models
             get { return _valId; }
             set { if (value != null) { _valId = value; } }
         }
+        [MaxLength(150)]
+        public string Maladi
+        {
+            get { return _maladi; }
+            set { if (value != null) { _maladi = value; } }
+        }
+        [MaxLength(50)]
+        public string Barkod
+        {
+            get { return _barkod; }
+            set { if (value != null) { _barkod = value; } }
+        }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Valyuta> valyuts
         {
@@ -178,11 +190,22 @@ namespace APIMuhasibat.Models
             get { return _kurs; }
             set { if (value > 0) { _kurs = value; } }
         }
+        public decimal Aksizderecesi
+        {
+            get { return _aksizderecesi; }
+            set { if (value > 0) { _aksizderecesi = value; } }
+        }
+        public decimal Yolvergisi
+        {
+            get { return _yolvergisi; }
+            set { if (value > 0) { _yolvergisi = value; } }
+        }
         [MaxLength(250)]
         public string Qeyd  //izahlar birinci debitin sonra  10 simvol buraxib kredit yazaq  
         {
             get { return _qeyd; }
             set { if (value != null) { _qeyd = value; } }
-        }        
+        }  
+        
     }
 }

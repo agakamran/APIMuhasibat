@@ -17,7 +17,7 @@ namespace APIMuhasibat.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EqaimeController : ControllerBase
+    public class EqaimeController : BaseController
     {
         #region
         private readonly IRepository<Tipler> _ti = null;
@@ -70,14 +70,17 @@ namespace APIMuhasibat.Controllers
             if (!ModelState.IsValid) { return BadRequest(ModelState); }
             else
             {
-                string path = "";
-                var file = Request.Form.Files["file"];
                 #region
-                // var pp = new prodphoto();
-                // pp.photoId = Guid.NewGuid().ToString();               
-                // var ft = Request.Form["genId"];
-                // string exten = Path.GetExtension(file.FileName);
-                // string url = "Images/" + fi + "/" + gen + "/" + pp.photoId + exten;
+                string path = "";
+               
+                var aId = Request.Form.Files["aId"];
+                var dhesId = Request.Form.Files["dhesId"];
+                var khesId = Request.Form.Files["khesId"];               
+                var QId = Request.Form.Files["QId"];
+                var pars = Request.Form.Files["pars"];
+                var ValId = Request.Form.Files["ValId"];
+                var Kurs= Request.Form.Files["Kurs"];
+                var file = Request.Form.Files["file"];
                 #endregion
                 if (file != null && file.Length > 0)
                 {
@@ -96,18 +99,59 @@ namespace APIMuhasibat.Controllers
                         XmlNode rootNode = doc.GetElementsByTagName("root").Item(0);
                         Qaime qaime = new Qaime
                         {
-                            kod = rootNode.Attributes["kod"].Value,
+                           // kod = rootNode.Attributes["kod"].Value,
                             qaimeKime = rootNode["qaimeKime"].InnerText,
                             qaimeKimden = rootNode["qaimeKimden"].InnerText,
                             sn = rootNode["sn"].InnerText,
                             vo = rootNode["vo"].InnerText,
                             des = rootNode["des"].InnerText,
-                            des2 = rootNode["des2"].InnerText
+                            des2 =rootNode["des2"].InnerText
                         };
-                        foreach (XmlNode row in rootNode["product"]["qaimeTable"].ChildNodes)
+                        if (_cryp.Cry(qaime.des2))
                         {
-                            string c1 = row["c1"].InnerText;
-                            Console.WriteLine("Hello World!");
+                            
+                        }
+                        #region qaimeKime
+                        Shirket ti =new Shirket();
+                        var shir = _shi.GetAll().FirstOrDefault(x => x.Shirvoen == qaime.qaimeKimden);
+                        if (shir==null)// && shir.Shirvoen != qaime.qaimeKimden
+                        {
+                            ti.ShId = Guid.NewGuid().ToString();
+                            ti.Bankadi = "";
+                            ti.Bankvoen = "";
+                            ti.SWIFT = "";
+                            ti.Bankkodu = "";
+                            ti.Muxbirhesab = "";
+                            ti.Aznhesab = "";
+                            ti.Shiricrachi = "";
+                            ti.Shirvoen = qaime.qaimeKime;
+                            ti.Cavabdehshexs = "";
+                            ti.Email = _GetEmail();
+                            ti.Unvan = ti.Unvan;
+                            ti.userId = _GeteId();
+                            ti.Shirpercent = 0;
+                          //  await _shi.InsertAsync(ti);
+                        }
+                        #endregion
+                        #region qaimeKimden
+                        Mushteri mi =new Mushteri();
+                        var mush = _mush.GetAll().FirstOrDefault(x => x.Voen == qaime.qaimeKimden);
+                        if (mush==null)//.Voen!=qaime.qaimeKimden
+                        {
+                            mi.MushId = Guid.NewGuid().ToString();
+                            mi.Firma = "";
+                            mi.Voen =qaime.qaimeKimden;
+                            mi.Muqavilenom = "";
+                            mi.Muqaviletar = DateTime.Now;
+                            mi.Valyuta = "1";
+                            mi.Odemesherti ="";
+                            mi.Temsilchi ="";
+                            //await _mush.InsertAsync(mi);
+                           
+                        }
+                        #endregion
+                        foreach (XmlNode row in rootNode["product"]["qaimeTable"].ChildNodes)
+                        {  
                             qaime.qaimeTables.Add(
                                new QaimeTable
                                {
@@ -144,6 +188,47 @@ namespace APIMuhasibat.Controllers
                                }
                                 );
                         }
+                        var Em = new Emeliyyatdet();
+                        Em.EmdetId = Guid.NewGuid().ToString();
+                        Em.UserId = _GeteId();
+                        Em.QId = QId.ToString();
+                        Em.AId = aId.ToString();
+                        Em.DhesId = dhesId.ToString();
+                        Em.KhesId = khesId.ToString();
+                        Em.MushId = mush.MushId;
+                        foreach (var xx in qaime.qaimeTables)
+                        {
+                            var ver = _ver.GetAll().FirstOrDefault(k => k.Vergikodu == xx.c1);
+                            Em.VergiId = ver.VergiId;
+                            Em.VId = ver.VId;
+                            Em.Maladi=xx.c2.ToString();
+                            Em.Barkod=xx.c4.ToString();
+                            Em.Miqdar =decimal.Parse(xx.c4);
+                            Em.Submiqdar = 1;
+                            Em.Vahidqiymeti_alish = decimal.Parse(xx.c5);
+                            Em.Vahidqiymeti_satish = Em.Vahidqiymeti_satish + decimal.Parse(xx.c5)*(decimal.Parse(pars.ToString())/100);  
+                            
+
+                            Em.ValId = ValId.ToString();
+                            Em.Kurs =decimal.Parse(Kurs.ToString());
+                            Em.Emeltarixi = DateTime.Now.Date;
+                            if (decimal.Parse(xx.c13) > 0)
+                            {
+                                Em.Edv = "0,18%";
+                                Em.Edvye_celbedilen =1;
+                                Em.Edvye_celbedilmeyen = 0;
+                            }
+                            else
+                            {
+                                Em.Edv = "0";
+                                Em.Edvye_celbedilen =0;
+                                Em.Edvye_celbedilmeyen = 1;
+                            } 
+                            Em.Qeyd = null;
+                            // await _emel.InsertAsync(Em);
+                        }
+
+
                         var fileSavePath = _path.Replace("\\", "/") + "/" + file.FileName;
                        
                         if (System.IO.File.Exists(fileSavePath))

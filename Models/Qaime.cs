@@ -14,9 +14,6 @@ namespace APIMuhasibat.Models
 
         public string des { get; set; }
         public string des2 { get; set; }
-
-
-
         public List<QaimeTable> qaimeTables { get; set; } = new List<QaimeTable>();
 
         public List<QaimeTable> qaimeYekunTables { get; set; } = new List<QaimeTable>();

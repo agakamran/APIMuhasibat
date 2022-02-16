@@ -117,8 +117,9 @@ namespace APIMuhasibat.Controllers
                     //    case "HESABLAŞMALAR":
                     //        break;
                     //}
-                    va.Miqdar = va.Miqdar;
                     va.EmdetId = Guid.NewGuid().ToString();
+                    va.AId = va.AId;
+                    va.Miqdar = va.Miqdar;                    
                     va.QId = va.QId;
                     va.UserId = _GeteId();
                     va.MushId = va.MushId;
