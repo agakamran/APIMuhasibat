@@ -15,7 +15,14 @@ namespace APIMuhasibat.Models
             _bId = null, _mId = null, _tipId = null, _activId = null;
         //Madde _madde = null;
         //Tipler _tipler = null;
-        public Hesab() { }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Hesab()
+        {
+            this.Activlers = new HashSet<Activler>();
+            this.Bolmes = new HashSet<Bolme>();
+            this.Maddes = new HashSet<Madde>();
+            this.Tiplers = new HashSet<Tipler>();
+        }
         public Hesab(string _HesId, string _Hesnom)
         {
             HesId = _HesId;
@@ -58,6 +65,8 @@ namespace APIMuhasibat.Models
                 if (value != null) { _bId = value; }
             }
         }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Bolme> Bolmes { get; set; }
         [MaxLength(36)]
         public string MId
         {
@@ -67,21 +76,16 @@ namespace APIMuhasibat.Models
                 if (value != null) { _mId = value; }
             }
         }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Madde> Maddes { get; set; }
         [MaxLength(36)]
         public string ActivId
         {
             get { return _activId; }
             set { if (value != null) { _activId = value; } }
         }
-        //[MaxLength(36)]
-        //public Madde madde
-        //{
-        //    get { return _madde; }
-        //    set
-        //    {
-        //        if (value != null) { _madde = value; }
-        //    }
-        //}
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Activler> Activlers { get; set; }
         [MaxLength(36)]
         public string TipId
         {
@@ -91,14 +95,8 @@ namespace APIMuhasibat.Models
                 if (value != null) { _tipId = value; }
             }
         }
-        //public Tipler tipler
-        //{
-        //    get { return _tipler; }
-        //    set
-        //    {
-        //        if (value != null) { _tipler = value; }
-        //    }
-        //}
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Tipler> Tiplers { get; set; }
     }
     public class hesb
     {

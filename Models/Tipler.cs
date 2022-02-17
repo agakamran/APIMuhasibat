@@ -30,5 +30,6 @@ namespace APIMuhasibat.Models
             get { return _tipName; }
             set { if (value != null) { _tipName = value; } }
         }
+       // public virtual ICollection<Hesab> Hesabs { get; set; }
     }
 }

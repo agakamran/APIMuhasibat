@@ -1,6 +1,5 @@
 ﻿using APIMuhasibat.Models;
 using APIMuhasibat.Services;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -9,7 +8,6 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Xml;
-using System.Xml.Linq;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -17,7 +15,7 @@ namespace APIMuhasibat.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EqaimeController : BaseController
+    public class OperationController : BaseController
     {
         #region
         private readonly IRepository<Tipler> _ti = null;
@@ -32,13 +30,15 @@ namespace APIMuhasibat.Controllers
         private readonly IRepository<Valyuta> _val = null;
         private readonly IRepository<Vergi> _ver = null;
         private readonly IRepository<fealsahe> _feal = null;
-        private readonly IRepository<Emeliyyatdet> _emel = null;
+        private readonly IRepository<operation> _oper = null;
+        private readonly IRepository<Productmaster> _promas = null;
+        private readonly IRepository<Productdetal> _prodet = null;
         private static IWebHostEnvironment _host;
         #endregion
-        public EqaimeController(IWebHostEnvironment host, IRepository<Tipler> ti, IRepository<Qrup> qr,
-            IRepository<Activler> act, IRepository<Hesab> he, IRepository<Bolme> bol,IRepository<Madde> mad,
+        public OperationController(IWebHostEnvironment host, IRepository<Tipler> ti, IRepository<Qrup> qr,
+            IRepository<Activler> act, IRepository<Hesab> he, IRepository<Bolme> bol, IRepository<Madde> mad,
             IRepository<Shirket> shi, IRepository<Mushteri> mush, IRepository<Vahid> va, IRepository<Valyuta> val,
-            IRepository<Vergi> ver, IRepository<fealsahe> feal, IRepository<Emeliyyatdet> emel)
+            IRepository<Vergi> ver, IRepository<fealsahe> feal, IRepository<Productmaster> promas, IRepository<Productdetal> prodet, IRepository<operation> oper)
         {
             #region
             _host = host;
@@ -54,15 +54,11 @@ namespace APIMuhasibat.Controllers
             _ver = ver;
             _bol = bol;
             _feal = feal;
-            _emel = emel;
-            #endregion           
+            _oper = oper;
+            _promas = promas;
+            _prodet= prodet;
+            #endregion
         }
-        // GET: api/<VergiKoduController>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }       
         [HttpPost]
         [Route("postfile")]
         public async Task<IActionResult> postfile()
@@ -72,14 +68,14 @@ namespace APIMuhasibat.Controllers
             {
                 #region
                 string path = "";
-               
+
                 var aId = Request.Form["aId"];
                 var dhesId = Request.Form["dhesId"];
-                var khesId = Request.Form["khesId"];               
+                var khesId = Request.Form["khesId"];
                 var QId = Request.Form["QId"];
                 var pars = Request.Form["pars"];
                 var ValId = Request.Form["ValId"];
-                var Kurs= Request.Form["Kurs"];
+                var Kurs = Request.Form["Kurs"];
                 var file = Request.Form.Files["file"];
                 #endregion
                 if (file != null && file.Length > 0)
@@ -93,28 +89,28 @@ namespace APIMuhasibat.Controllers
                         using (var stream = new FileStream(path, FileMode.Create))
                         {
                             await file.CopyToAsync(stream);
-                        }                       
+                        }
                         XmlDocument doc = new XmlDocument();
                         doc.Load(_path + file.FileName);
                         XmlNode rootNode = doc.GetElementsByTagName("root").Item(0);
                         Qaime qaime = new Qaime
                         {
-                           // kod = rootNode.Attributes["kod"].Value,
+                            // kod = rootNode.Attributes["kod"].Value,
                             qaimeKime = rootNode["qaimeKime"].InnerText,       // (Alan tərəfin VÖENi buraya yazılır.Məcburidir və 10 rəqəmlidir )
                             qaimeKimden = rootNode["qaimeKimden"].InnerText,   // (Satan tərəfin VÖENi buraya yazılır. Məcburidir və 10 rəqəmlidir )
                             ds = rootNode["ds"].InnerText,
                             dn = rootNode["vo"].InnerText,
                             des = rootNode["des"].InnerText,                  //(Qaimənin əsas qeydi buraya yazılır. Ən çox 150 simvol ola bilər. Məcburidir)
-                            des2 =rootNode["des2"].InnerText,                 //(Qaimənin əlavə qeydi buraya yazılır. Ən çox 150 simvol ola bilər. Məcburidir. Boş ola bilər) 
+                            des2 = rootNode["des2"].InnerText,                 //(Qaimənin əlavə qeydi buraya yazılır. Ən çox 150 simvol ola bilər. Məcburidir. Boş ola bilər) 
                             ma = rootNode["ma"].InnerText,                    //(Qaimə təqdim edən filial/obyektin adı buraya yazılır.Məcburi deyil) 
                             mk = rootNode["mk"].InnerText,                   //(Qaimə təqdim edən filial/obyektin kodu buraya yazılır.Məcburi deyil) 
                             mediator = rootNode["mediator"].InnerText        //(Vasitəçi  Agent və ya Komisyonçu)
                         };
-                       // if (!_cryp.Cry(qaime.des)) {            }
+                        // if (!_cryp.Cry(qaime.des)) {            }
                         #region qaimeKime
-                        Shirket ti =new Shirket();
+                        Shirket ti = new Shirket();
                         var shir = _shi.GetAll().FirstOrDefault(x => x.Shirvoen == qaime.qaimeKimden);
-                        if (shir==null)// && shir.Shirvoen != qaime.qaimeKimden
+                        if (shir == null)// && shir.Shirvoen != qaime.qaimeKimden
                         {
                             ti.ShId = Guid.NewGuid().ToString();
                             ti.Bankadi = "";
@@ -134,26 +130,26 @@ namespace APIMuhasibat.Controllers
                         }
                         #endregion
                         #region qaimeKimden
-                        Mushteri mi =new Mushteri();
+                        Mushteri mi = new Mushteri();
                         var mush = _mush.GetAll().FirstOrDefault(x => x.Voen == qaime.qaimeKimden);
-                        if (mush==null)//.Voen!=qaime.qaimeKimden
+                        if (mush == null)//.Voen!=qaime.qaimeKimden
                         {
                             mi.MushId = Guid.NewGuid().ToString();
                             mi.Firma = "";
-                            mi.Voen =qaime.qaimeKimden;
+                            mi.Voen = qaime.qaimeKimden;
                             mi.Muqavilenom = "";
                             mi.Muqaviletar = DateTime.Now;
                             mi.Valyuta = "1";
-                            mi.Odemesherti ="";
-                            mi.Temsilchi ="";
+                            mi.Odemesherti = "";
+                            mi.Temsilchi = "";
                             await _mush.InsertAsync(mi);
-                           
+
                         }
                         #endregion
                         foreach (XmlNode row in rootNode["product"]["qaimeTable"].ChildNodes)
-                        {  
-                            qaime.qaimeTables.Add(
-                               new QaimeTable
+                        {
+                            var pde=new Productdetal();
+                            qaime.qaimeTables.Add(new QaimeTable
                                {
                                    c1 = row["c1"].InnerText, //(Mal kodu burada saxlanılır.10 rəqəmlidir. Məcburidir)
                                    c2 = row["c2"].InnerText, //(Mal adı burada saxlanılır.Max 150 simvoldur. Məcburidir)
@@ -173,7 +169,13 @@ namespace APIMuhasibat.Controllers
                                    c16 = row["c16"].InnerText,//(Yola salınmış mallara,görülmüş işlərə və göstərilmiş xidmətlər üçün məbləğ burada saxlanılır.Kəsir hissəsi ən çox 2 rəqəmlidir.Məcburidir )
                                    c17 = row["c17"].InnerText,//(Malların Barkod)
                                });
+                            pde.PdetId= Guid.NewGuid().ToString();
+                            pde.Maladi = "";
+                            //string _pdetId = null,  _maladi = null, _barkod = null, _vergiId = null, _vId = null, _qeyd = null, _edv = null;
+                            await _prodet.InsertAsync(pde);
                         }
+
+
                         foreach (XmlNode row in rootNode["product"]["qaimeYekunTable"].ChildNodes)
                         {
                             qaime.qaimeYekunTables.Add(
@@ -193,6 +195,7 @@ namespace APIMuhasibat.Controllers
                                }
                                 );
                         }
+
                         var Em = new Emeliyyatdet();
                         Em.EmdetId = Guid.NewGuid().ToString();
                         Em.UserId = _GeteId();
@@ -206,36 +209,36 @@ namespace APIMuhasibat.Controllers
                             var ver = _ver.GetAll().FirstOrDefault(k => k.Vergikodu == xx.c1);
                             Em.VergiId = ver.VergiId;
                             Em.VId = ver.VId;
-                            Em.Maladi=xx.c2.ToString();
-                            Em.Barkod=xx.c4.ToString();
-                            Em.Miqdar =decimal.Parse(xx.c4);
+                            Em.Maladi = xx.c2.ToString();
+                            Em.Barkod = xx.c4.ToString();
+                            Em.Miqdar = decimal.Parse(xx.c4);
                             Em.Submiqdar = 1;
                             Em.Vahidqiymeti_alish = decimal.Parse(xx.c5);
-                            Em.Vahidqiymeti_satish = Em.Vahidqiymeti_satish + decimal.Parse(xx.c5)*(decimal.Parse(pars.ToString())/100);  
-                            
+                            Em.Vahidqiymeti_satish = Em.Vahidqiymeti_satish + decimal.Parse(xx.c5) * (decimal.Parse(pars.ToString()) / 100);
+
 
                             Em.ValId = ValId.ToString();
-                            Em.Kurs =decimal.Parse(Kurs.ToString());
+                            Em.Kurs = decimal.Parse(Kurs.ToString());
                             Em.Emeltarixi = DateTime.Now.Date;
                             if (decimal.Parse(xx.c13) > 0)
                             {
                                 Em.Edv = "0,18%";
-                                Em.Edvye_celbedilen =1;
+                                Em.Edvye_celbedilen = 1;
                                 Em.Edvye_celbedilmeyen = 0;
                             }
                             else
                             {
                                 Em.Edv = "0";
-                                Em.Edvye_celbedilen =0;
+                                Em.Edvye_celbedilen = 0;
                                 Em.Edvye_celbedilmeyen = 1;
-                            } 
+                            }
                             Em.Qeyd = null;
-                             await _emel.InsertAsync(Em);
+                            //await _emel.InsertAsync(Em);
                         }
 
 
                         var fileSavePath = _path.Replace("\\", "/") + "/" + file.FileName;
-                       
+
                         if (System.IO.File.Exists(fileSavePath))
                         {
                             System.IO.File.Delete(fileSavePath);
@@ -247,34 +250,41 @@ namespace APIMuhasibat.Controllers
                     }
                 }
                 //--------------------------------------                   
-               // pp.proId = Request.Form["proId"];
-              //  pp.photourl = url;
-               // await _photo.InsertAsync(pp);
+                // pp.proId = Request.Form["proId"];
+                //  pp.photourl = url;
+                // await _photo.InsertAsync(pp);
                 return Ok();
 
 
             }
         }
-        // GET api/<VergiKoduController>/5
+        // GET: api/<OperationController>
+        [HttpGet]
+        public IEnumerable<string> Get()
+        {
+            return new string[] { "value1", "value2" };
+        }
+
+        // GET api/<OperationController>/5
         [HttpGet("{id}")]
         public string Get(int id)
         {
             return "value";
         }
 
-        // POST api/<VergiKoduController>
+        // POST api/<OperationController>
         [HttpPost]
         public void Post([FromBody] string value)
         {
         }
 
-        // PUT api/<VergiKoduController>/5
+        // PUT api/<OperationController>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
         }
 
-        // DELETE api/<VergiKoduController>/5
+        // DELETE api/<OperationController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {

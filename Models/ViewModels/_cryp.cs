@@ -1,9 +1,11 @@
-﻿namespace APIMuhasibat.Models
+﻿using System;
+
+namespace APIMuhasibat.Models.ViewModels
 {
     public class _cryp
     {
-        public static bool b = false;
-        public static bool Cry(string str)
+        public  bool b = false;
+        public  bool Cry(string str)
         {
             #region kod
             //string[] buf;
@@ -76,6 +78,25 @@
             return b;
             #endregion
         }
-
+        public bool _int(string str)
+        {
+            try
+            {
+                int ss = int.Parse(str);
+                b = true;
+            }
+            catch (Exception e) { b = false; }
+            return b;
+        }
+        public bool _decimal(string str)
+        {
+            try
+            {
+                float ss = float.Parse(str);
+                b = true;
+            }
+            catch (Exception e) { b = false; }
+            return b;
+        }
     }
 }

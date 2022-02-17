@@ -27,6 +27,7 @@ namespace APIMuhasibat.Models
         public string MaddeName {
             get { return _maddeName; }
             set { if (value != null) { _maddeName = value; } }
-        }        
+        }
+       // public virtual ICollection<Hesab> Hesabs { get; set; }
     }
 }

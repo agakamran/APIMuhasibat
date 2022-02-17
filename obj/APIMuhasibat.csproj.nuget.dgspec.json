@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Programmer\\Angular\\CommercialSolution\\APIMuhasibat\\APIMuhasibat.csproj": {}
+    "E:\\Kamran\\Proektler\\API\\CommercialSolution\\APIMuhasibat\\APIMuhasibat.csproj": {}
   },
   "projects": {
-    "D:\\Programmer\\Angular\\CommercialSolution\\APIMuhasibat\\APIMuhasibat.csproj": {
+    "E:\\Kamran\\Proektler\\API\\CommercialSolution\\APIMuhasibat\\APIMuhasibat.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Programmer\\Angular\\CommercialSolution\\APIMuhasibat\\APIMuhasibat.csproj",
+        "projectUniqueName": "E:\\Kamran\\Proektler\\API\\CommercialSolution\\APIMuhasibat\\APIMuhasibat.csproj",
         "projectName": "APIMuhasibat",
-        "projectPath": "D:\\Programmer\\Angular\\CommercialSolution\\APIMuhasibat\\APIMuhasibat.csproj",
-        "packagesPath": "C:\\Users\\adm\\.nuget\\packages\\",
-        "outputPath": "D:\\Programmer\\Angular\\CommercialSolution\\APIMuhasibat\\obj\\",
+        "projectPath": "E:\\Kamran\\Proektler\\API\\CommercialSolution\\APIMuhasibat\\APIMuhasibat.csproj",
+        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+        "outputPath": "E:\\Kamran\\Proektler\\API\\CommercialSolution\\APIMuhasibat\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\adm\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -106,7 +106,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.200\\RuntimeIdentifierGraph.json"
         }
       }
     }

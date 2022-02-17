@@ -11,12 +11,7 @@ namespace APIMuhasibat.Models
     [Table("Aktivs")]
    public class Activler
     {
-        string _activId = null;
-        string _activName = null;
-       // Nullable<decimal> _activdeyeri = 0;
-       // Nullable<DateTime> _tarix = DateTime.Now;
-        string _description = null;
-
+        string _activId = null, _activName = null, _description = null;
         public Activler()
         {
         }
@@ -26,8 +21,6 @@ namespace APIMuhasibat.Models
         {
            this.ActivId = _ActivId;
            this.ActivName = _ActivName;
-            //  this.Activdeyeri = _Activdeyeri;
-           // this.Tarix= _Tarix;
            this.Description = _Description;
         }
         [Key]
@@ -42,21 +35,12 @@ namespace APIMuhasibat.Models
         {
             get { return _activName; }
             set { if (value != null) { _activName = value; } }
-        }
-        //public Nullable<decimal> Activdeyeri
-        //{
-        //    get { return _activdeyeri; }
-        //    set { if (_activdeyeri != null) { _activdeyeri = value; } }
-        //}
-        //public Nullable<DateTime> Tarix
-        //{
-        //    get { return _tarix; }
-        //    set { if (_tarix != null) { _tarix = value; } }
-        //}
+        }       
         [MaxLength(50)]
         public string Description {
              get { return _description; }
             set { if (value != null) { _description = value; } }
         }
+       // public virtual ICollection<Hesab> Hesabs { get; set; }
     }    
 }

@@ -12,7 +12,7 @@ namespace APIMuhasibat.Models
    public class Vahid
     {
         string _vId = null, _vahidadi = null;
-        public Vahid() { }
+        public Vahid() {    }
         public Vahid(string _VId, string _Vahidadi)
         {
             this.VId = _VId;
@@ -28,6 +28,8 @@ namespace APIMuhasibat.Models
         public string Vahidadi {
             get { return _vahidadi; }
             set { if (value != null) { _vahidadi = value; } }
-        }
+        }        
+       // public virtual ICollection<Vergi> Vergis { get; set; }
+
     }
 }

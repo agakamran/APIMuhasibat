@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace APIMuhasibat.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220216173346_init")]
-    partial class init
+    [Migration("20220217125710_In")]
+    partial class In
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -35,12 +35,12 @@ namespace APIMuhasibat.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("EmeliyyatdetEmdetId")
+                    b.Property<string>("HesabHesId")
                         .HasColumnType("nvarchar(36)");
 
                     b.HasKey("ActivId");
 
-                    b.HasIndex("EmeliyyatdetEmdetId");
+                    b.HasIndex("HesabHesId");
 
                     b.ToTable("Aktivs");
                 });
@@ -51,106 +51,18 @@ namespace APIMuhasibat.Migrations
                         .HasMaxLength(36)
                         .HasColumnType("nvarchar(36)");
 
+                    b.Property<string>("HesabHesId")
+                        .HasColumnType("nvarchar(36)");
+
                     b.Property<string>("bolmeName")
                         .HasMaxLength(5)
                         .HasColumnType("nvarchar(5)");
 
                     b.HasKey("bId");
 
+                    b.HasIndex("HesabHesId");
+
                     b.ToTable("Bolmes");
-                });
-
-            modelBuilder.Entity("APIMuhasibat.Models.Emeliyyatdet", b =>
-                {
-                    b.Property<string>("EmdetId")
-                        .HasMaxLength(36)
-                        .HasColumnType("nvarchar(36)");
-
-                    b.Property<string>("AId")
-                        .HasMaxLength(36)
-                        .HasColumnType("nvarchar(36)");
-
-                    b.Property<decimal>("Aksizderecesi")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("Barkod")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("DhesId")
-                        .HasMaxLength(36)
-                        .HasColumnType("nvarchar(36)");
-
-                    b.Property<string>("Edv")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
-
-                    b.Property<int?>("Edvye_celbedilen")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Edvye_celbedilmeyen")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("Emeltarixi")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("KhesId")
-                        .HasMaxLength(36)
-                        .HasColumnType("nvarchar(36)");
-
-                    b.Property<decimal>("Kurs")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("Maladi")
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
-
-                    b.Property<decimal?>("Miqdar")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("MushId")
-                        .HasMaxLength(36)
-                        .HasColumnType("nvarchar(36)");
-
-                    b.Property<string>("QId")
-                        .HasMaxLength(36)
-                        .HasColumnType("nvarchar(36)");
-
-                    b.Property<string>("Qeyd")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
-
-                    b.Property<int?>("Submiqdar")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .HasMaxLength(36)
-                        .HasColumnType("nvarchar(36)");
-
-                    b.Property<string>("VId")
-                        .HasMaxLength(36)
-                        .HasColumnType("nvarchar(36)");
-
-                    b.Property<decimal?>("Vahidqiymeti_alish")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal?>("Vahidqiymeti_satish")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("ValId")
-                        .HasMaxLength(36)
-                        .HasColumnType("nvarchar(36)");
-
-                    b.Property<string>("VergiId")
-                        .HasMaxLength(36)
-                        .HasColumnType("nvarchar(36)");
-
-                    b.Property<decimal>("Yolvergisi")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("EmdetId");
-
-                    b.ToTable("Emeliyyatdets");
                 });
 
             modelBuilder.Entity("APIMuhasibat.Models.Hesab", b =>
@@ -194,11 +106,16 @@ namespace APIMuhasibat.Migrations
                         .HasMaxLength(36)
                         .HasColumnType("nvarchar(36)");
 
+                    b.Property<string>("HesabHesId")
+                        .HasColumnType("nvarchar(36)");
+
                     b.Property<string>("MaddeName")
                         .HasMaxLength(5)
                         .HasColumnType("nvarchar(5)");
 
                     b.HasKey("MId");
+
+                    b.HasIndex("HesabHesId");
 
                     b.ToTable("Maddes");
                 });
@@ -207,9 +124,6 @@ namespace APIMuhasibat.Migrations
                 {
                     b.Property<string>("MushId")
                         .HasMaxLength(36)
-                        .HasColumnType("nvarchar(36)");
-
-                    b.Property<string>("EmeliyyatdetEmdetId")
                         .HasColumnType("nvarchar(36)");
 
                     b.Property<string>("Firma")
@@ -241,9 +155,79 @@ namespace APIMuhasibat.Migrations
 
                     b.HasKey("MushId");
 
-                    b.HasIndex("EmeliyyatdetEmdetId");
-
                     b.ToTable("Mushteris");
+                });
+
+            modelBuilder.Entity("APIMuhasibat.Models.Productdetal", b =>
+                {
+                    b.Property<string>("PdetId")
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
+
+                    b.Property<string>("Barkod")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Edv")
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("Maladi")
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("ProductmasterPmasId")
+                        .HasColumnType("nvarchar(36)");
+
+                    b.Property<string>("Qeyd")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("VId")
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
+
+                    b.Property<string>("VergiId")
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
+
+                    b.HasKey("PdetId");
+
+                    b.HasIndex("ProductmasterPmasId");
+
+                    b.ToTable("Productdetals");
+                });
+
+            modelBuilder.Entity("APIMuhasibat.Models.Productmaster", b =>
+                {
+                    b.Property<string>("PmasId")
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
+
+                    b.Property<DateTime?>("Emeltarixi")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("Kimden_sum")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Kimden_voen")
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("OpdetId")
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
+
+                    b.Property<bool>("Pay")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserId")
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
+
+                    b.HasKey("PmasId");
+
+                    b.ToTable("Productmasters");
                 });
 
             modelBuilder.Entity("APIMuhasibat.Models.Qrup", b =>
@@ -256,16 +240,11 @@ namespace APIMuhasibat.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("EmeliyyatdetEmdetId")
-                        .HasColumnType("nvarchar(36)");
-
                     b.Property<string>("Qrupname")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("QId");
-
-                    b.HasIndex("EmeliyyatdetEmdetId");
 
                     b.ToTable("Qrups");
                 });
@@ -338,11 +317,16 @@ namespace APIMuhasibat.Migrations
                         .HasMaxLength(36)
                         .HasColumnType("nvarchar(36)");
 
+                    b.Property<string>("HesabHesId")
+                        .HasColumnType("nvarchar(36)");
+
                     b.Property<string>("TipName")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("TipId");
+
+                    b.HasIndex("HesabHesId");
 
                     b.ToTable("Tiplers");
                 });
@@ -353,16 +337,16 @@ namespace APIMuhasibat.Migrations
                         .HasMaxLength(36)
                         .HasColumnType("nvarchar(36)");
 
-                    b.Property<string>("EmeliyyatdetEmdetId")
-                        .HasColumnType("nvarchar(36)");
-
                     b.Property<string>("Vahidadi")
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
+                    b.Property<string>("VergiId")
+                        .HasColumnType("nvarchar(36)");
+
                     b.HasKey("VId");
 
-                    b.HasIndex("EmeliyyatdetEmdetId");
+                    b.HasIndex("VergiId");
 
                     b.ToTable("Vahids");
                 });
@@ -371,9 +355,6 @@ namespace APIMuhasibat.Migrations
                 {
                     b.Property<string>("ValId")
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("EmeliyyatdetEmdetId")
-                        .HasColumnType("nvarchar(36)");
 
                     b.Property<DateTime?>("Tarix")
                         .HasColumnType("datetime2");
@@ -387,8 +368,6 @@ namespace APIMuhasibat.Migrations
 
                     b.HasKey("ValId");
 
-                    b.HasIndex("EmeliyyatdetEmdetId");
-
                     b.ToTable("Valyutas");
                 });
 
@@ -401,7 +380,7 @@ namespace APIMuhasibat.Migrations
                     b.Property<DateTime?>("Edv_tar")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("EmeliyyatdetEmdetId")
+                    b.Property<string>("ProductdetalPdetId")
                         .HasColumnType("nvarchar(36)");
 
                     b.Property<int>("State")
@@ -420,7 +399,7 @@ namespace APIMuhasibat.Migrations
 
                     b.HasKey("VergiId");
 
-                    b.HasIndex("EmeliyyatdetEmdetId");
+                    b.HasIndex("ProductdetalPdetId");
 
                     b.ToTable("Vergis");
                 });
@@ -626,6 +605,70 @@ namespace APIMuhasibat.Migrations
                     b.ToTable("loggers");
                 });
 
+            modelBuilder.Entity("APIMuhasibat.Models.operation", b =>
+                {
+                    b.Property<string>("OpId")
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
+
+                    b.Property<string>("ActivId")
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
+
+                    b.Property<decimal>("Aksizderecesi")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal?>("Alishqiy")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("DhesId")
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
+
+                    b.Property<string>("KhesId")
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
+
+                    b.Property<decimal>("Kurs")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal?>("Miqdar")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("MushId")
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
+
+                    b.Property<string>("PmasId")
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
+
+                    b.Property<string>("Qeyd")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("QrupId")
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
+
+                    b.Property<decimal?>("Satishqiy")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int?>("Submiqdar")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ValId")
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
+
+                    b.Property<decimal>("Yolvergisi")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("OpId");
+
+                    b.ToTable("operations");
+                });
+
             modelBuilder.Entity("APIMuhasibat.Services.RefreshToken", b =>
                 {
                     b.Property<string>("Id")
@@ -795,44 +838,51 @@ namespace APIMuhasibat.Migrations
 
             modelBuilder.Entity("APIMuhasibat.Models.Activler", b =>
                 {
-                    b.HasOne("APIMuhasibat.Models.Emeliyyatdet", null)
-                        .WithMany("activs")
-                        .HasForeignKey("EmeliyyatdetEmdetId");
+                    b.HasOne("APIMuhasibat.Models.Hesab", null)
+                        .WithMany("Activlers")
+                        .HasForeignKey("HesabHesId");
                 });
 
-            modelBuilder.Entity("APIMuhasibat.Models.Mushteri", b =>
+            modelBuilder.Entity("APIMuhasibat.Models.Bolme", b =>
                 {
-                    b.HasOne("APIMuhasibat.Models.Emeliyyatdet", null)
-                        .WithMany("mushteris")
-                        .HasForeignKey("EmeliyyatdetEmdetId");
+                    b.HasOne("APIMuhasibat.Models.Hesab", null)
+                        .WithMany("Bolmes")
+                        .HasForeignKey("HesabHesId");
                 });
 
-            modelBuilder.Entity("APIMuhasibat.Models.Qrup", b =>
+            modelBuilder.Entity("APIMuhasibat.Models.Madde", b =>
                 {
-                    b.HasOne("APIMuhasibat.Models.Emeliyyatdet", null)
-                        .WithMany("qrups")
-                        .HasForeignKey("EmeliyyatdetEmdetId");
+                    b.HasOne("APIMuhasibat.Models.Hesab", null)
+                        .WithMany("Maddes")
+                        .HasForeignKey("HesabHesId");
+                });
+
+            modelBuilder.Entity("APIMuhasibat.Models.Productdetal", b =>
+                {
+                    b.HasOne("APIMuhasibat.Models.Productmaster", null)
+                        .WithMany("productdetals")
+                        .HasForeignKey("ProductmasterPmasId");
+                });
+
+            modelBuilder.Entity("APIMuhasibat.Models.Tipler", b =>
+                {
+                    b.HasOne("APIMuhasibat.Models.Hesab", null)
+                        .WithMany("Tiplers")
+                        .HasForeignKey("HesabHesId");
                 });
 
             modelBuilder.Entity("APIMuhasibat.Models.Vahid", b =>
                 {
-                    b.HasOne("APIMuhasibat.Models.Emeliyyatdet", null)
-                        .WithMany("vahids")
-                        .HasForeignKey("EmeliyyatdetEmdetId");
-                });
-
-            modelBuilder.Entity("APIMuhasibat.Models.Valyuta", b =>
-                {
-                    b.HasOne("APIMuhasibat.Models.Emeliyyatdet", null)
-                        .WithMany("valyuts")
-                        .HasForeignKey("EmeliyyatdetEmdetId");
+                    b.HasOne("APIMuhasibat.Models.Vergi", null)
+                        .WithMany("Vahids")
+                        .HasForeignKey("VergiId");
                 });
 
             modelBuilder.Entity("APIMuhasibat.Models.Vergi", b =>
                 {
-                    b.HasOne("APIMuhasibat.Models.Emeliyyatdet", null)
+                    b.HasOne("APIMuhasibat.Models.Productdetal", null)
                         .WithMany("vergis")
-                        .HasForeignKey("EmeliyyatdetEmdetId");
+                        .HasForeignKey("ProductdetalPdetId");
                 });
 
             modelBuilder.Entity("APIMuhasibat.Services.RefreshToken", b =>
@@ -893,19 +943,30 @@ namespace APIMuhasibat.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("APIMuhasibat.Models.Emeliyyatdet", b =>
+            modelBuilder.Entity("APIMuhasibat.Models.Hesab", b =>
                 {
-                    b.Navigation("activs");
+                    b.Navigation("Activlers");
 
-                    b.Navigation("mushteris");
+                    b.Navigation("Bolmes");
 
-                    b.Navigation("qrups");
+                    b.Navigation("Maddes");
 
-                    b.Navigation("vahids");
+                    b.Navigation("Tiplers");
+                });
 
-                    b.Navigation("valyuts");
-
+            modelBuilder.Entity("APIMuhasibat.Models.Productdetal", b =>
+                {
                     b.Navigation("vergis");
+                });
+
+            modelBuilder.Entity("APIMuhasibat.Models.Productmaster", b =>
+                {
+                    b.Navigation("productdetals");
+                });
+
+            modelBuilder.Entity("APIMuhasibat.Models.Vergi", b =>
+                {
+                    b.Navigation("Vahids");
                 });
 
             modelBuilder.Entity("APIMuhasibat.Models.ViewModels.ApplicationUser", b =>

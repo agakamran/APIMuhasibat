@@ -103,20 +103,7 @@ namespace APIMuhasibat.Controllers
             {
                 if (va.EmdetId == "")
                 {
-                    // var ff = _val.GetAll().FirstOrDefault(k => k.Valname.Trim().Contains(va.Valname.Trim()));
-                    //  if (ff == null)
-                    // {
-                    //switch (va.QId)//'ALIŞ','SATIŞ','HESABLAŞMALAR','VERGİLƏR','ÖHDƏLİKLƏR','KAPİTALLAR','GƏLİRLƏR','XƏRCLƏR','DVIDENTLƏR'
-                    //{
-                    //    case "ALIŞ":
-                    //        va.Miqdar = va.Miqdar;
-                    //        break;
-                    //    case "SATIŞ":
-                    //        va.Miqdar = -va.Miqdar;
-                    //        break;
-                    //    case "HESABLAŞMALAR":
-                    //        break;
-                    //}
+                  
                     va.EmdetId = Guid.NewGuid().ToString();
                     va.AId = va.AId;
                     va.Miqdar = va.Miqdar;                    

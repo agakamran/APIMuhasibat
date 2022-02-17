@@ -13,7 +13,11 @@ namespace APIMuhasibat.Models
     {
         string _vergiId = null, _vergikodu = null, _vergikodununadi = null, _vId = null;
         Nullable<DateTime> _edv_tar = null; int _STATE = 0;
-        public Vergi() { }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Vergi() 
+        {
+            this.Vahids = new HashSet<Vahid>();
+        }
         public Vergi(string vergiId, string vergikodununadi)
         {
             this.VergiId = vergiId;
@@ -38,6 +42,8 @@ namespace APIMuhasibat.Models
             get { return _vId; }
             set { if (value != null) { _vId = value; } }
         }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Vahid> Vahids { get; set; }
         // [MaxLength(550)]
         public string Vergikodununadi
         {
@@ -54,6 +60,7 @@ namespace APIMuhasibat.Models
             get { return _edv_tar; }
             set { if (value != null) { _edv_tar = value; } }
         }
+      
     }
 
     public class verg

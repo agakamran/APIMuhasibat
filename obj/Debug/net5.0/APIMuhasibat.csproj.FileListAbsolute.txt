@@ -142,7 +142,6 @@ E:\Kamran\Proektler\API\CommercialSolution\APIMuhasibat\bin\Debug\net5.0\APIMuha
 E:\Kamran\Proektler\API\CommercialSolution\APIMuhasibat\bin\Debug\net5.0\APIMuhasibat.runtimeconfig.json
 E:\Kamran\Proektler\API\CommercialSolution\APIMuhasibat\bin\Debug\net5.0\APIMuhasibat.runtimeconfig.dev.json
 E:\Kamran\Proektler\API\CommercialSolution\APIMuhasibat\bin\Debug\net5.0\APIMuhasibat.dll
-E:\Kamran\Proektler\API\CommercialSolution\APIMuhasibat\bin\Debug\net5.0\ref\APIMuhasibat.dll
 E:\Kamran\Proektler\API\CommercialSolution\APIMuhasibat\bin\Debug\net5.0\APIMuhasibat.pdb
 E:\Kamran\Proektler\API\CommercialSolution\APIMuhasibat\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 E:\Kamran\Proektler\API\CommercialSolution\APIMuhasibat\bin\Debug\net5.0\Microsoft.AspNetCore.Cryptography.Internal.dll
@@ -298,3 +297,4 @@ E:\Kamran\Proektler\API\CommercialSolution\APIMuhasibat\bin\Debug\net5.0\Uploade
 E:\Kamran\Proektler\API\CommercialSolution\APIMuhasibat\bin\Debug\net5.0\Uploade\ayarlar\tip.json
 E:\Kamran\Proektler\API\CommercialSolution\APIMuhasibat\bin\Debug\net5.0\Uploade\ayarlar\vahid.json
 E:\Kamran\Proektler\API\CommercialSolution\APIMuhasibat\bin\Debug\net5.0\AngleSharp.dll
+E:\Kamran\Proektler\API\CommercialSolution\APIMuhasibat\obj\Debug\net5.0\refint\APIMuhasibat.dll

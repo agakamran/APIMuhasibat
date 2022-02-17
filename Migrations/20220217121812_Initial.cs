@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace APIMuhasibat.Migrations
 {
-    public partial class init : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -54,52 +54,6 @@ namespace APIMuhasibat.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Bolmes",
-                columns: table => new
-                {
-                    bId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
-                    bolmeName = table.Column<string>(type: "nvarchar(5)", maxLength: 5, nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Bolmes", x => x.bId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Emeliyyatdets",
-                columns: table => new
-                {
-                    EmdetId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
-                    UserId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: true),
-                    QId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: true),
-                    AId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: true),
-                    DhesId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: true),
-                    KhesId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: true),
-                    MushId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: true),
-                    VergiId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: true),
-                    VId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: true),
-                    Miqdar = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    Submiqdar = table.Column<int>(type: "int", nullable: true),
-                    Vahidqiymeti_alish = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    Vahidqiymeti_satish = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    Edv = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
-                    Edvye_celbedilen = table.Column<int>(type: "int", nullable: true),
-                    Edvye_celbedilmeyen = table.Column<int>(type: "int", nullable: true),
-                    Emeltarixi = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ValId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: true),
-                    Maladi = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: true),
-                    Barkod = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    Kurs = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Aksizderecesi = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Yolvergisi = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Qeyd = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Emeliyyatdets", x => x.EmdetId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "fealsahes",
                 columns: table => new
                 {
@@ -130,6 +84,19 @@ namespace APIMuhasibat.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Qrups",
+                columns: table => new
+                {
+                    QId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
+                    Qrupname = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Qrups", x => x.QId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "loggers",
                 columns: table => new
                 {
@@ -147,15 +114,21 @@ namespace APIMuhasibat.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Maddes",
+                name: "Mushteris",
                 columns: table => new
                 {
-                    MId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
-                    MaddeName = table.Column<string>(type: "nvarchar(5)", maxLength: 5, nullable: true)
+                    MushId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
+                    Firma = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    Voen = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: true),
+                    Muqavilenom = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: true),
+                    Muqaviletar = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Valyuta = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
+                    Odemesherti = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    Temsilchi = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Maddes", x => x.MId);
+                    table.PrimaryKey("PK_Mushteris", x => x.MushId);
                 });
 
             migrationBuilder.CreateTable(
@@ -192,6 +165,49 @@ namespace APIMuhasibat.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "operations",
+                columns: table => new
+                {
+                    OpId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
+                    PmasId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: true),
+                    Miqdar = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    Submiqdar = table.Column<int>(type: "int", nullable: true),
+                    Alishqiy = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    Satishqiy = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    QrupId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: true),
+                    ActivId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: true),
+                    DhesId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: true),
+                    KhesId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: true),
+                    ValId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: true),
+                    Kurs = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Aksizderecesi = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Yolvergisi = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    MushId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: true),
+                    Qeyd = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_operations", x => x.OpId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Productmasters",
+                columns: table => new
+                {
+                    PmasId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
+                    EmdetId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: true),
+                    Kimden_voen = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
+                    Kimden_sum = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Emeltarixi = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Pay = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Productmasters", x => x.PmasId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Shirkets",
                 columns: table => new
                 {
@@ -216,15 +232,17 @@ namespace APIMuhasibat.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Tiplers",
+                name: "Valyutas",
                 columns: table => new
                 {
-                    TipId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
-                    TipName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true)
+                    ValId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Valname = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
+                    Valnominal = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Tarix = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Tiplers", x => x.TipId);
+                    table.PrimaryKey("PK_Valyutas", x => x.ValId);
                 });
 
             migrationBuilder.CreateTable(
@@ -365,101 +383,98 @@ namespace APIMuhasibat.Migrations
                     ActivId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
                     ActivName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     Description = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    EmeliyyatdetEmdetId = table.Column<string>(type: "nvarchar(36)", nullable: true)
+                    HesabHesId = table.Column<string>(type: "nvarchar(36)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Aktivs", x => x.ActivId);
                     table.ForeignKey(
-                        name: "FK_Aktivs_Emeliyyatdets_EmeliyyatdetEmdetId",
-                        column: x => x.EmeliyyatdetEmdetId,
-                        principalTable: "Emeliyyatdets",
-                        principalColumn: "EmdetId",
+                        name: "FK_Aktivs_Hesabs_HesabHesId",
+                        column: x => x.HesabHesId,
+                        principalTable: "Hesabs",
+                        principalColumn: "HesId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Mushteris",
+                name: "Bolmes",
                 columns: table => new
                 {
-                    MushId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
-                    Firma = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    Voen = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: true),
-                    Muqavilenom = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: true),
-                    Muqaviletar = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Valyuta = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
-                    Odemesherti = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    Temsilchi = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    EmeliyyatdetEmdetId = table.Column<string>(type: "nvarchar(36)", nullable: true)
+                    bId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
+                    bolmeName = table.Column<string>(type: "nvarchar(5)", maxLength: 5, nullable: true),
+                    HesabHesId = table.Column<string>(type: "nvarchar(36)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Mushteris", x => x.MushId);
+                    table.PrimaryKey("PK_Bolmes", x => x.bId);
                     table.ForeignKey(
-                        name: "FK_Mushteris_Emeliyyatdets_EmeliyyatdetEmdetId",
-                        column: x => x.EmeliyyatdetEmdetId,
-                        principalTable: "Emeliyyatdets",
-                        principalColumn: "EmdetId",
+                        name: "FK_Bolmes_Hesabs_HesabHesId",
+                        column: x => x.HesabHesId,
+                        principalTable: "Hesabs",
+                        principalColumn: "HesId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Qrups",
+                name: "Maddes",
                 columns: table => new
                 {
-                    QId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
-                    Qrupname = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    EmeliyyatdetEmdetId = table.Column<string>(type: "nvarchar(36)", nullable: true)
+                    MId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
+                    MaddeName = table.Column<string>(type: "nvarchar(5)", maxLength: 5, nullable: true),
+                    HesabHesId = table.Column<string>(type: "nvarchar(36)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Qrups", x => x.QId);
+                    table.PrimaryKey("PK_Maddes", x => x.MId);
                     table.ForeignKey(
-                        name: "FK_Qrups_Emeliyyatdets_EmeliyyatdetEmdetId",
-                        column: x => x.EmeliyyatdetEmdetId,
-                        principalTable: "Emeliyyatdets",
-                        principalColumn: "EmdetId",
+                        name: "FK_Maddes_Hesabs_HesabHesId",
+                        column: x => x.HesabHesId,
+                        principalTable: "Hesabs",
+                        principalColumn: "HesId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Vahids",
+                name: "Tiplers",
                 columns: table => new
                 {
-                    VId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
-                    Vahidadi = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
-                    EmeliyyatdetEmdetId = table.Column<string>(type: "nvarchar(36)", nullable: true)
+                    TipId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
+                    TipName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    HesabHesId = table.Column<string>(type: "nvarchar(36)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Vahids", x => x.VId);
+                    table.PrimaryKey("PK_Tiplers", x => x.TipId);
                     table.ForeignKey(
-                        name: "FK_Vahids_Emeliyyatdets_EmeliyyatdetEmdetId",
-                        column: x => x.EmeliyyatdetEmdetId,
-                        principalTable: "Emeliyyatdets",
-                        principalColumn: "EmdetId",
+                        name: "FK_Tiplers_Hesabs_HesabHesId",
+                        column: x => x.HesabHesId,
+                        principalTable: "Hesabs",
+                        principalColumn: "HesId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Valyutas",
+                name: "Productdetals",
                 columns: table => new
                 {
-                    ValId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Valname = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
-                    Valnominal = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Tarix = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    EmeliyyatdetEmdetId = table.Column<string>(type: "nvarchar(36)", nullable: true)
+                    PdetId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
+                    EmdetId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: true),
+                    Maladi = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: true),
+                    Barkod = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    VergiId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: true),
+                    VId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: true),
+                    Edv = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
+                    Qeyd = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
+                    ProductmasterPmasId = table.Column<string>(type: "nvarchar(36)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Valyutas", x => x.ValId);
+                    table.PrimaryKey("PK_Productdetals", x => x.PdetId);
                     table.ForeignKey(
-                        name: "FK_Valyutas_Emeliyyatdets_EmeliyyatdetEmdetId",
-                        column: x => x.EmeliyyatdetEmdetId,
-                        principalTable: "Emeliyyatdets",
-                        principalColumn: "EmdetId",
+                        name: "FK_Productdetals_Productmasters_ProductmasterPmasId",
+                        column: x => x.ProductmasterPmasId,
+                        principalTable: "Productmasters",
+                        principalColumn: "PmasId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -473,23 +488,42 @@ namespace APIMuhasibat.Migrations
                     Vergikodununadi = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     State = table.Column<int>(type: "int", nullable: false),
                     Edv_tar = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    EmeliyyatdetEmdetId = table.Column<string>(type: "nvarchar(36)", nullable: true)
+                    ProductdetalPdetId = table.Column<string>(type: "nvarchar(36)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Vergis", x => x.VergiId);
                     table.ForeignKey(
-                        name: "FK_Vergis_Emeliyyatdets_EmeliyyatdetEmdetId",
-                        column: x => x.EmeliyyatdetEmdetId,
-                        principalTable: "Emeliyyatdets",
-                        principalColumn: "EmdetId",
+                        name: "FK_Vergis_Productdetals_ProductdetalPdetId",
+                        column: x => x.ProductdetalPdetId,
+                        principalTable: "Productdetals",
+                        principalColumn: "PdetId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Vahids",
+                columns: table => new
+                {
+                    VId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
+                    Vahidadi = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
+                    VergiId = table.Column<string>(type: "nvarchar(36)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Vahids", x => x.VId);
+                    table.ForeignKey(
+                        name: "FK_Vahids_Vergis_VergiId",
+                        column: x => x.VergiId,
+                        principalTable: "Vergis",
+                        principalColumn: "VergiId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Aktivs_EmeliyyatdetEmdetId",
+                name: "IX_Aktivs_HesabHesId",
                 table: "Aktivs",
-                column: "EmeliyyatdetEmdetId");
+                column: "HesabHesId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -531,14 +565,19 @@ namespace APIMuhasibat.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Mushteris_EmeliyyatdetEmdetId",
-                table: "Mushteris",
-                column: "EmeliyyatdetEmdetId");
+                name: "IX_Bolmes_HesabHesId",
+                table: "Bolmes",
+                column: "HesabHesId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Qrups_EmeliyyatdetEmdetId",
-                table: "Qrups",
-                column: "EmeliyyatdetEmdetId");
+                name: "IX_Maddes_HesabHesId",
+                table: "Maddes",
+                column: "HesabHesId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Productdetals_ProductmasterPmasId",
+                table: "Productdetals",
+                column: "ProductmasterPmasId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RefreshToken_ApplicationUserId",
@@ -546,19 +585,19 @@ namespace APIMuhasibat.Migrations
                 column: "ApplicationUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Vahids_EmeliyyatdetEmdetId",
+                name: "IX_Tiplers_HesabHesId",
+                table: "Tiplers",
+                column: "HesabHesId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Vahids_VergiId",
                 table: "Vahids",
-                column: "EmeliyyatdetEmdetId");
+                column: "VergiId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Valyutas_EmeliyyatdetEmdetId",
-                table: "Valyutas",
-                column: "EmeliyyatdetEmdetId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Vergis_EmeliyyatdetEmdetId",
+                name: "IX_Vergis_ProductdetalPdetId",
                 table: "Vergis",
-                column: "EmeliyyatdetEmdetId");
+                column: "ProductdetalPdetId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -588,7 +627,7 @@ namespace APIMuhasibat.Migrations
                 name: "fealsahes");
 
             migrationBuilder.DropTable(
-                name: "Hesabs");
+                name: "Qrups");
 
             migrationBuilder.DropTable(
                 name: "loggers");
@@ -606,7 +645,7 @@ namespace APIMuhasibat.Migrations
                 name: "Navroles");
 
             migrationBuilder.DropTable(
-                name: "Qrups");
+                name: "operations");
 
             migrationBuilder.DropTable(
                 name: "RefreshToken");
@@ -624,16 +663,22 @@ namespace APIMuhasibat.Migrations
                 name: "Valyutas");
 
             migrationBuilder.DropTable(
-                name: "Vergis");
-
-            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Emeliyyatdets");
+                name: "Hesabs");
+
+            migrationBuilder.DropTable(
+                name: "Vergis");
+
+            migrationBuilder.DropTable(
+                name: "Productdetals");
+
+            migrationBuilder.DropTable(
+                name: "Productmasters");
         }
     }
 }

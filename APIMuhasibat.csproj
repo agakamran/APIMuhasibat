@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Controllers\AccountController1.cs" />
-    <Compile Remove="Controllers\_AyarlarController.cs" />
+    <Compile Remove="Controllers\EmeliyyatController.cs" />
+    <Compile Remove="Controllers\EqaimeController.cs" />
     <Compile Remove="Models\_Client.cs" />
   </ItemGroup>
 

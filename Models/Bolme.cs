@@ -29,5 +29,6 @@ namespace APIMuhasibat.Models
             get { return _bolmeName; }
             set { if (value != null) { _bolmeName = value; } }
         }
+        //public virtual ICollection<Hesab> Hesabs { get; set; }
     }
 }
