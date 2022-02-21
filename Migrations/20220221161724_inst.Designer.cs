@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace APIMuhasibat.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220217125710_In")]
-    partial class In
+    [Migration("20220221161724_inst")]
+    partial class inst
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -38,9 +38,14 @@ namespace APIMuhasibat.Migrations
                     b.Property<string>("HesabHesId")
                         .HasColumnType("nvarchar(36)");
 
+                    b.Property<string>("ProductmasterPmasId")
+                        .HasColumnType("nvarchar(36)");
+
                     b.HasKey("ActivId");
 
                     b.HasIndex("HesabHesId");
+
+                    b.HasIndex("ProductmasterPmasId");
 
                     b.ToTable("Aktivs");
                 });
@@ -91,11 +96,21 @@ namespace APIMuhasibat.Migrations
                         .HasMaxLength(36)
                         .HasColumnType("nvarchar(36)");
 
+                    b.Property<string>("ProductmasterPmasId")
+                        .HasColumnType("nvarchar(36)");
+
+                    b.Property<string>("ProductmasterPmasId1")
+                        .HasColumnType("nvarchar(36)");
+
                     b.Property<string>("TipId")
                         .HasMaxLength(36)
                         .HasColumnType("nvarchar(36)");
 
                     b.HasKey("HesId");
+
+                    b.HasIndex("ProductmasterPmasId");
+
+                    b.HasIndex("ProductmasterPmasId1");
 
                     b.ToTable("Hesabs");
                 });
@@ -141,6 +156,9 @@ namespace APIMuhasibat.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<string>("ProductmasterPmasId")
+                        .HasColumnType("nvarchar(36)");
+
                     b.Property<string>("Temsilchi")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
@@ -154,6 +172,8 @@ namespace APIMuhasibat.Migrations
                         .HasColumnType("nvarchar(15)");
 
                     b.HasKey("MushId");
+
+                    b.HasIndex("ProductmasterPmasId");
 
                     b.ToTable("Mushteris");
                 });
@@ -176,12 +196,13 @@ namespace APIMuhasibat.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
-                    b.Property<string>("ProductmasterPmasId")
+                    b.Property<string>("PmasId")
+                        .HasMaxLength(36)
                         .HasColumnType("nvarchar(36)");
 
                     b.Property<string>("Qeyd")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
 
                     b.Property<string>("VId")
                         .HasMaxLength(36)
@@ -191,9 +212,12 @@ namespace APIMuhasibat.Migrations
                         .HasMaxLength(36)
                         .HasColumnType("nvarchar(36)");
 
+                    b.Property<string>("operationOpId")
+                        .HasColumnType("nvarchar(36)");
+
                     b.HasKey("PdetId");
 
-                    b.HasIndex("ProductmasterPmasId");
+                    b.HasIndex("operationOpId");
 
                     b.ToTable("Productdetals");
                 });
@@ -204,8 +228,20 @@ namespace APIMuhasibat.Migrations
                         .HasMaxLength(36)
                         .HasColumnType("nvarchar(36)");
 
+                    b.Property<string>("ActivId")
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
+
+                    b.Property<string>("DhesId")
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
+
                     b.Property<DateTime?>("Emeltarixi")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("KhesId")
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
 
                     b.Property<decimal>("Kimden_sum")
                         .HasColumnType("decimal(18,2)");
@@ -214,18 +250,42 @@ namespace APIMuhasibat.Migrations
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<string>("OpdetId")
+                    b.Property<decimal>("Kurs")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("MushId")
                         .HasMaxLength(36)
                         .HasColumnType("nvarchar(36)");
 
                     b.Property<bool>("Pay")
                         .HasColumnType("bit");
 
+                    b.Property<string>("ProductdetalPdetId")
+                        .HasColumnType("nvarchar(36)");
+
+                    b.Property<string>("QrupId")
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
+
+                    b.Property<string>("Serial")
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
+
                     b.Property<string>("UserId")
                         .HasMaxLength(36)
                         .HasColumnType("nvarchar(36)");
 
+                    b.Property<string>("ValId")
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
+
+                    b.Property<string>("Vo")
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
+
                     b.HasKey("PmasId");
+
+                    b.HasIndex("ProductdetalPdetId");
 
                     b.ToTable("Productmasters");
                 });
@@ -240,11 +300,16 @@ namespace APIMuhasibat.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<string>("ProductmasterPmasId")
+                        .HasColumnType("nvarchar(36)");
+
                     b.Property<string>("Qrupname")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("QId");
+
+                    b.HasIndex("ProductmasterPmasId");
 
                     b.ToTable("Qrups");
                 });
@@ -283,6 +348,9 @@ namespace APIMuhasibat.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<string>("ProductmasterPmasId")
+                        .HasColumnType("nvarchar(36)");
+
                     b.Property<string>("SWIFT")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
@@ -307,6 +375,8 @@ namespace APIMuhasibat.Migrations
                         .HasColumnType("nvarchar(36)");
 
                     b.HasKey("ShId");
+
+                    b.HasIndex("ProductmasterPmasId");
 
                     b.ToTable("Shirkets");
                 });
@@ -337,6 +407,9 @@ namespace APIMuhasibat.Migrations
                         .HasMaxLength(36)
                         .HasColumnType("nvarchar(36)");
 
+                    b.Property<string>("ProductdetalPdetId")
+                        .HasColumnType("nvarchar(36)");
+
                     b.Property<string>("Vahidadi")
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
@@ -346,6 +419,8 @@ namespace APIMuhasibat.Migrations
 
                     b.HasKey("VId");
 
+                    b.HasIndex("ProductdetalPdetId");
+
                     b.HasIndex("VergiId");
 
                     b.ToTable("Vahids");
@@ -354,7 +429,11 @@ namespace APIMuhasibat.Migrations
             modelBuilder.Entity("APIMuhasibat.Models.Valyuta", b =>
                 {
                     b.Property<string>("ValId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
+
+                    b.Property<string>("ProductmasterPmasId")
+                        .HasColumnType("nvarchar(36)");
 
                     b.Property<DateTime?>("Tarix")
                         .HasColumnType("datetime2");
@@ -367,6 +446,8 @@ namespace APIMuhasibat.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("ValId");
+
+                    b.HasIndex("ProductmasterPmasId");
 
                     b.ToTable("Valyutas");
                 });
@@ -611,55 +692,28 @@ namespace APIMuhasibat.Migrations
                         .HasMaxLength(36)
                         .HasColumnType("nvarchar(36)");
 
-                    b.Property<string>("ActivId")
-                        .HasMaxLength(36)
-                        .HasColumnType("nvarchar(36)");
-
                     b.Property<decimal>("Aksizderecesi")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal?>("Alishqiy")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("DhesId")
-                        .HasMaxLength(36)
-                        .HasColumnType("nvarchar(36)");
-
-                    b.Property<string>("KhesId")
-                        .HasMaxLength(36)
-                        .HasColumnType("nvarchar(36)");
-
-                    b.Property<decimal>("Kurs")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<decimal?>("Miqdar")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("MushId")
-                        .HasMaxLength(36)
-                        .HasColumnType("nvarchar(36)");
-
-                    b.Property<string>("PmasId")
+                    b.Property<string>("PdetId")
                         .HasMaxLength(36)
                         .HasColumnType("nvarchar(36)");
 
                     b.Property<string>("Qeyd")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
-
-                    b.Property<string>("QrupId")
-                        .HasMaxLength(36)
-                        .HasColumnType("nvarchar(36)");
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
 
                     b.Property<decimal?>("Satishqiy")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<int?>("Submiqdar")
                         .HasColumnType("int");
-
-                    b.Property<string>("ValId")
-                        .HasMaxLength(36)
-                        .HasColumnType("nvarchar(36)");
 
                     b.Property<decimal>("Yolvergisi")
                         .HasColumnType("decimal(18,2)");
@@ -841,6 +895,10 @@ namespace APIMuhasibat.Migrations
                     b.HasOne("APIMuhasibat.Models.Hesab", null)
                         .WithMany("Activlers")
                         .HasForeignKey("HesabHesId");
+
+                    b.HasOne("APIMuhasibat.Models.Productmaster", null)
+                        .WithMany("Activlers")
+                        .HasForeignKey("ProductmasterPmasId");
                 });
 
             modelBuilder.Entity("APIMuhasibat.Models.Bolme", b =>
@@ -850,6 +908,17 @@ namespace APIMuhasibat.Migrations
                         .HasForeignKey("HesabHesId");
                 });
 
+            modelBuilder.Entity("APIMuhasibat.Models.Hesab", b =>
+                {
+                    b.HasOne("APIMuhasibat.Models.Productmaster", null)
+                        .WithMany("DHesabs")
+                        .HasForeignKey("ProductmasterPmasId");
+
+                    b.HasOne("APIMuhasibat.Models.Productmaster", null)
+                        .WithMany("KHesabs")
+                        .HasForeignKey("ProductmasterPmasId1");
+                });
+
             modelBuilder.Entity("APIMuhasibat.Models.Madde", b =>
                 {
                     b.HasOne("APIMuhasibat.Models.Hesab", null)
@@ -857,10 +926,38 @@ namespace APIMuhasibat.Migrations
                         .HasForeignKey("HesabHesId");
                 });
 
-            modelBuilder.Entity("APIMuhasibat.Models.Productdetal", b =>
+            modelBuilder.Entity("APIMuhasibat.Models.Mushteri", b =>
                 {
                     b.HasOne("APIMuhasibat.Models.Productmaster", null)
-                        .WithMany("productdetals")
+                        .WithMany("Mushteris")
+                        .HasForeignKey("ProductmasterPmasId");
+                });
+
+            modelBuilder.Entity("APIMuhasibat.Models.Productdetal", b =>
+                {
+                    b.HasOne("APIMuhasibat.Models.operation", null)
+                        .WithMany("Productdetals")
+                        .HasForeignKey("operationOpId");
+                });
+
+            modelBuilder.Entity("APIMuhasibat.Models.Productmaster", b =>
+                {
+                    b.HasOne("APIMuhasibat.Models.Productdetal", null)
+                        .WithMany("Productmasters")
+                        .HasForeignKey("ProductdetalPdetId");
+                });
+
+            modelBuilder.Entity("APIMuhasibat.Models.Qrup", b =>
+                {
+                    b.HasOne("APIMuhasibat.Models.Productmaster", null)
+                        .WithMany("Qrups")
+                        .HasForeignKey("ProductmasterPmasId");
+                });
+
+            modelBuilder.Entity("APIMuhasibat.Models.Shirket", b =>
+                {
+                    b.HasOne("APIMuhasibat.Models.Productmaster", null)
+                        .WithMany("Shirkets")
                         .HasForeignKey("ProductmasterPmasId");
                 });
 
@@ -873,9 +970,20 @@ namespace APIMuhasibat.Migrations
 
             modelBuilder.Entity("APIMuhasibat.Models.Vahid", b =>
                 {
+                    b.HasOne("APIMuhasibat.Models.Productdetal", null)
+                        .WithMany("Vahids")
+                        .HasForeignKey("ProductdetalPdetId");
+
                     b.HasOne("APIMuhasibat.Models.Vergi", null)
                         .WithMany("Vahids")
                         .HasForeignKey("VergiId");
+                });
+
+            modelBuilder.Entity("APIMuhasibat.Models.Valyuta", b =>
+                {
+                    b.HasOne("APIMuhasibat.Models.Productmaster", null)
+                        .WithMany("Valyutas")
+                        .HasForeignKey("ProductmasterPmasId");
                 });
 
             modelBuilder.Entity("APIMuhasibat.Models.Vergi", b =>
@@ -956,12 +1064,28 @@ namespace APIMuhasibat.Migrations
 
             modelBuilder.Entity("APIMuhasibat.Models.Productdetal", b =>
                 {
+                    b.Navigation("Productmasters");
+
+                    b.Navigation("Vahids");
+
                     b.Navigation("vergis");
                 });
 
             modelBuilder.Entity("APIMuhasibat.Models.Productmaster", b =>
                 {
-                    b.Navigation("productdetals");
+                    b.Navigation("Activlers");
+
+                    b.Navigation("DHesabs");
+
+                    b.Navigation("KHesabs");
+
+                    b.Navigation("Mushteris");
+
+                    b.Navigation("Qrups");
+
+                    b.Navigation("Shirkets");
+
+                    b.Navigation("Valyutas");
                 });
 
             modelBuilder.Entity("APIMuhasibat.Models.Vergi", b =>
@@ -972,6 +1096,11 @@ namespace APIMuhasibat.Migrations
             modelBuilder.Entity("APIMuhasibat.Models.ViewModels.ApplicationUser", b =>
                 {
                     b.Navigation("RefreshTokens");
+                });
+
+            modelBuilder.Entity("APIMuhasibat.Models.operation", b =>
+                {
+                    b.Navigation("Productdetals");
                 });
 #pragma warning restore 612, 618
         }

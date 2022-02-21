@@ -7,6 +7,7 @@ namespace APIMuhasibat.Models
         public string kod { get; set; }
         public string qaimeKime { get; set; }
         public string qaimeKimden { get; set; }
+        public string vo { get; set; }
         public string ds { get; set; }
         public string dn { get; set; }
         public string des { get; set; }

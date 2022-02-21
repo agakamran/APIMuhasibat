@@ -3,6 +3,7 @@ using APIMuhasibat.Services;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -68,7 +69,6 @@ namespace APIMuhasibat.Controllers
             {
                 #region
                 string path = "";
-
                 var aId = Request.Form["aId"];
                 var dhesId = Request.Form["dhesId"];
                 var khesId = Request.Form["khesId"];
@@ -76,7 +76,10 @@ namespace APIMuhasibat.Controllers
                 var pars = Request.Form["pars"];
                 var ValId = Request.Form["ValId"];
                 var Kurs = Request.Form["Kurs"];
+                var Serial = Request.Form["Serial"];
+                var emeltarixi = Request.Form["emeltarixi"];
                 var file = Request.Form.Files["file"];
+                DateTime tt = Convert.ToDateTime(emeltarixi);
                 #endregion
                 if (file != null && file.Length > 0)
                 {
@@ -98,18 +101,19 @@ namespace APIMuhasibat.Controllers
                             // kod = rootNode.Attributes["kod"].Value,
                             qaimeKime = rootNode["qaimeKime"].InnerText,       // (Alan tərəfin VÖENi buraya yazılır.Məcburidir və 10 rəqəmlidir )
                             qaimeKimden = rootNode["qaimeKimden"].InnerText,   // (Satan tərəfin VÖENi buraya yazılır. Məcburidir və 10 rəqəmlidir )
+                            vo = rootNode["vo"].InnerText,
                             ds = rootNode["ds"].InnerText,
-                            dn = rootNode["vo"].InnerText,
+                            dn = rootNode["dn"].InnerText,
                             des = rootNode["des"].InnerText,                  //(Qaimənin əsas qeydi buraya yazılır. Ən çox 150 simvol ola bilər. Məcburidir)
                             des2 = rootNode["des2"].InnerText,                 //(Qaimənin əlavə qeydi buraya yazılır. Ən çox 150 simvol ola bilər. Məcburidir. Boş ola bilər) 
                             ma = rootNode["ma"].InnerText,                    //(Qaimə təqdim edən filial/obyektin adı buraya yazılır.Məcburi deyil) 
                             mk = rootNode["mk"].InnerText,                   //(Qaimə təqdim edən filial/obyektin kodu buraya yazılır.Məcburi deyil) 
-                            mediator = rootNode["mediator"].InnerText        //(Vasitəçi  Agent və ya Komisyonçu)
+                           // mediator = rootNode["mediator"].InnerText        //(Vasitəçi  Agent və ya Komisyonçu)
                         };
-                        // if (!_cryp.Cry(qaime.des)) {            }
+                        
                         #region qaimeKime
                         Shirket ti = new Shirket();
-                        var shir = _shi.GetAll().FirstOrDefault(x => x.Shirvoen == qaime.qaimeKimden);
+                        var shir = _shi.GetAll().FirstOrDefault(x => x.Shirvoen == qaime.qaimeKime);
                         if (shir == null)// && shir.Shirvoen != qaime.qaimeKimden
                         {
                             ti.ShId = Guid.NewGuid().ToString();
@@ -125,7 +129,7 @@ namespace APIMuhasibat.Controllers
                             ti.Email = _GetEmail();
                             ti.Unvan = ti.Unvan;
                             ti.userId = _GeteId();
-                            ti.Shirpercent = 0;
+                            ti.Shirpercent = decimal.Parse(pars.ToString());
                             await _shi.InsertAsync(ti);
                         }
                         #endregion
@@ -135,7 +139,7 @@ namespace APIMuhasibat.Controllers
                         if (mush == null)//.Voen!=qaime.qaimeKimden
                         {
                             mi.MushId = Guid.NewGuid().ToString();
-                            mi.Firma = "";
+                            mi.Firma =qaime.des2;
                             mi.Voen = qaime.qaimeKimden;
                             mi.Muqavilenom = "";
                             mi.Muqaviletar = DateTime.Now;
@@ -143,39 +147,31 @@ namespace APIMuhasibat.Controllers
                             mi.Odemesherti = "";
                             mi.Temsilchi = "";
                             await _mush.InsertAsync(mi);
-
                         }
                         #endregion
                         foreach (XmlNode row in rootNode["product"]["qaimeTable"].ChildNodes)
-                        {
-                            var pde=new Productdetal();
+                        {                            
                             qaime.qaimeTables.Add(new QaimeTable
-                               {
-                                   c1 = row["c1"].InnerText, //(Mal kodu burada saxlanılır.10 rəqəmlidir. Məcburidir)
-                                   c2 = row["c2"].InnerText, //(Mal adı burada saxlanılır.Max 150 simvoldur. Məcburidir)
-                                   c3 = row["c3"].InnerText, //(Ölçü vahidi burada saxlanılır.Max 150 simvoldur. Məcburidir)
-                                   c4 = row["c4"].InnerText, //(Malın miqdarı burada saxlanılır. Kəsir hissə ən çox 4 rəqəmlidir. Məcburidir)
-                                   c5 = row["c5"].InnerText, //(Malın buraxılış qiyməti burada saxlanılır. Kəsir hissə ən çox 9 rəqəmlidir. Məcburidir) 
-                                   c6 = row["c6"].InnerText, //(Cəmi qiyməti burada saxlanılır.Kəsir hissə ən çox 2 rəqəmlidir. Düstur: c4*c5 = c6 . Məcburidir)
-                                   c7 = row["c7"].InnerText, //(Aksiz dərəcəsi burada saxlanılır. Kəsir hissəsi ən çox 2 rəqəmlidir. Məcburidir )
-                                   c8 = row["c8"].InnerText, //(Aksiz məbləği burada saxlanılır. Kəsir hissəsi ən çox 2 rəqəmlidir. Məcburidir )
-                                   c9 = row["c9"].InnerText, //(Cəmi məbləğ burada saxlanılır. Kəsir hissəsi ən çox 2 rəqəmlidir.Düstur : c6+c8 = c9. Şərt: c9= c10+c11+c12. Məcburidir )
-                                   c10 = row["c10"].InnerText,//(ƏDV - yə cəlb edilən məbləğ burada saxlanılır.Kəsir hissəsi ən çox 2 rəqəmlidir.Məcburidir )
-                                   c11 = row["c11"].InnerText,//(ƏDV-yə cəlb edilməyən məbləğ burada saxlanılır. Kəsir hissəsi ən çox 2 rəqəmlidir.  Məcburidir )
-                                   c12 = row["c12"].InnerText,//(ƏDV-dən azad olunan məbləğ burada saxlanılır. Kəsir hissəsi ən çox 2 rəqəmlidir.  Məcburidir )
-                                   c13 = row["c13"].InnerText,//(ƏDV-yə 0 dərəcə ilə cəlb edilən məbləğ burada saxlanılır. Kəsir hissəsi ən çox 2 rəqəmlidir.  Məcburidir )
-                                   c14 = row["c14"].InnerText,//(Ödənilməli ƏDV burada saxlanılır.Kəsir hissəsi ən çox 2 rəqəmlidir.  Məcburidir )
-                                   c15 = row["c15"].InnerText,//(Yol vergisi məbləği burada saxlanılır. Boş ola bilməz.) 
-                                   c16 = row["c16"].InnerText,//(Yola salınmış mallara,görülmüş işlərə və göstərilmiş xidmətlər üçün məbləğ burada saxlanılır.Kəsir hissəsi ən çox 2 rəqəmlidir.Məcburidir )
-                                   c17 = row["c17"].InnerText,//(Malların Barkod)
-                               });
-                            pde.PdetId= Guid.NewGuid().ToString();
-                            pde.Maladi = "";
-                            //string _pdetId = null,  _maladi = null, _barkod = null, _vergiId = null, _vId = null, _qeyd = null, _edv = null;
-                            await _prodet.InsertAsync(pde);
+                            {
+                                c1 = row["c1"].InnerText, //(Mal kodu burada saxlanılır.10 rəqəmlidir. Məcburidir)
+                                c2 = row["c2"].InnerText, //(Mal adı burada saxlanılır.Max 150 simvoldur. Məcburidir)
+                                c3 = row["c3"].InnerText, //(Ölçü vahidi burada saxlanılır.Max 150 simvoldur. Məcburidir)
+                                c4 = row["c4"].InnerText, //(Malın miqdarı burada saxlanılır. Kəsir hissə ən çox 4 rəqəmlidir. Məcburidir)
+                                c5 = row["c5"].InnerText, //(Malın buraxılış qiyməti burada saxlanılır. Kəsir hissə ən çox 9 rəqəmlidir. Məcburidir) 
+                                c6 = row["c6"].InnerText, //(Cəmi qiyməti burada saxlanılır.Kəsir hissə ən çox 2 rəqəmlidir. Düstur: c4*c5 = c6 . Məcburidir)
+                                c7 = row["c7"].InnerText, //(Aksiz dərəcəsi burada saxlanılır. Kəsir hissəsi ən çox 2 rəqəmlidir. Məcburidir )
+                                c8 = row["c8"].InnerText, //(Aksiz məbləği burada saxlanılır. Kəsir hissəsi ən çox 2 rəqəmlidir. Məcburidir )
+                                c9 = row["c9"].InnerText, //(Cəmi məbləğ burada saxlanılır. Kəsir hissəsi ən çox 2 rəqəmlidir.Düstur : c6+c8 = c9. Şərt: c9= c10+c11+c12. Məcburidir )
+                                c10 = row["c10"].InnerText,//(ƏDV - yə cəlb edilən məbləğ burada saxlanılır.Kəsir hissəsi ən çox 2 rəqəmlidir.Məcburidir )
+                                c11 = row["c11"].InnerText,//(ƏDV-yə cəlb edilməyən məbləğ burada saxlanılır. Kəsir hissəsi ən çox 2 rəqəmlidir.  Məcburidir )
+                                c12 = row["c12"].InnerText,//(ƏDV-dən azad olunan məbləğ burada saxlanılır. Kəsir hissəsi ən çox 2 rəqəmlidir.  Məcburidir )
+                                c13 = row["c13"].InnerText,//(ƏDV-yə 0 dərəcə ilə cəlb edilən məbləğ burada saxlanılır. Kəsir hissəsi ən çox 2 rəqəmlidir.  Məcburidir )
+                                c14 = row["c14"].InnerText,//(Ödənilməli ƏDV burada saxlanılır.Kəsir hissəsi ən çox 2 rəqəmlidir.  Məcburidir )
+                                c15 = row["c15"].InnerText,//(Yol vergisi məbləği burada saxlanılır. Boş ola bilməz.) 
+                               // c16 = row["c16"].InnerText,//(Yola salınmış mallara,görülmüş işlərə və göstərilmiş xidmətlər üçün məbləğ burada saxlanılır.Kəsir hissəsi ən çox 2 rəqəmlidir.Məcburidir )
+                               // c17 = row["c17"].InnerText,//(Malların Barkod)
+                            });                           
                         }
-
-
                         foreach (XmlNode row in rootNode["product"]["qaimeYekunTable"].ChildNodes)
                         {
                             qaime.qaimeYekunTables.Add(
@@ -189,59 +185,104 @@ namespace APIMuhasibat.Controllers
                                    c6 = row["c6"].InnerText, // (Malların  ƏDV-dən azad olunan cəmi məbləği burada saxlanılır.Kəsir hissəsi ən çox 2 rəqəmlidir. Düstur : qaimeYekunTable.c6= sum(qaimeTable.c12) . Məcburidir )
                                    c7 = row["c7"].InnerText, //(Malların  ƏDV-yə 0 dərəcə ilə cəlb edilən cəmi məbləği burada saxlanılır.Kəsir hissəsi ən çox 2 rəqəmlidir. Düstur : qaimeYekunTable.c6= sum(qaimeTable.c12) . Məcburidir )
                                    c8 = row["c8"].InnerText, //(Malların cəmi ödənilməli ƏDV məbləği burada saxlanılır.Kəsir hissəsi ən çox 2 rəqəmlidir. Düstur : qaimeYekunTable.c7= sum(qaimeTable.c13) . Məcburidir )
-                                   c9 = row["c9"].InnerText, //(Yola salınmış mallara,görülmüş işlərə və göstərilmiş xidmətlər üçün cəmi məbləğ burada saxlanılır.Kəsir hissəsi ən çox 2 rəqəmlidir. Düstur : qaimeYekunTable.c8= sum(qaimeTable.c14) . Məcburidir )
-                                   c10 = row["c10"].InnerText,//(Yola salınmış mallara,görülmüş işlərə və göstərilmiş xidmətlər üçün yol vergisi )
-
-                               }
-                                );
+                                                             // c9 = row["c9"].InnerText, //(Yola salınmış mallara,görülmüş işlərə və göstərilmiş xidmətlər üçün cəmi məbləğ burada saxlanılır.Kəsir hissəsi ən çox 2 rəqəmlidir. Düstur : qaimeYekunTable.c8= sum(qaimeTable.c14) . Məcburidir )
+                                                             // c10 = row["c10"].InnerText,//(Yola salınmış mallara,görülmüş işlərə və göstərilmiş xidmətlər üçün yol vergisi )
+                               });
                         }
-
-                        var Em = new Emeliyyatdet();
-                        Em.EmdetId = Guid.NewGuid().ToString();
-                        Em.UserId = _GeteId();
-                        Em.QId = QId.ToString();
-                        Em.AId = aId.ToString();
-                        Em.DhesId = dhesId.ToString();
-                        Em.KhesId = khesId.ToString();
-                        Em.MushId = mush.MushId;
-                        foreach (var xx in qaime.qaimeTables)
-                        {
-                            var ver = _ver.GetAll().FirstOrDefault(k => k.Vergikodu == xx.c1);
-                            Em.VergiId = ver.VergiId;
-                            Em.VId = ver.VId;
-                            Em.Maladi = xx.c2.ToString();
-                            Em.Barkod = xx.c4.ToString();
-                            Em.Miqdar = decimal.Parse(xx.c4);
-                            Em.Submiqdar = 1;
-                            Em.Vahidqiymeti_alish = decimal.Parse(xx.c5);
-                            Em.Vahidqiymeti_satish = Em.Vahidqiymeti_satish + decimal.Parse(xx.c5) * (decimal.Parse(pars.ToString()) / 100);
-
-
-                            Em.ValId = ValId.ToString();
-                            Em.Kurs = decimal.Parse(Kurs.ToString());
-                            Em.Emeltarixi = DateTime.Now.Date;
-                            if (decimal.Parse(xx.c13) > 0)
-                            {
-                                Em.Edv = "0,18%";
-                                Em.Edvye_celbedilen = 1;
-                                Em.Edvye_celbedilmeyen = 0;
-                            }
-                            else
-                            {
-                                Em.Edv = "0";
-                                Em.Edvye_celbedilen = 0;
-                                Em.Edvye_celbedilmeyen = 1;
-                            }
-                            Em.Qeyd = null;
-                            //await _emel.InsertAsync(Em);
+                        #region  masteri hazirla                        
+                        decimal _Sum = 0;
+                        //yoxlayaq bu qaime evveller daxil edilib
+                        mush = _mush.GetAll().FirstOrDefault(x => x.Voen == qaime.qaimeKimden);
+                        var _vvo= _promas.GetAll().FirstOrDefault(k=>k.Vo==qaime.vo.ToString());
+                        var vval = _val.GetAll().FirstOrDefault(k => k.Valname == "AZN");
+                        if (vval == null) {
+                            vval = new Valyuta() { ValId = Guid.NewGuid().ToString(), Valname = "AZN", Valnominal = 1, Tarix = DateTime.Now };
+                            await _val.InsertAsync(vval);
                         }
-
-
-                        var fileSavePath = _path.Replace("\\", "/") + "/" + file.FileName;
-
-                        if (System.IO.File.Exists(fileSavePath))
+                        var qru = _qr.GetAll().FirstOrDefault(k => k.Qrupname == QId.ToString());
+                        if (qru == null) {
+                            qru = new Qrup() { QId = Guid.NewGuid().ToString(), Qrupname = QId.ToString() };
+                            await _qr.InsertAsync(qru);
+                        }
+                        if (_vvo == null)
                         {
-                            System.IO.File.Delete(fileSavePath);
+                            var pmas = new Productmaster()
+                            {
+                                PmasId = Guid.NewGuid().ToString(),
+                                UserId = _GeteId(),
+                                Kimden_voen = qaime.qaimeKimden,
+                                Kimden_sum = _Sum,
+                                Emeltarixi = Convert.ToDateTime(emeltarixi.ToString()),
+                                Serial = Serial.ToString(),
+                                Vo = qaime.vo,
+                                ActivId = aId.ToString(),
+                                DhesId = dhesId.ToString(),
+                                KhesId = khesId.ToString(),
+                                MushId = mush.MushId,
+                                ValId = vval.ValId,
+                                Kurs = decimal.Parse(Kurs.ToString()),
+                                QrupId = qru.QId,
+                                Pay = false
+                            };
+                            await _promas.InsertAsync(pmas);
+                            foreach (var xx in qaime.qaimeTables)
+                            {
+                                var vver = _ver.GetAll().FirstOrDefault(k => k.Vergikodu == xx.c1);
+                                var prodet = _prodet.GetAll().FirstOrDefault(k => k.VergiId == vver.VergiId);
+                                if (prodet == null)
+                                {
+                                    var eedv = "0";
+                                    if (decimal.Parse(xx.c10) > 0) { eedv = "0,18%"; }
+                                    prodet = new Productdetal()
+                                    {
+                                        PdetId = Guid.NewGuid().ToString(),
+                                        PmasId = pmas.PmasId,
+                                        Maladi = xx.c2,
+                                        Barkod = xx.c17,
+                                        VergiId = vver.VergiId,
+                                        VId = vver.VId,
+                                        Edv = eedv,
+                                        Qeyd = ""
+                                    };
+                                    await _prodet.InsertAsync(prodet);
+                                }
+                                _Sum += decimal.Parse(xx.c4.ToString()) * decimal.Parse(xx.c5.ToString());
+                                #region  ------operation----------
+                                shir = _shi.GetAll().FirstOrDefault(x => x.Shirvoen == qaime.qaimeKime);
+                                var oper = new operation()
+                                {
+                                    OpId = Guid.NewGuid().ToString(),
+                                    PdetId = prodet.PdetId,
+                                    Submiqdar = 1,
+                                    Miqdar = decimal.Parse(xx.c4),
+                                    Alishqiy = decimal.Parse(xx.c5),
+                                    Satishqiy = decimal.Parse(xx.c5) + decimal.Parse(xx.c5) * (shir.Shirpercent / 100),
+                                    Aksizderecesi = int.Parse(xx.c7),
+                                    Yolvergisi = decimal.Parse(xx.c15),
+                                    Qeyd = ""
+                                };
+                                await _oper.InsertAsync(oper);
+                                #endregion
+                            }
+                            //-------masteri yenileyek---------
+                            pmas.Kimden_sum = _Sum;
+                            await _promas.EditAsync(pmas);
+                            //-------masteri yenileyek---------
+                        }
+                        else
+                        {
+                            var fileSavePath = _path.Replace("\\", "/") + "/" + file.FileName;
+                            if (System.IO.File.Exists(fileSavePath))
+                            {
+                                System.IO.File.Delete(fileSavePath);
+                            }
+                            return BadRequest("Siz bu qaimeni evveller daxil etmisiniz");
+                        }
+                        #endregion                       
+                        var fileSavePath1 = _path.Replace("\\", "/") + "/" + file.FileName;
+                        if (System.IO.File.Exists(fileSavePath1))
+                        {
+                            System.IO.File.Delete(fileSavePath1);
                         }
                     }
                     catch (Exception ex)
@@ -249,19 +290,57 @@ namespace APIMuhasibat.Controllers
                         Console.WriteLine(ex.Message);
                     }
                 }
-                //--------------------------------------                   
-                // pp.proId = Request.Form["proId"];
-                //  pp.photourl = url;
-                // await _photo.InsertAsync(pp);
                 return Ok();
-
-
             }
         }
         // GET: api/<OperationController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        [Route("getqayime")]
+        public IEnumerable Get(DateTime t1,DateTime t2,string userId)
         {
+            /*
+             select pm.UserId,pm.Kimden_voen,pm.Kimden_sum,pm.Emeltarixi,pm.Serial,pm.Pay,pd.Maladi,pd.Edv,Ve.Vergikodununadi,Va.Vahidadi,* from Productmasters pm
+join Productdetals pd on pm.PmasId=pd.PmasId
+join operations op on pd.PdetId=op.PdetId
+join Vergis Ve on pd.VergiId=Ve.VergiId
+left join Vahids Va on pd.VId=Va.VId
+             */
+            /*  
+             var res = (from e in _emel.GetAll()
+                        join a in _ver.GetAll() on e.VergiId equals a.VergiId
+                        join b in _va.GetAll() on e.VId equals b.VId
+                        //  join e in _emel.GetAll()
+                        select new
+                        {
+                            e.EmdetId,
+                            e.UserId,
+                            e.QId,
+                            e.AId,
+                            e.DhesId,
+                            e.KhesId,
+                            e.MushId,
+                            e.VergiId,
+                            e.VId,
+                            e.Miqdar,
+                            e.Submiqdar,
+                            e.Vahidqiymeti_alish,
+                            e.Vahidqiymeti_satish,
+                            e.Edv,
+                            e.Edvye_celbedilen,
+                            e.Edvye_celbedilmeyen,
+                            e.Emeltarixi,
+                            e.ValId,
+                            e.Qeyd,
+                            e.Kurs,
+                            a.Vergikodu,
+                            a.Vergikodununadi,
+                            //               e.VId,
+                            //               a.Edv_tar,
+                            //               a.State,
+                            //b.Vahidadi
+                        });
+             // int d= _va.GetAll().Count();
+             return res.OrderByDescending(c => c.EmdetId);*/
             return new string[] { "value1", "value2" };
         }
 

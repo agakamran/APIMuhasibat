@@ -13,12 +13,11 @@ namespace APIMuhasibat.Models
         string _valId = null, _valname = null;
         decimal _valnominal = 0;
         Nullable<DateTime> _tarix = DateTime.Now;
-
         public Valyuta()
         {
         }
-
         [Key]
+        [MaxLength(36)]
         public string ValId {
             get { return _valId; }
             set { if (value != null) { _valId = value; } }
