@@ -27,7 +27,7 @@ namespace APIMuhasibat.Models
             get { return _qId; }
             set { if (value != null) { _qId = value; } }
         }
-        [MaxLength(50)]
+        [MaxLength(100)]
         public string Qrupname
         {
             get { return _qrupname; }

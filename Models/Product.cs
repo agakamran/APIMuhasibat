@@ -191,4 +191,10 @@ namespace APIMuhasibat.Models
         public virtual ICollection<Productmaster> Productmasters { get; set; }
         public virtual ICollection<Vahid> Vahids { get; set; }
     }
+    public class axtar
+    {
+        public string userId { get; set; }
+        public DateTime t1 { get; set; }
+        public DateTime t2 { get; set; }        
+    }
 }

@@ -112,41 +112,47 @@ namespace APIMuhasibat.Controllers
                         };
                         
                         #region qaimeKime
-                        Shirket ti = new Shirket();
+                       // Shirket ti = new Shirket();
                         var shir = _shi.GetAll().FirstOrDefault(x => x.Shirvoen == qaime.qaimeKime);
                         if (shir == null)// && shir.Shirvoen != qaime.qaimeKimden
                         {
-                            ti.ShId = Guid.NewGuid().ToString();
-                            ti.Bankadi = "";
-                            ti.Bankvoen = "";
-                            ti.SWIFT = "";
-                            ti.Bankkodu = "";
-                            ti.Muxbirhesab = "";
-                            ti.Aznhesab = "";
-                            ti.Shiricrachi = "";
-                            ti.Shirvoen = qaime.qaimeKime;
-                            ti.Cavabdehshexs = "";
-                            ti.Email = _GetEmail();
-                            ti.Unvan = ti.Unvan;
-                            ti.userId = _GeteId();
-                            ti.Shirpercent = decimal.Parse(pars.ToString());
-                            await _shi.InsertAsync(ti);
+                            shir = new Shirket()
+                            {
+                                ShId = Guid.NewGuid().ToString(),
+                                Bankadi = "",
+                                Bankvoen = "",
+                                SWIFT = "",
+                                Bankkodu = "",
+                                Muxbirhesab = "",
+                                Aznhesab = "",
+                                Shiricrachi = "",
+                                Shirvoen = qaime.qaimeKime,
+                                Cavabdehshexs = "",
+                                Email = _GetEmail(),
+                                Unvan = "",
+                                userId = _GeteId(),
+                                Shirpercent = decimal.Parse(pars.ToString()),
+                            };
+                            await _shi.InsertAsync(shir);
                         }
                         #endregion
                         #region qaimeKimden
-                        Mushteri mi = new Mushteri();
+                       // Mushteri mi = new Mushteri();
                         var mush = _mush.GetAll().FirstOrDefault(x => x.Voen == qaime.qaimeKimden);
                         if (mush == null)//.Voen!=qaime.qaimeKimden
                         {
-                            mi.MushId = Guid.NewGuid().ToString();
-                            mi.Firma =qaime.des2;
-                            mi.Voen = qaime.qaimeKimden;
-                            mi.Muqavilenom = "";
-                            mi.Muqaviletar = DateTime.Now;
-                            mi.Valyuta = "1";
-                            mi.Odemesherti = "";
-                            mi.Temsilchi = "";
-                            await _mush.InsertAsync(mi);
+                            mush = new Mushteri()
+                            {
+                                MushId = Guid.NewGuid().ToString(),
+                                Firma = qaime.des2,
+                                Voen = qaime.qaimeKimden,
+                                Muqavilenom = "",
+                                Muqaviletar = DateTime.Now,
+                                Valyuta = "1",
+                                Odemesherti = "",
+                                Temsilchi = ""
+                            };
+                            await _mush.InsertAsync(mush);
                         }
                         #endregion
                         foreach (XmlNode row in rootNode["product"]["qaimeTable"].ChildNodes)
@@ -294,60 +300,47 @@ namespace APIMuhasibat.Controllers
             }
         }
         // GET: api/<OperationController>
-        [HttpGet]
-        [Route("getqayime")]
-        public IEnumerable Get(DateTime t1,DateTime t2,string userId)
+        [HttpPost]
+        [Route("getqayimeler")]
+        public IEnumerable getqayimeler([FromBody] axtar dat)
         {
-            /*
-             select pm.UserId,pm.Kimden_voen,pm.Kimden_sum,pm.Emeltarixi,pm.Serial,pm.Pay,pd.Maladi,pd.Edv,Ve.Vergikodununadi,Va.Vahidadi,* from Productmasters pm
-join Productdetals pd on pm.PmasId=pd.PmasId
-join operations op on pd.PdetId=op.PdetId
-join Vergis Ve on pd.VergiId=Ve.VergiId
-left join Vahids Va on pd.VId=Va.VId
-             */
-            /*  
-             var res = (from e in _emel.GetAll()
-                        join a in _ver.GetAll() on e.VergiId equals a.VergiId
-                        join b in _va.GetAll() on e.VId equals b.VId
-                        //  join e in _emel.GetAll()
+             var res = (from pm in _promas.GetAll().Where(k=>k.UserId==dat.userId) 
+                        join q in _qr.GetAll() on pm.QrupId equals q.QId
+                        join m in _mush.GetAll() on pm.MushId equals m.MushId                        
                         select new
                         {
-                            e.EmdetId,
-                            e.UserId,
-                            e.QId,
-                            e.AId,
-                            e.DhesId,
-                            e.KhesId,
-                            e.MushId,
-                            e.VergiId,
-                            e.VId,
-                            e.Miqdar,
-                            e.Submiqdar,
-                            e.Vahidqiymeti_alish,
-                            e.Vahidqiymeti_satish,
-                            e.Edv,
-                            e.Edvye_celbedilen,
-                            e.Edvye_celbedilmeyen,
-                            e.Emeltarixi,
-                            e.ValId,
-                            e.Qeyd,
-                            e.Kurs,
-                            a.Vergikodu,
-                            a.Vergikodununadi,
-                            //               e.VId,
-                            //               a.Edv_tar,
-                            //               a.State,
-                            //b.Vahidadi
-                        });
-             // int d= _va.GetAll().Count();
-             return res.OrderByDescending(c => c.EmdetId);*/
-            return new string[] { "value1", "value2" };
+
+                           Növü   = q.Qrupname,
+                           Serial = pm.Serial,                           
+                            pm.Kimden_voen,
+                            m.Firma,
+                            pm.Kimden_sum,
+                            pm.Emeltarixi, 
+                            pm.Pay,
+                            pm.UserId,
+                            pm.Vo
+                           
+                        }).Where(k=>k.Emeltarixi>=dat.t1 && k.Emeltarixi<=dat.t2).ToList();
+             int d= _va.GetAll().Count();
+             return res.OrderByDescending(c => c.Emeltarixi);            
         }
 
         // GET api/<OperationController>/5
         [HttpGet("{id}")]
         public string Get(int id)
         {
+            /*
+            select pm.UserId,pm.Kimden_voen,pm.Kimden_sum,pm.Emeltarixi,pm.Serial,pm.Pay,pd.Maladi,pd.Edv,Ve.Vergikodununadi,Va.Vahidadi,* from Productmasters pm
+join Productdetals pd on pm.PmasId=pd.PmasId
+join operations op on pd.PdetId=op.PdetId
+join Vergis Ve on pd.VergiId=Ve.VergiId
+left join Vahids Va on pd.VId=Va.VId
+
+
+              select q.Qrupname,pm.Serial,pm.UserId,pm.Kimden_voen,pm.Kimden_sum,pm.Emeltarixi,m.Firma,pm.Vo from Productmasters pm
+join Qrups q on pm.QrupId = q.QId
+join Mushteris m on pm.MushId = m.MushId
+            */
             return "value";
         }
 
