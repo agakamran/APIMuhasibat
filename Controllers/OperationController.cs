@@ -230,6 +230,7 @@ namespace APIMuhasibat.Controllers
                                 QrupId = qru.QId,
                                 Pay = false
                             };
+
                             await _promas.InsertAsync(pmas);
                             foreach (var xx in qaime.qaimeTables)
                             {
@@ -300,18 +301,20 @@ namespace APIMuhasibat.Controllers
             }
         }
         // GET: api/<OperationController>
-        [HttpPost]
+        [HttpGet]
         [Route("getqayimeler")]
-        public IEnumerable getqayimeler([FromBody] axtar dat)
+        public IEnumerable getqayimeler( string tar)
         {
-             var res = (from pm in _promas.GetAll().Where(k=>k.UserId==dat.userId) 
+            
+             var res = (from pm in _promas.GetAll().Where(k=>k.UserId== _GeteId()) 
                         join q in _qr.GetAll() on pm.QrupId equals q.QId
                         join m in _mush.GetAll() on pm.MushId equals m.MushId                        
                         select new
                         {
 
-                           Növü   = q.Qrupname,
-                           Serial = pm.Serial,                           
+                            q.Qrupname,
+                            pm.PmasId,
+                            pm.Serial,                           
                             pm.Kimden_voen,
                             m.Firma,
                             pm.Kimden_sum,
@@ -320,32 +323,70 @@ namespace APIMuhasibat.Controllers
                             pm.UserId,
                             pm.Vo
                            
-                        }).Where(k=>k.Emeltarixi>=dat.t1 && k.Emeltarixi<=dat.t2).ToList();
-             int d= _va.GetAll().Count();
+                        }).ToList();
+            if (tar!=null && tar != "NaN") {
+               res= res.Where(k => k.Emeltarixi >=Convert.ToDateTime(tar) && k.Emeltarixi <= DateTime.Now).ToList();
+            }
+             int d= res.Count();
              return res.OrderByDescending(c => c.Emeltarixi);            
         }
 
+        [HttpGet]
+        [Route("getqayimedetal")]
+        public IEnumerable getqayimedetal(string PmasId)
+        {
+           /*
+             select pm.UserId,pm.Kimden_voen,pm.Serial,pd.Maladi,op.Miqdar,op.Alishqiy, op.Alishqiy * 0.18 ,pd.Edv,Ve.Vergikodununadi,Va.Vahidadi,pm.Emeltarixi from Productmasters pm
+             join Productdetals pd on pm.PmasId=pd.PmasId
+             join operations op on pd.PdetId=op.PdetId
+             join Vergis Ve on pd.VergiId=Ve.VergiId
+             left join Vahids Va on pd.VId=Va.VId
+            */
+            var res = (from pm in _promas.GetAll().Where(k => k.PmasId == PmasId)
+                       join pd in _prodet.GetAll() on pm.PmasId equals pd.PmasId
+                       join op in _oper.GetAll() on pd.PdetId equals op.PdetId
+                       join Ve in _ver.GetAll() on pd.VergiId equals Ve.VergiId
+                       join Va in _va.GetAll() on pd.VId equals Va.VId
+                       select new
+                       {
+                           pm.UserId,
+                           pm.Kimden_voen,
+                           pm.Serial,
+                           pd.Maladi,
+                           op.Miqdar,
+                           op.Alishqiy,
+                           pd.Edv,
+                           Ve.Vergikodununadi,
+                           Va.Vahidadi,
+                           pm.Emeltarixi
+
+                       }).ToList();
+
+            int d = res.Count();
+            return res;
+        }
         // GET api/<OperationController>/5
         [HttpGet("{id}")]
         public string Get(int id)
         {
             /*
             select pm.UserId,pm.Kimden_voen,pm.Kimden_sum,pm.Emeltarixi,pm.Serial,pm.Pay,pd.Maladi,pd.Edv,Ve.Vergikodununadi,Va.Vahidadi,* from Productmasters pm
-join Productdetals pd on pm.PmasId=pd.PmasId
-join operations op on pd.PdetId=op.PdetId
-join Vergis Ve on pd.VergiId=Ve.VergiId
-left join Vahids Va on pd.VId=Va.VId
+            join Productdetals pd on pm.PmasId=pd.PmasId
+            join operations op on pd.PdetId=op.PdetId
+            join Vergis Ve on pd.VergiId=Ve.VergiId
+            left join Vahids Va on pd.VId=Va.VId
 
 
               select q.Qrupname,pm.Serial,pm.UserId,pm.Kimden_voen,pm.Kimden_sum,pm.Emeltarixi,m.Firma,pm.Vo from Productmasters pm
-join Qrups q on pm.QrupId = q.QId
-join Mushteris m on pm.MushId = m.MushId
+            join Qrups q on pm.QrupId = q.QId
+            join Mushteris m on pm.MushId = m.MushId
             */
             return "value";
         }
 
         // POST api/<OperationController>
         [HttpPost]
+        [Route("postku")]
         public void Post([FromBody] string value)
         {
         }
