@@ -346,7 +346,7 @@ namespace APIMuhasibat.Controllers
                        join pd in _prodet.GetAll() on pm.PmasId equals pd.PmasId
                        join op in _oper.GetAll() on pd.PdetId equals op.PdetId
                        join Ve in _ver.GetAll() on pd.VergiId equals Ve.VergiId
-                       join Va in _va.GetAll() on pd.VId equals Va.VId
+                     //  join Va in _va.GetAll() on pd.VId equals Va.VId
                        select new
                        {
                            pm.UserId,
@@ -357,7 +357,7 @@ namespace APIMuhasibat.Controllers
                            op.Alishqiy,
                            pd.Edv,
                            Ve.Vergikodununadi,
-                           Va.Vahidadi,
+                          // Va.Vahidadi,
                            pm.Emeltarixi
 
                        }).ToList();

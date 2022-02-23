@@ -12,3 +12,5 @@ git push origin main
 ------gitqebul et--------------------- 
 git clone // tam proyekti gotur
 git pull origin main //yeniliyi dart
+
+git reset --hard
