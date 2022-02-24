@@ -198,6 +198,7 @@ namespace APIMuhasibat.Controllers
                         #region  masteri hazirla                        
                         decimal _Sum = 0;
                         //yoxlayaq bu qaime evveller daxil edilib
+                        shir = _shi.GetAll().FirstOrDefault(x => x.Shirvoen == qaime.qaimeKime);
                         mush = _mush.GetAll().FirstOrDefault(x => x.Voen == qaime.qaimeKimden);
                         var _vvo= _promas.GetAll().FirstOrDefault(k=>k.Vo==qaime.vo.ToString());
                         var vval = _val.GetAll().FirstOrDefault(k => k.Valname == "AZN");
@@ -228,6 +229,7 @@ namespace APIMuhasibat.Controllers
                                 ValId = vval.ValId,
                                 Kurs = decimal.Parse(Kurs.ToString()),
                                 QrupId = qru.QId,
+                                ShId= shir.ShId,
                                 Pay = false
                             };
 
@@ -318,6 +320,7 @@ namespace APIMuhasibat.Controllers
                             pm.Kimden_voen,
                             m.Firma,
                             pm.Kimden_sum,
+                            edv= (pm.Kimden_sum* 18/100),
                             pm.Emeltarixi, 
                             pm.Pay,
                             pm.UserId,
@@ -346,16 +349,28 @@ namespace APIMuhasibat.Controllers
                        join pd in _prodet.GetAll() on pm.PmasId equals pd.PmasId
                        join op in _oper.GetAll() on pd.PdetId equals op.PdetId
                        join Ve in _ver.GetAll() on pd.VergiId equals Ve.VergiId
-                     //  join Va in _va.GetAll() on pd.VId equals Va.VId
+                       join sh in _shi.GetAll() on pm.ShId equals sh.ShId
+                       join q in _qr.GetAll() on pm.QrupId equals q.QId
+                       join m in _mush.GetAll() on pm.MushId equals m.MushId
+                       //  join Va in _va.GetAll() on pd.VId equals Va.VId
                        select new
                        {
-                           pm.UserId,
+                           q.Qrupname,
                            pm.Kimden_voen,
+                           m.Firma,
+                           sh.Shirvoen,
+                           sh.Shiricrachi,
+                           m.Voen,
+                           pm.UserId,                          
                            pm.Serial,
                            pd.Maladi,
                            op.Miqdar,
                            op.Alishqiy,
-                           pd.Edv,
+                           cemi= op.Miqdar* op.Alishqiy,
+                           edvcəlbedilən= op.Miqdar * op.Alishqiy,
+                           Edv = (op.Miqdar * op.Alishqiy * 18/100),
+                           yekunmeb= op.Miqdar * op.Alishqiy+ (op.Miqdar * op.Alishqiy * 18 / 100),
+                           //pd.Edv,
                            Ve.Vergikodununadi,
                           // Va.Vahidadi,
                            pm.Emeltarixi
