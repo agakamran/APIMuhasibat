@@ -34,12 +34,14 @@ namespace APIMuhasibat.Controllers
         private readonly IRepository<operation> _oper = null;
         private readonly IRepository<Productmaster> _promas = null;
         private readonly IRepository<Productdetal> _prodet = null;
+        private readonly IRepository<anbar> _anbar = null;
         private static IWebHostEnvironment _host;
         #endregion
         public OperationController(IWebHostEnvironment host, IRepository<Tipler> ti, IRepository<Qrup> qr,
             IRepository<Activler> act, IRepository<Hesab> he, IRepository<Bolme> bol, IRepository<Madde> mad,
             IRepository<Shirket> shi, IRepository<Mushteri> mush, IRepository<Vahid> va, IRepository<Valyuta> val,
-            IRepository<Vergi> ver, IRepository<fealsahe> feal, IRepository<Productmaster> promas, IRepository<Productdetal> prodet, IRepository<operation> oper)
+            IRepository<Vergi> ver, IRepository<fealsahe> feal, IRepository<Productmaster> promas,
+            IRepository<anbar> anbar, IRepository<Productdetal> prodet, IRepository<operation> oper)
         {
             #region
             _host = host;
@@ -58,6 +60,7 @@ namespace APIMuhasibat.Controllers
             _oper = oper;
             _promas = promas;
             _prodet= prodet;
+            _anbar = anbar;
             #endregion
         }
         [HttpPost]
@@ -69,9 +72,10 @@ namespace APIMuhasibat.Controllers
             {
                 #region
                 string path = "";
-                var aId = Request.Form["aId"];
-                var dhesId = Request.Form["dhesId"];
-                var khesId = Request.Form["khesId"];
+                var AnbId=Request.Form["AnbId"];
+               // var aId = Request.Form["aId"];
+                //var dhesId = Request.Form["dhesId"];
+                //var khesId = Request.Form["khesId"];
                 var QId = Request.Form["QId"];
                 var pars = Request.Form["pars"];
                 var ValId = Request.Form["ValId"];
@@ -211,6 +215,12 @@ namespace APIMuhasibat.Controllers
                             qru = new Qrup() { QId = Guid.NewGuid().ToString(), Qrupname = QId.ToString() };
                             await _qr.InsertAsync(qru);
                         }
+                        var anb = _anbar.GetAll().FirstOrDefault(k => k.Anbarname == AnbId.ToString());
+                        if (anb == null)
+                        {
+                            anb = new anbar() { AnbId = Guid.NewGuid().ToString(), Anbarname = AnbId.ToString() };
+                            await _anbar.InsertAsync(anb);
+                        }
                         if (_vvo == null)
                         {
                             var pmas = new Productmaster()
@@ -222,14 +232,16 @@ namespace APIMuhasibat.Controllers
                                 Emeltarixi = Convert.ToDateTime(emeltarixi.ToString()),
                                 Serial = Serial.ToString(),
                                 Vo = qaime.vo,
-                                ActivId = aId.ToString(),
-                                DhesId = dhesId.ToString(),
-                                KhesId = khesId.ToString(),
+                                QrupId = qru.QId,
+                                //ActivId = aId.ToString(),
+                                //DhesId = dhesId.ToString(),
+                                //KhesId = khesId.ToString(),
                                 MushId = mush.MushId,
                                 ValId = vval.ValId,
                                 Kurs = decimal.Parse(Kurs.ToString()),
-                                QrupId = qru.QId,
+                               
                                 ShId= shir.ShId,
+                                AnbId=AnbId.ToString(),
                                 Pay = false
                             };
 
@@ -321,8 +333,9 @@ namespace APIMuhasibat.Controllers
                             m.Firma,
                             pm.Kimden_sum,
                             edv= (pm.Kimden_sum* 18/100),
+                            yekunmeb = pm.Kimden_sum + (pm.Kimden_sum * 18 / 100),
                             pm.Emeltarixi, 
-                            pm.Pay,
+                            Pay = pm.Pay ? "ödenib": "ödenmeli",
                             pm.UserId,
                             pm.Vo
                            

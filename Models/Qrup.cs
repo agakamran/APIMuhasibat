@@ -1,25 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace APIMuhasibat.Models
 {
     [Table("Qrups")]//ALIŞ satish
    public class Qrup
     {
-        string _qId = null, _qrupname = null, _description = null;
+        string _qId = null, _qrupname = null, _dhesId = null, _khesId = null;
         public Qrup() { }
-        public Qrup(string _QId, string _Qrupname, string _Description)
+        public Qrup(string _QId, string _Qrupname)
         {
             this.QId = _QId;
             this.Qrupname = _Qrupname;
-            this.Description = _Description;
         }
-
         [Key]
         [MaxLength(36)]
         public string QId
@@ -33,11 +26,17 @@ namespace APIMuhasibat.Models
             get { return _qrupname; }
             set { if (value != null) { _qrupname = value; } }
         }
-        [MaxLength(50)]
-        public string Description
+        [MaxLength(36)]
+        public string DhesId //alacaq +
         {
-            get { return _description; }
-            set { if (value != null) { _description = value; } }
+            get { return _dhesId; }
+            set { if (value != null) { _dhesId = value; } }
+        }
+        [MaxLength(36)]
+        public string KhesId //verecek -
+        {
+            get { return _khesId; }
+            set { if (value != null) { _khesId = value; } }
         }
 
 

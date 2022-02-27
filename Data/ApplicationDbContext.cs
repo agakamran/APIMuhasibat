@@ -38,6 +38,7 @@ namespace APIMuhasibat.Data
         public DbSet<Productdetal> Productdetals { get; set; }
         public DbSet<Valyuta> valyutas { get; set; }
         public DbSet<logger> loggers { get; set; }
+        public DbSet<anbar> anbars { get; set; }
         // public DbSet<Cart> Carts { get; set; }
         // public DbSet<vido> vidos { get; set; }
         // public DbSet<Cont> conts { get; set; }

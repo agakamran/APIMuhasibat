@@ -1,0 +1,4 @@
+﻿1) sralanma qaimə
+2) Nomenklaturada anbarlar
+3) Ümumi nomeklaturanın sayı,məbləğ
+4) Kontrogent üzrə alınmış mal-material hesabat (firma uzre filtir)

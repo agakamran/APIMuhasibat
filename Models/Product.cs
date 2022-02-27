@@ -8,8 +8,8 @@ namespace APIMuhasibat.Models
     [Table("Productmasters")]
     public class Productmaster
     {
-        string _pmasId = null, _userId = null, _kimden_voen = null, _serial = null, _mushId = null, _vo =null,
-            _activId = null, _dhesId = null, _khesId = null, _valId = null,_qrupId = null, _shId = null;
+        string _pmasId = null, _userId = null, _kimden_voen = null, _serial = null, _mushId = null, _vo = null,
+        _activId = null, _valId = null, _qrupId = null, _shId = null, _anbId = null;// _dhesId = null, _khesId = null,
         decimal _kurs = 1, _kimden_sum =0;bool _pay = false;
         Nullable<DateTime> _emeltarixi = DateTime.Now;
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -17,12 +17,12 @@ namespace APIMuhasibat.Models
         {
             this.Shirkets = new HashSet<Shirket>();
             this.Mushteris = new HashSet<Mushteri>();
-            this.Activlers = new HashSet<Activler>();
-            this.DHesabs = new HashSet<Hesab>();
-            this.KHesabs = new HashSet<Hesab>();
-            this.Activlers = new HashSet<Activler>();
+            this.Activlers = new HashSet<Activler>();           
             this.Valyutas = new HashSet<Valyuta>();
             this.Qrups = new HashSet<Qrup>();
+            this.anbars = new HashSet<anbar>();
+            //this.DHesabs = new HashSet<Hesab>();
+            //this.KHesabs = new HashSet<Hesab>();
         }
         [Key]
         [MaxLength(36)]
@@ -84,19 +84,24 @@ namespace APIMuhasibat.Models
             get { return _activId; }
             set { if (value != null) { _activId = value; } }
         }
-
         [MaxLength(36)]
-        public string DhesId //alacaq +
+        public string AnbId
         {
-            get { return _dhesId; }
-            set { if (value != null) { _dhesId = value; } }
+            get { return _anbId; }
+            set { if (value != null) { _anbId = value; } }
         }
-        [MaxLength(36)]
-        public string KhesId //verecek -
-        {
-            get { return _khesId; }
-            set { if (value != null) { _khesId = value; } }
-        }
+        //[MaxLength(36)]
+        //public string DhesId //alacaq +
+        //{
+        //    get { return _dhesId; }
+        //    set { if (value != null) { _dhesId = value; } }
+        //}
+        //[MaxLength(36)]
+        //public string KhesId //verecek -
+        //{
+        //    get { return _khesId; }
+        //    set { if (value != null) { _khesId = value; } }
+        //}
 
         [MaxLength(36)]
         public string ValId
@@ -127,9 +132,10 @@ namespace APIMuhasibat.Models
         public virtual ICollection<Activler> Activlers { get; set; }
         public virtual ICollection<Valyuta> Valyutas { get; set; }
         public virtual ICollection<Mushteri> Mushteris { get; set; }
-        public virtual ICollection<Hesab> DHesabs { get; set; }
-        public virtual ICollection<Hesab> KHesabs { get; set; }
+        //public virtual ICollection<Hesab> DHesabs { get; set; }
+        //public virtual ICollection<Hesab> KHesabs { get; set; }
         public virtual ICollection<Qrup> Qrups { get; set; }
+        public virtual ICollection<anbar> anbars { get; set; }
     }
 
     [Table("Productdetals")]
@@ -197,10 +203,21 @@ namespace APIMuhasibat.Models
         public virtual ICollection<Productmaster> Productmasters { get; set; }
         public virtual ICollection<Vahid> Vahids { get; set; }
     }
-    public class axtar
+    [Table("anbars")]
+    public class anbar
     {
-        public string userId { get; set; }
-        public DateTime t1 { get; set; }
-        public DateTime t2 { get; set; }        
+        string _anbId = null, _anbarname = null;
+
+       [MaxLength(36)]
+        [Key]
+        public string AnbId {
+            get { return _anbId; }
+            set { if (value != null) { _anbId = value; } }
+        }
+        [MaxLength(50)]
+        public string Anbarname  {
+            get { return _anbarname; }
+            set { if (value != null) { _anbarname = value; } }
+        }   
     }
 }

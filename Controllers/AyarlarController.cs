@@ -32,10 +32,11 @@ namespace APIMuhasibat.Controllers
         private readonly IRepository<Vergi> _ver = null;
         private readonly IRepository<fealsahe> _feal = null;
         private readonly IRepository<Emeliyyatdet> _emel = null;
+        private readonly IRepository<anbar> _anbar = null;
         private static IWebHostEnvironment _host;
         public AyarlarController(IWebHostEnvironment host, IRepository<Tipler> ti, IRepository<Qrup> qr, IRepository<Activler> act, IRepository<Hesab> he, IRepository<Bolme> bol,
         IRepository<Madde> mad, IRepository<Shirket> shi, IRepository<Mushteri> mush, IRepository<Vahid> va, IRepository<Valyuta> val,
-        IRepository<Vergi> ver, IRepository<fealsahe> feal, IRepository<Emeliyyatdet> emel)
+         IRepository<anbar> anbar, IRepository<Vergi> ver, IRepository<fealsahe> feal, IRepository<Emeliyyatdet> emel)
         {
             _host = host;
             _ti = ti;
@@ -51,6 +52,7 @@ namespace APIMuhasibat.Controllers
             _bol = bol;
             _feal = feal;
             _emel = emel;
+            _anbar = anbar;
         }
         /*
    select *from Tiplers
@@ -144,19 +146,27 @@ namespace APIMuhasibat.Controllers
         // GET: api/hazirla
         [HttpGet]
         [Route("_getqrup")]
-        public IEnumerable<Qrup> _getqrup(string id)
+        public IEnumerable _getqrup(string id)
         {
             // int vv = _mov.GetAll().OrderByDescending(c => c.mnom).Count()if (id != null)
+            //  select QId, Qrupname, dh.Hesnom, kh.Hesnom from Qrups q join Hesabs dh on q.DhesId = dh.HesId
+            //            join Hesabs kh on q.KhesId = kh.HesId
+            var res = (from q in _qr.GetAll().ToList()
+                        join dh in _he.GetAll().ToList() on q.DhesId equals dh.HesId
+                        join kh in _he.GetAll().ToList() on q.KhesId equals kh.HesId
+                        select new
+                        {
+                            q.QId,
+                            q.Qrupname,
+                            dhesId = dh.Hesnom,
+                            khesId = kh.Hesnom
+                        }).ToList();
             if (id != null)
             {
-                return _qr.GetAll().Where(g => g.QId == id);
+                
+                return res.ToList().Where(g => g.QId == id);
             }
-            else
-            {
-                return _qr.GetAll().OrderByDescending(c => c.QId).OrderBy(k => k.QId);
-            }
-
-
+            return res.ToList();
         }
         // POST: api/hazirla/_postmov
         [HttpPost]
@@ -170,7 +180,9 @@ namespace APIMuhasibat.Controllers
                 {
                     qr.QId = Guid.NewGuid().ToString();
                     qr.Qrupname = qr.Qrupname;
-                    qr.Description = qr.Description;
+                    qr.DhesId = qr.DhesId;
+                    qr.KhesId=qr.KhesId;
+                   // qr.Description = qr.Description;
                     await _qr.InsertAsync(qr);
                     return Ok();
                 }
@@ -178,7 +190,9 @@ namespace APIMuhasibat.Controllers
                 {
                     var _m = _qr.GetAll().FirstOrDefault(x => x.QId == qr.QId);
                     _m.Qrupname = qr.Qrupname;
-                    _m.Description = qr.Description;
+                    _m.DhesId = qr.DhesId;
+                    _m.KhesId = qr.KhesId;
+                    // _m.Description = qr.Description;
                     await _qr.EditAsync(_m);
                     return Ok();
                 }
@@ -255,17 +269,17 @@ namespace APIMuhasibat.Controllers
         }
         // DELETE: api/hazirla/5
         [HttpDelete]
-        [Route("_deletebol")]
-        public async Task<IActionResult> _deletebol(string id)
+        [Route("_delaktiv")]
+        public async Task<IActionResult> _delaktiv(string id)
         {
             if (!ModelState.IsValid) { return BadRequest(ModelState); }
-            var ti = await _ti.GetAll().SingleOrDefaultAsync(m => m.TipId == id);
+            var ti = await _act.GetAll().SingleOrDefaultAsync(m => m.ActivId == id);
             if (ti == null)
             {
                 return NotFound();
             }
 
-            await _ti.DeleteAsync(ti);
+            await _act.DeleteAsync(ti);
             // await _context.SaveChangesAsync();
 
             return Ok(ti);
@@ -290,7 +304,8 @@ namespace APIMuhasibat.Controllers
                        // from _mmad in mad.DefaultIfEmpty()
                        select new
                        {
-                           he.HesId, he.Hesnom, he.Hesname, he.BId,b.bolmeName, m.MId, m.MaddeName, t.TipId, t.TipName,he.ActivId,a.ActivName
+                           he.HesId, he.Hesnom, he.Hesname, he.BId,b.bolmeName, m.MId,
+                           m.MaddeName, t.TipId, t.TipName,he.ActivId,a.ActivName
                        });
             if (id != null)
             {
@@ -1011,7 +1026,69 @@ namespace APIMuhasibat.Controllers
             return Ok(va);
         }
         #endregion
+        #region anbar
+        // GET: api/hazirla
+        [HttpGet]
+        [Route("getanbar")]
+        public IEnumerable<anbar> getanbar(string id)
+        {
+            if (id != null)
+            {
+                return _anbar.GetAll().Where(g => g.AnbId == id).ToList();
+            }
+            else
+            {
+                return _anbar.GetAll().OrderByDescending(c => c.AnbId).OrderBy(k => k.AnbId);
+            }
 
+
+        }
+        // POST: api/hazirla/_postmov
+        [HttpPost]
+        [Route("_postanbar")]
+        public async Task<IActionResult> _postanbar([FromBody] anbar ti)
+        {
+            if (!ModelState.IsValid) { return BadRequest(ModelState); }
+            try
+            {
+                if (ti.AnbId == "")
+                {
+                    ti.AnbId = Guid.NewGuid().ToString();
+                    ti.Anbarname = ti.Anbarname;                   
+                    await _anbar.InsertAsync(ti);
+                    return Ok();
+                }
+                else
+                {
+                    var _m = _anbar.GetAll().FirstOrDefault(x => x.AnbId == ti.AnbId);
+                    _m.AnbId = ti.AnbId;
+                    _m.Anbarname = ti.Anbarname;
+                    await _anbar.EditAsync(_m);
+                    return Ok();
+                }
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return BadRequest();
+            }
+        }
+        // DELETE: api/hazirla/5
+        [HttpDelete]
+        [Route("_delanbar")]
+        public async Task<IActionResult> _delanbar(string id)
+        {
+            if (!ModelState.IsValid) { return BadRequest(ModelState); }
+            var ti = await _anbar.GetAll().FirstOrDefaultAsync(m => m.AnbId == id);
+            if (ti == null)
+            {
+                return NotFound();
+            }
+            await _anbar.DeleteAsync(ti);
+            // await _context.SaveChangesAsync();
+
+            return Ok(ti);
+        }
+        #endregion
         // GET: api/<AyarlarController>
         [HttpGet]
         public IEnumerable<string> Get()
