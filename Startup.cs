@@ -1,5 +1,6 @@
 using APIMuhasibat.Data;
 using APIMuhasibat.Models;
+using APIMuhasibat.Models.LOGER;
 using APIMuhasibat.Models.ViewModels;
 using APIMuhasibat.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -74,8 +75,8 @@ namespace APIMuhasibat
                     ValidateIssuer = false,
                     ValidateAudience = false,
                     ValidateLifetime = true,
-                    ClockSkew = TimeSpan.Zero
-                    // ClockSkew = TimeSpan.FromMinutes(2)//Zero
+                   // ClockSkew = TimeSpan.Zero
+                    ClockSkew = TimeSpan.FromMinutes(30)//Zero
                 };
             });
             //---------------------global cors policy----------------------
@@ -109,7 +110,7 @@ namespace APIMuhasibat
             var _baseURL = $"{request.Scheme}://{request.Host}"; // http://localhost:5000
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ApplicationDbContext context,
-            RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager)
+            RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager, ILoggerFactory loggerFactory)
         {
 
             // string url = HttpContext.Current.Request.Url.AbsoluteUri;
@@ -147,6 +148,14 @@ namespace APIMuhasibat
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+            loggerFactory.AddFile(Path.Combine(Directory.GetCurrentDirectory(), "logger.txt"));
+            var logger = loggerFactory.CreateLogger("FileLogger");
+
+            app.Run(async (context) =>
+            {
+                logger.LogInformation("Processing request {0}", context.Request.Path);
+                await context.Response.WriteAsync("Hello World!");
             });
             DummyData.Initialize(context, userManager, roleManager).Wait();
         }

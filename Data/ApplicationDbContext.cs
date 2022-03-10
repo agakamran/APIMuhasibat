@@ -1,4 +1,5 @@
 ﻿using APIMuhasibat.Models;
+using APIMuhasibat.Models.LOGER;
 using APIMuhasibat.Models.ViewModels;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;

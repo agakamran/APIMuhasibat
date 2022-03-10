@@ -9,7 +9,7 @@ namespace APIMuhasibat.Models
     public class Productmaster
     {
         string _pmasId = null, _userId = null, _kimden_voen = null, _serial = null, _mushId = null, _vo = null,
-        _activId = null, _valId = null, _qrupId = null, _shId = null, _anbId = null;// _dhesId = null, _khesId = null,
+        _activId = null, _valId = null, _qId = null, _shId = null, _anbId = null;// _dhesId = null, _khesId = null,
         decimal _kurs = 1, _kimden_sum =0;bool _pay = false;
         Nullable<DateTime> _emeltarixi = DateTime.Now;
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -116,10 +116,10 @@ namespace APIMuhasibat.Models
             set { if (value > 1) { _kurs = value; } }
         }
         [MaxLength(36)]
-        public string QrupId  //Qrupid
+        public string QId 
         {
-            get { return _qrupId; }
-            set { if (value != null) { _qrupId = value; } }
+            get { return _qId; }
+            set { if (value != null) { _qId = value; } }
         } //qruplar alish satish
         [MaxLength(36)]
         public string ShId

@@ -1,5 +1,6 @@
 ﻿using APIMuhasibat.Data;
 using APIMuhasibat.Models;
+using APIMuhasibat.Models.LOGER;
 using APIMuhasibat.Models.ViewModels;
 using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Authorization;
@@ -16,6 +17,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using APIMuhasibat.Services;
+using System.IO;
 //using System.Web.Http;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -36,6 +38,7 @@ namespace APIMuhasibat.Controllers
         private readonly IEmailSender _emailSender;
         private readonly IRepository<logger> _log = null;
         private readonly ILogger _logger;
+        private readonly ILoggerFactory _loggerFactory = null;
         //private readonly IAntiforgery _antiforgery;
         //  private readonly IRepository<payment> _pa = null; //imkani
         ///  private readonly IRepository<Price> _pr = null;  //qiymet
@@ -55,8 +58,9 @@ namespace APIMuhasibat.Controllers
             IUserValidator<ApplicationUser> userValid,
             IPasswordValidator<ApplicationUser> passValid,
             IPasswordHasher<ApplicationUser> passwordHash,
-            IRepository<logger> log
-             //IAntiforgery antiforgery, IRepository<payment> pa,  IRepository<Customer> cu, IRepository<Price> pr,  IRepository<invoice> inv,     IHostingEnvironment hostingEnvironment,
+            IRepository<logger> log,
+            ILoggerFactory loggerFactory
+            //IAntiforgery antiforgery, IRepository<payment> pa,  IRepository<Customer> cu, IRepository<Price> pr,  IRepository<invoice> inv,     IHostingEnvironment hostingEnvironment,
             )
         {
             db = _db;
@@ -71,7 +75,8 @@ namespace APIMuhasibat.Controllers
             passwordValidator = passValid;
             passwordHasher = passwordHash;
             _log = log;
-            // _pa = pa; _cu = cu;  _pr = pr;  _inv = inv;    _hostingEnvironment = hostingEnvironment;
+            _loggerFactory = loggerFactory;
+            //_pa = pa; _cu = cu;  _pr = pr;  _inv = inv;    _hostingEnvironment = hostingEnvironment;
             //_antiforgery = antiforgery;
         }
         //[HttpGet]
@@ -133,6 +138,9 @@ namespace APIMuhasibat.Controllers
                             token = tokenString,
                             mesage = ""
                         };
+                        //https://metanit.com/sharp/aspnet5/2.27.php
+                      //  _loggerFactory.AddFile(Path.Combine(Directory.GetCurrentDirectory(), "logger.txt"));
+                      //  var logger = _loggerFactory.CreateLogger("FileLogger");
                         return response = Ok( use //token = tokenString
                         );
                     }
@@ -191,7 +199,7 @@ namespace APIMuhasibat.Controllers
                 _config["Jwt:Issuer"],
                 claims,
                 //IsExpired: DateTime.Now,
-                expires: DateTime.Now.AddMinutes(20),
+                expires: DateTime.Now.AddMinutes(30),
                 signingCredentials: creds);
             return new JwtSecurityTokenHandler().WriteToken(token);
         }

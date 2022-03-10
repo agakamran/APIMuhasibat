@@ -1,5 +1,6 @@
 ﻿using APIMuhasibat.Models;
 using APIMuhasibat.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -16,6 +17,7 @@ namespace APIMuhasibat.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Administrator")]
     public class OperationController : BaseController
     {
         #region
@@ -210,12 +212,12 @@ namespace APIMuhasibat.Controllers
                             vval = new Valyuta() { ValId = Guid.NewGuid().ToString(), Valname = "AZN", Valnominal = 1, Tarix = DateTime.Now };
                             await _val.InsertAsync(vval);
                         }
-                        var qru = _qr.GetAll().FirstOrDefault(k => k.Qrupname == QId.ToString());
+                        var qru = _qr.GetAll().FirstOrDefault(k => k.QId == QId.ToString());
                         if (qru == null) {
                             qru = new Qrup() { QId = Guid.NewGuid().ToString(), Qrupname = QId.ToString() };
                             await _qr.InsertAsync(qru);
                         }
-                        var anb = _anbar.GetAll().FirstOrDefault(k => k.Anbarname == AnbId.ToString());
+                        var anb = _anbar.GetAll().FirstOrDefault(k => k.AnbId == AnbId.ToString());
                         if (anb == null)
                         {
                             anb = new anbar() { AnbId = Guid.NewGuid().ToString(), Anbarname = AnbId.ToString() };
@@ -232,7 +234,7 @@ namespace APIMuhasibat.Controllers
                                 Emeltarixi = Convert.ToDateTime(emeltarixi.ToString()),
                                 Serial = Serial.ToString(),
                                 Vo = qaime.vo,
-                                QrupId = qru.QId,
+                                QId = qru.QId,
                                 //ActivId = aId.ToString(),
                                 //DhesId = dhesId.ToString(),
                                 //KhesId = khesId.ToString(),
@@ -321,7 +323,7 @@ namespace APIMuhasibat.Controllers
         {
             
              var res = (from pm in _promas.GetAll().Where(k=>k.UserId== _GeteId()) 
-                        join q in _qr.GetAll() on pm.QrupId equals q.QId
+                        join q in _qr.GetAll() on pm.QId equals q.QId
                         join m in _mush.GetAll() on pm.MushId equals m.MushId                        
                         select new
                         {
@@ -351,21 +353,29 @@ namespace APIMuhasibat.Controllers
         [Route("getqayimedetal")]
         public IEnumerable getqayimedetal(string PmasId)
         {
-           /*
-             select pm.UserId,pm.Kimden_voen,pm.Serial,pd.Maladi,op.Miqdar,op.Alishqiy, op.Alishqiy * 0.18 ,pd.Edv,Ve.Vergikodununadi,Va.Vahidadi,pm.Emeltarixi from Productmasters pm
-             join Productdetals pd on pm.PmasId=pd.PmasId
-             join operations op on pd.PdetId=op.PdetId
-             join Vergis Ve on pd.VergiId=Ve.VergiId
-             left join Vahids Va on pd.VId=Va.VId
-            */
+            /*
+              select pm.PmasId, pm.UserId,pm.Kimden_voen,pm.Serial,pd.Maladi,op.Miqdar,op.Alishqiy, op.Alishqiy * 0.18 ,pd.Edv,Ve.Vergikodununadi,Va.Vahidadi,pm.Emeltarixi,
+              an.Anbarname ,qr.Qrupname      ,* 
+              from Productmasters pm
+              join Productdetals pd on pm.PmasId=pd.PmasId --where pm.PmasId='1c0191f1-6453-4bdf-bf0d-f8b514f47429'
+              join anbars an on pm.AnbId=an.AnbId 
+              join Qrups qr on pm.QrupId=qr.QId 
+              join operations op on pd.PdetId=op.PdetId
+              join Vergis Ve on pd.VergiId=Ve.VergiId
+              left join Vahids Va on pd.VId=Va.VId
+
+              where pm.PmasId='1c0191f1-6453-4bdf-bf0d-f8b514f47429'
+             */
             var res = (from pm in _promas.GetAll().Where(k => k.PmasId == PmasId)
                        join pd in _prodet.GetAll() on pm.PmasId equals pd.PmasId
+                       join an in _anbar.GetAll() on pm.AnbId equals an.AnbId
+                       join q in _qr.GetAll()     on pm.QId equals q.QId                       
                        join op in _oper.GetAll() on pd.PdetId equals op.PdetId
                        join Ve in _ver.GetAll() on pd.VergiId equals Ve.VergiId
-                       join sh in _shi.GetAll() on pm.ShId equals sh.ShId
-                       join q in _qr.GetAll() on pm.QrupId equals q.QId
+                       join sh in _shi.GetAll() on pm.ShId equals sh.ShId                       
                        join m in _mush.GetAll() on pm.MushId equals m.MushId
                        //  join Va in _va.GetAll() on pd.VId equals Va.VId
+
                        select new
                        {
                            q.Qrupname,
@@ -386,6 +396,57 @@ namespace APIMuhasibat.Controllers
                            //pd.Edv,
                            Ve.Vergikodununadi,
                           // Va.Vahidadi,
+                           pm.Emeltarixi
+
+                       }).ToList();
+
+            int d = res.Count();
+            return res;
+        }
+        [HttpGet]
+        [Route("proddetal")]
+        public IEnumerable proddetal()
+        {
+            /*
+              select pm.PmasId, pm.UserId,pm.Kimden_voen,pm.Serial,pd.Maladi,op.Miqdar,op.Alishqiy, op.Alishqiy * 0.18 ,pd.Edv,Ve.Vergikodununadi,Va.Vahidadi,pm.Emeltarixi,
+               an.Anbarname ,qr.Qrupname from Productmasters pm
+               join Productdetals pd on pm.PmasId=pd.PmasId 
+               join anbars an on pm.AnbId=an.AnbId 
+               join Qrups qr on pm.QId=qr.QId 
+               join operations op on pd.PdetId=op.PdetId
+               join Vergis Ve on pd.VergiId=Ve.VergiId
+               left join Vahids Va on pd.VId=Va.VId
+             */
+            var res = (from pm in _promas.GetAll().Where(k => k.UserId == _GeteId())
+                       join pd in _prodet.GetAll() on pm.PmasId equals pd.PmasId
+                       join an in _anbar.GetAll() on pm.AnbId equals an.AnbId
+                       join q in _qr.GetAll() on pm.QId equals q.QId
+                       join op in _oper.GetAll() on pd.PdetId equals op.PdetId
+                       join Ve in _ver.GetAll() on pd.VergiId equals Ve.VergiId
+                       join sh in _shi.GetAll() on pm.ShId equals sh.ShId
+                       join m in _mush.GetAll() on pm.MushId equals m.MushId
+                       //  join Va in _va.GetAll() on pd.VId equals Va.VId
+
+                       select new
+                       {
+                           q.Qrupname,
+                           pm.Kimden_voen,
+                           m.Firma,
+                           sh.Shirvoen,
+                           sh.Shiricrachi,
+                           m.Voen,
+                           pm.UserId,
+                           pm.Serial,
+                           pd.Maladi,
+                           op.Miqdar,
+                           op.Alishqiy,
+                           cemi = op.Miqdar * op.Alishqiy,
+                           edvcəlbedilən = op.Miqdar * op.Alishqiy,
+                           Edv = (op.Miqdar * op.Alishqiy * 18 / 100),
+                           yekunmeb = op.Miqdar * op.Alishqiy + (op.Miqdar * op.Alishqiy * 18 / 100),
+                           //pd.Edv,
+                           Ve.Vergikodununadi,
+                           // Va.Vahidadi,
                            pm.Emeltarixi
 
                        }).ToList();

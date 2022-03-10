@@ -1,4 +1,7 @@
-﻿--------git olmasa----------------
+﻿1--enable-migrations
+2--Add-Migration initial
+3--Update-Database
+--------git olmasa----------------
 git init
 git add -A
 git commit -m "first commit"
