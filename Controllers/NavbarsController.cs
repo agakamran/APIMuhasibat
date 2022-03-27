@@ -11,6 +11,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using APIMuhasibat.Models.ViewModels;
+using System.Data;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Data.SqlClient;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -27,9 +30,11 @@ namespace APIMuhasibat.Controllers
         private readonly IRepository<Role> _rol = null;
         private readonly IRepository<UserRole> _userol = null;
 
+        private readonly IConfiguration _con;
         public NavbarsController(ApplicationDbContext context, IRepository<Navbar> nav,
             IRepository<Role> rol, IRepository<UserRole> userol,
-            IRepository<NavbarRole> navrol, RoleManager<IdentityRole> roleMgr)
+            IRepository<NavbarRole> navrol,
+            RoleManager<IdentityRole> roleMgr, IConfiguration con)
         {
             _context = context;
             _nav = nav;
@@ -37,6 +42,30 @@ namespace APIMuhasibat.Controllers
             _roleManager = roleMgr;
             _rol = rol;
             _userol = userol;
+            _con = con;
+        }
+        [HttpGet]
+        [Route("_testnav")]
+        //https://www.youtube.com/watch?v=gpfP60KjmZU
+        public JsonResult _testnav()
+        {
+            //nid,pid,ntitle,npath,nicon,nlan,ncsay,nrol,ink,nisparent
+            string query = @"select * from Navbars";
+            DataTable dt = new DataTable();
+            string sqlDataSours = _con.GetConnectionString("DefaultConnection");
+            SqlDataReader reader;
+            using (SqlConnection con =new SqlConnection(sqlDataSours))
+            {
+                con.Open();
+                using(SqlCommand command=new SqlCommand(query, con))
+                {
+                    reader = command.ExecuteReader();
+                    dt.Load(reader);
+                    reader.Close();
+                    con.Close();
+                }
+            }
+            return new JsonResult(dt);
         }
         // GET: api/Navbars
         #region  TOKEN decomp

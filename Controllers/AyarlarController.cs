@@ -151,7 +151,11 @@ namespace APIMuhasibat.Controllers
             // int vv = _mov.GetAll().OrderByDescending(c => c.mnom).Count()if (id != null)
             //  select QId, Qrupname, dh.Hesnom, kh.Hesnom from Qrups q join Hesabs dh on q.DhesId = dh.HesId
             //            join Hesabs kh on q.KhesId = kh.HesId
-            var res = (from q in _qr.GetAll().ToList()
+           // select QId, Qrupname, dh.HesId dhid, dh.Hesnom dhnom, dh.Hesname dhname, kh.HesId khid, kh.Hesnom khnom, kh.Hesname khname from Qrups q
+           //join Hesabs dh on q.DhesId = dh.HesId
+           // join Hesabs kh on q.KhesId = kh.HesId
+       
+                   var res = (from q in _qr.GetAll().ToList()
                         join dh in _he.GetAll().ToList() on q.DhesId equals dh.HesId
                         join kh in _he.GetAll().ToList() on q.KhesId equals kh.HesId
                         select new

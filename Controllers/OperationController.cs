@@ -342,7 +342,7 @@ namespace APIMuhasibat.Controllers
                             pm.Vo
                            
                         }).ToList();
-            if (tar!=null && tar != "NaN") {
+            if (tar!=null && tar != "NaN" && tar !="undefined") {
                res= res.Where(k => k.Emeltarixi >=Convert.ToDateTime(tar) && k.Emeltarixi <= DateTime.Now).ToList();
             }
              int d= res.Count();

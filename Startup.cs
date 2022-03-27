@@ -19,6 +19,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -93,6 +94,16 @@ namespace APIMuhasibat
                                       .AllowAnyMethod();
                                   });
             });
+
+           
+            //json serialize
+            services.AddControllersWithViews()
+                .AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft
+                .Json.ReferenceLoopHandling.Ignore)
+                .AddNewtonsoftJson(o => o.SerializerSettings.ContractResolver =
+                new DefaultContractResolver());
+
             //----------------Service-----------------
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddTransient<IEmailSender, EmailSender>();

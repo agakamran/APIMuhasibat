@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Zf4rDvfyCeFTPSstmxvpHHLXKDCdFun7VIHhGUgHDy7J9ILajVGoC1pH6JCgwjzXzvP/uhqs3RJp/i96Ev1vTw==",
+  "dgSpecHash": "xr0YBw4YCSayF91AOVwPy2KH9AqMOjMJHLDy/tEYpKHr2/I/IEmNojBv9X355/G5KojUoGrbn0QWW8MfsgFLRw==",
   "success": true,
   "projectFilePath": "D:\\Programmer\\Angular\\CommercialSolution\\APIMuhasibat\\APIMuhasibat.csproj",
   "expectedPackageFiles": [
@@ -112,7 +112,8 @@
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512"
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512",
+    "C:\\Users\\adm\\.nuget\\packages\\microsoft.netcore.app.ref\\5.0.0\\microsoft.netcore.app.ref.5.0.0.nupkg.sha512"
   ],
   "logs": []
 }

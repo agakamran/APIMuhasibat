@@ -14,3 +14,134 @@ Hosting environment: Development
 Content root path: D:\Programmer\Angular\CommercialSolution\APIMuhasibat
 User logged in.
 User logged in.
+No type was specified for the decimal property 'Shirpercent' on entity type 'Shirket'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
+No type was specified for the decimal property 'Valnominal' on entity type 'Valyuta'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
+No type was specified for the decimal property 'percent' on entity type 'ApplicationUser'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: D:\Programmer\Angular\CommercialSolution\APIMuhasibat
+User logged in.
+No type was specified for the decimal property 'Shirpercent' on entity type 'Shirket'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
+No type was specified for the decimal property 'Valnominal' on entity type 'Valyuta'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
+No type was specified for the decimal property 'percent' on entity type 'ApplicationUser'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: D:\Programmer\Angular\CommercialSolution\APIMuhasibat
+No type was specified for the decimal property 'Shirpercent' on entity type 'Shirket'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
+No type was specified for the decimal property 'Valnominal' on entity type 'Valyuta'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
+No type was specified for the decimal property 'percent' on entity type 'ApplicationUser'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: D:\Programmer\Angular\CommercialSolution\APIMuhasibat
+No type was specified for the decimal property 'Shirpercent' on entity type 'Shirket'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
+No type was specified for the decimal property 'Valnominal' on entity type 'Valyuta'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
+No type was specified for the decimal property 'percent' on entity type 'ApplicationUser'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: D:\Programmer\Angular\CommercialSolution\APIMuhasibat
+No type was specified for the decimal property 'Shirpercent' on entity type 'Shirket'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
+No type was specified for the decimal property 'Valnominal' on entity type 'Valyuta'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
+No type was specified for the decimal property 'percent' on entity type 'ApplicationUser'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: D:\Programmer\Angular\CommercialSolution\APIMuhasibat
+User logged in.
+No type was specified for the decimal property 'Shirpercent' on entity type 'Shirket'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
+No type was specified for the decimal property 'Valnominal' on entity type 'Valyuta'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
+No type was specified for the decimal property 'percent' on entity type 'ApplicationUser'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: D:\Programmer\Angular\CommercialSolution\APIMuhasibat
+User logged in.
+User logged in.
+User logged out.
+User logged in.
+User logged out.
+User logged in.
+No type was specified for the decimal property 'Shirpercent' on entity type 'Shirket'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
+No type was specified for the decimal property 'Valnominal' on entity type 'Valyuta'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
+No type was specified for the decimal property 'percent' on entity type 'ApplicationUser'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: D:\Programmer\Angular\CommercialSolution\APIMuhasibat
+No type was specified for the decimal property 'Shirpercent' on entity type 'Shirket'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
+No type was specified for the decimal property 'Valnominal' on entity type 'Valyuta'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
+No type was specified for the decimal property 'percent' on entity type 'ApplicationUser'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: D:\Programmer\Angular\CommercialSolution\APIMuhasibat
+User logged in.
+User logged in.
+User logged out.
+User logged in.
+User logged in.
+Invalid password for user.
+User failed to provide the correct password.
+Invalid password for user.
+User failed to provide the correct password.
+User logged in.
+User logged in.
+User logged in.
+User logged in.
+User logged in.
+Processing request /api/Settings/itemdetail
+Processing request /api/Settings/gender
+Processing request /api/Settings/categoriy
+Processing request /api/Settings/itemmarka
+Processing request /api/Settings/beden
+Processing request /api/Settings/qelip
+Processing request /api/Settings/firma
+Processing request /api/Settings/itemmateral
+Processing request /api/Settings/itemcolor
+Processing request /api/Settings/qoltipi
+Processing request /api/Settings/yaka
+Processing request /api/Settings/itemstil
+Processing request /api/Settings/kullanimAlani
+Processing request /api/Settings/kumashtipi
+Processing request /api/Settings/itemdesen
+Processing request /api/Settings/firma
+No type was specified for the decimal property 'Shirpercent' on entity type 'Shirket'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
+No type was specified for the decimal property 'Valnominal' on entity type 'Valyuta'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
+No type was specified for the decimal property 'percent' on entity type 'ApplicationUser'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: D:\Programmer\Angular\CommercialSolution\APIMuhasibat
+User logged in.
+User logged in.
+User logged in.
+No type was specified for the decimal property 'Shirpercent' on entity type 'Shirket'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
+No type was specified for the decimal property 'Valnominal' on entity type 'Valyuta'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
+No type was specified for the decimal property 'percent' on entity type 'ApplicationUser'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: D:\Programmer\Angular\CommercialSolution\APIMuhasibat
+An unhandled exception has occurred while executing the request.
+User logged in.
+User logged in.
+No type was specified for the decimal property 'Shirpercent' on entity type 'Shirket'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
+No type was specified for the decimal property 'Valnominal' on entity type 'Valyuta'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
+No type was specified for the decimal property 'percent' on entity type 'ApplicationUser'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: D:\Programmer\Angular\CommercialSolution\APIMuhasibat
+An unhandled exception has occurred while executing the request.
+An unhandled exception has occurred while executing the request.
+User logged in.
+User logged in.
+User logged in.
+User logged in.
+User logged in.
+User logged in.
+No type was specified for the decimal property 'Shirpercent' on entity type 'Shirket'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
+No type was specified for the decimal property 'Valnominal' on entity type 'Valyuta'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
+No type was specified for the decimal property 'percent' on entity type 'ApplicationUser'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: D:\Programmer\Angular\CommercialSolution\APIMuhasibat
+No type was specified for the decimal property 'Shirpercent' on entity type 'Shirket'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
+No type was specified for the decimal property 'Valnominal' on entity type 'Valyuta'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
+No type was specified for the decimal property 'percent' on entity type 'ApplicationUser'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: D:\Programmer\Angular\CommercialSolution\APIMuhasibat
+User logged in.

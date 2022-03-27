@@ -41,7 +41,7 @@ namespace APIMuhasibat.Controllers
         public IActionResult _getUser(string id)
         {
             RoleEditModel Mod = new RoleEditModel();
-            if (id != null)
+            if (id != null&& id!= "undefined")
             {
                 IdentityRole role = _roleManager.FindByIdAsync(id).Result;
                 var members = new List<ApplicationUser>();
