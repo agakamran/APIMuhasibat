@@ -225,7 +225,7 @@ namespace APIMuhasibat.Controllers
                         }
                         if (_vvo == null)
                         {
-                            var pmas = new Productmaster()
+                            var pmas = new Productmaster()/*Mastere yazaq*/
                             {
                                 PmasId = Guid.NewGuid().ToString(),
                                 UserId = _GeteId(),
@@ -246,12 +246,13 @@ namespace APIMuhasibat.Controllers
                                 AnbId=AnbId.ToString(),
                                 Pay = false
                             };
-
                             await _promas.InsertAsync(pmas);
+
                             foreach (var xx in qaime.qaimeTables)
                             {
                                 var vver = _ver.GetAll().FirstOrDefault(k => k.Vergikodu == xx.c1);
-                                var prodet = _prodet.GetAll().FirstOrDefault(k => k.VergiId == vver.VergiId);
+                                var prodet = _prodet.GetAll().FirstOrDefault(k => k.VergiId == vver.VergiId && 
+                                k.Maladi == xx.c2.ToString());
                                 if (prodet == null)
                                 {
                                     var eedv = "0";
@@ -321,7 +322,8 @@ namespace APIMuhasibat.Controllers
         [Route("getqayimeler")]
         public IEnumerable getqayimeler( string tar)
         {
-            
+            //var t = _promas.GetAll();
+            //if (_promas.GetAll()== null){ return null;  }            
              var res = (from pm in _promas.GetAll().Where(k=>k.UserId== _GeteId()) 
                         join q in _qr.GetAll() on pm.QId equals q.QId
                         join m in _mush.GetAll() on pm.MushId equals m.MushId                        
