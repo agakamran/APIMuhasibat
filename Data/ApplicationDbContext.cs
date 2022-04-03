@@ -6,13 +6,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace APIMuhasibat.Data
 {
-   public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+   public class ApplicationDbContext : IdentityDbContext<ApplicationUser,ApplicationRole,string>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
-
+        //https://docs.microsoft.com/en-us/aspnet/core/security/authentication/customize-identity-model?view=aspnetcore-6.0
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -20,6 +20,40 @@ namespace APIMuhasibat.Data
             // Customize the ASP.NET Identity model and override the defaults if needed.
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
+            //modelBuilder.Entity<IdentityUser>(b =>
+            //{
+            //    b.ToTable("kamUsers");
+            //});
+
+            //modelBuilder.Entity<IdentityUserClaim<string>>(b =>
+            //{
+            //    b.ToTable("kamUserClaims");
+            //});
+
+            //modelBuilder.Entity<IdentityUserLogin<string>>(b =>
+            //{
+            //    b.ToTable("kamUserLogins");
+            //});
+
+            //modelBuilder.Entity<IdentityUserToken<string>>(b =>
+            //{
+            //    b.ToTable("kamUserTokens");
+            //});
+
+            //modelBuilder.Entity<IdentityRole>(b =>
+            //{
+            //    b.ToTable("kamRoles");
+            //});
+
+            //modelBuilder.Entity<IdentityRoleClaim<string>>(b =>
+            //{
+            //    b.ToTable("kamRoleClaims");
+            //});
+
+            //modelBuilder.Entity<IdentityUserRole<string>>(b =>
+            //{
+            //    b.ToTable("kamUserRoles");
+            //});
         }      
         public DbSet<Navbar> navbars { get; set; }
         public DbSet<NavbarRole> navroles { get; set; }

@@ -26,7 +26,7 @@ namespace APIMuhasibat.Controllers
         private readonly ApplicationDbContext _context;
         private readonly IRepository<Navbar> _nav = null;
         private readonly IRepository<NavbarRole> _navrol = null;
-        private RoleManager<IdentityRole> _roleManager;
+        private RoleManager<ApplicationRole> _roleManager;
         private readonly IRepository<Role> _rol = null;
         private readonly IRepository<UserRole> _userol = null;
 
@@ -34,7 +34,7 @@ namespace APIMuhasibat.Controllers
         public NavbarsController(ApplicationDbContext context, IRepository<Navbar> nav,
             IRepository<Role> rol, IRepository<UserRole> userol,
             IRepository<NavbarRole> navrol,
-            RoleManager<IdentityRole> roleMgr, IConfiguration con)
+            RoleManager<ApplicationRole> roleMgr, IConfiguration con)
         {
             _context = context;
             _nav = nav;

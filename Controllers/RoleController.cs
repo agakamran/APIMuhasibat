@@ -17,12 +17,13 @@ namespace APIMuhasibat.Controllers
     [Authorize(Roles = "Administrator")]
     public class RoleController : ControllerBase
     {
-        private RoleManager<IdentityRole> _roleManager;
-        private UserManager<ApplicationUser> userManager;
-        public RoleController(RoleManager<IdentityRole> roleMgr, UserManager<ApplicationUser> userMrg)
+        private RoleManager<ApplicationRole> _roleManager;
+        private readonly UserManager<ApplicationUser> _userManager;
+       
+        public RoleController(RoleManager<ApplicationRole> roleMgr, UserManager<ApplicationUser> userMrg)
         {
             _roleManager = roleMgr;
-            userManager = userMrg;
+            _userManager = userMrg;
         }
         [HttpGet]
         [Route("_getRoles")]
@@ -46,9 +47,9 @@ namespace APIMuhasibat.Controllers
                 IdentityRole role = _roleManager.FindByIdAsync(id).Result;
                 var members = new List<ApplicationUser>();
                 var nonMembers = new List<ApplicationUser>();
-                foreach (ApplicationUser user in userManager.Users)
+                foreach (ApplicationUser user in _userManager.Users)
                 {
-                    var list = userManager.IsInRoleAsync(user, role.Name).Result ? members : nonMembers;
+                    var list = _userManager.IsInRoleAsync(user, role.Name).Result ? members : nonMembers;
                     list.Add(user);
                 }
                 Mod.Role = role; Mod.Members = members; Mod.NonMembers = nonMembers;
@@ -64,10 +65,10 @@ namespace APIMuhasibat.Controllers
             {
                 foreach (string userId in model.IdsToAdd ?? new string[] { })
                 {
-                    ApplicationUser user = userManager.FindByIdAsync(userId).Result;
+                    ApplicationUser user = _userManager.FindByIdAsync(userId).Result;
                     if (user != null)
                     {
-                        result = userManager.AddToRoleAsync(user, model.RoleName).Result;
+                        result = _userManager.AddToRoleAsync(user, model.RoleName).Result;
                         if (!result.Succeeded)
                         {
                             AddErrors(result);
@@ -76,10 +77,10 @@ namespace APIMuhasibat.Controllers
                 }
                 foreach (string userId in model.IdsToDelete ?? new string[] { })
                 {
-                    ApplicationUser user = userManager.FindByIdAsync(userId).Result;
+                    ApplicationUser user = _userManager.FindByIdAsync(userId).Result;
                     if (user != null)
                     {
-                        result = userManager.RemoveFromRoleAsync(user, model.RoleName).Result;
+                        result = _userManager.RemoveFromRoleAsync(user, model.RoleName).Result;
                         if (!result.Succeeded)
                         {
                             AddErrors(result);
@@ -108,7 +109,7 @@ namespace APIMuhasibat.Controllers
             {
                 if (rol.id == "")
                 {
-                    IdentityResult result = await _roleManager.CreateAsync(new IdentityRole(rol.name));
+                    IdentityResult result = await _roleManager.CreateAsync(new ApplicationRole(rol.name));
                     if (result.Succeeded)
                     {
                         return Ok();
@@ -142,10 +143,10 @@ namespace APIMuhasibat.Controllers
         [Route("_DeleteRole")]
         public async Task<IActionResult> _DeleteRole([FromBody] Role rol)
         {
-            IdentityRole role = await _roleManager.FindByIdAsync(rol.id);
+            ApplicationRole role = await _roleManager.FindByIdAsync(rol.id);
             if (role != null)
             {
-                IdentityResult result = await _roleManager.DeleteAsync(role);
+                var result = await _roleManager.DeleteAsync(role);
                 if (result.Succeeded)
                 {
                     return Ok(_roleManager.Roles);
@@ -163,7 +164,48 @@ namespace APIMuhasibat.Controllers
             }
             // return View("Index", _roleManager.Roles);
         }
-
+        [HttpGet]
+        [Route("addAllrole")]
+        public async Task<IActionResult> addAllrole()
+        {
+            bool _b;
+            string _user = "agakamran@yandex.ru", password = "123456";
+            string[] _role = { "Administrator", "Operator", "User" };
+            foreach (var rol in _role)
+            {
+                if (rol == "Administrator") { _b = true; }
+                else { _b = false; }
+                if (await _roleManager.FindByNameAsync(rol) == null)
+                {
+                    await _roleManager.CreateAsync(new ApplicationRole
+                    {
+                        reade = _b,
+                        create = _b,
+                        delete = _b,
+                        update = _b,
+                        Id = Guid.NewGuid().ToString(),
+                        Name = rol,
+                        NormalizedName = rol.ToUpper()
+                    });
+                }
+            }
+            if (await _userManager.FindByEmailAsync(_user) == null)
+            {
+                var user = new ApplicationUser { UserName = _user, Email = _user };
+                var result = await _userManager.CreateAsync(user, password);
+                if (result.Succeeded)
+                {
+                    foreach (var rol in _role)
+                    {
+                        await _userManager.AddToRoleAsync(user, rol);
+                    }
+                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    var _result = await _userManager.ConfirmEmailAsync(user, code);
+                }
+            }
+            var roles = _roleManager.Roles.ToList();
+            return Ok(roles);
+        }
 
         #region Helpers       
         private void AddErrors(IdentityResult result)

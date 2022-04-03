@@ -18,6 +18,7 @@ using System.Text;
 using System.Threading.Tasks;
 using APIMuhasibat.Services;
 using System.IO;
+using System.Collections;
 //using System.Web.Http;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -46,14 +47,14 @@ namespace APIMuhasibat.Controllers
         //  private readonly IRepository<Customer> _cu = null;
         //  private readonly IHostingEnvironment _hostingEnvironment;
         //-----------------------
-        private RoleManager<IdentityRole> _roleManager;
+        private RoleManager<ApplicationRole> _roleManager;
         private IConfiguration _config;
         // static int _issueCount = 0;
         //-----------------------
 
 
         public AccountController(ApplicationDbContext _db, UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager, RoleManager<IdentityRole> roleMgr, IRepository<Shirket> firma,
+            SignInManager<ApplicationUser> signInManager, RoleManager<ApplicationRole> roleMgr, IRepository<Shirket> firma,
             IConfiguration config, IEmailSender emailSender, ILogger<AccountController> logger,
             IUserValidator<ApplicationUser> userValid,
             IPasswordValidator<ApplicationUser> passValid,
@@ -97,6 +98,12 @@ namespace APIMuhasibat.Controllers
         {
             return new string[] { "kamran", "Salam555" };
         }
+        [HttpGet]
+        [Route("GetUsersInfo")]
+        public IEnumerable GetUsersInfo()
+        {
+            return _userManager.Users.ToList();
+        }
         [TempData]
         public string StatusMessage { get; set; }
         [HttpPost]
@@ -112,7 +119,7 @@ namespace APIMuhasibat.Controllers
                 
              
                 var user1 = await _userManager.FindByNameAsync(model.Email);
-                if (user1 == null || !(await _userManager.IsEmailConfirmedAsync(user1)))
+                if (user1 == null || !await _userManager.IsEmailConfirmedAsync(user1))
                 {
                     // Don't reveal that the user does not exist or is not confirmed
                     return Ok(new { mesage = "400" });

@@ -33,6 +33,7 @@ namespace APIMuhasibat
 {
     class Startup
     {
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -47,7 +48,7 @@ namespace APIMuhasibat
              Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDbContext<ApplicationDbContext>(ServiceLifetime.Transient);
-            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+            services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
             {
                 options.Password.RequireDigit = false;
                 options.Password.RequiredLength = 6;
@@ -121,7 +122,7 @@ namespace APIMuhasibat
             var _baseURL = $"{request.Scheme}://{request.Host}"; // http://localhost:5000
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ApplicationDbContext context,
-            RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager, ILoggerFactory loggerFactory)
+            RoleManager<ApplicationRole> roleManager, UserManager<ApplicationUser> userManager, ILoggerFactory loggerFactory)
         {
 
             // string url = HttpContext.Current.Request.Url.AbsoluteUri;

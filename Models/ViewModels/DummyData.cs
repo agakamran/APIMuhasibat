@@ -25,57 +25,44 @@ namespace APIMuhasibat.Models.ViewModels
         }
 
         public static async Task Initialize(ApplicationDbContext context, UserManager<ApplicationUser> _userManager,
-            RoleManager<IdentityRole> _roleManager)
+            RoleManager<ApplicationRole> _roleManager)
         {
+            bool _b;
             context.Database.EnsureCreated();
-            string _user = "agakamran@yandex.ru";
+            string _user = "agakamran@yandex.ru", password = "123456";
             string[] _role = { "Administrator", "Operator", "User" };
-
-
-            string password = "123456";
-            if (await _roleManager.FindByNameAsync(_role[0]) == null)
+            foreach (var rol in _role)
             {
-                await _roleManager.CreateAsync(new IdentityRole(_role[0]));
+                if (rol == "Administrator") { _b = true; }
+                else { _b = false; }
+                if (await _roleManager.FindByNameAsync(rol) == null)
+                {
+                    await _roleManager.CreateAsync(new ApplicationRole
+                    {
+                        reade = _b,
+                        create = _b,
+                        delete = _b,
+                        update = _b,
+                        Id = Guid.NewGuid().ToString(),
+                        Name = rol,
+                        NormalizedName = rol.ToUpper()
+                    });
+                }
             }
-            //if (await _roleManager.FindByNameAsync(_role[1]) == null)
-            //{
-            //    await _roleManager.CreateAsync(new IdentityRole(_role[1]));
-            //}
-            //if (await _roleManager.FindByNameAsync(_role[2]) == null)
-            //{
-            //    await _roleManager.CreateAsync(new IdentityRole(_role[2]));
-            //}
             if (await _userManager.FindByEmailAsync(_user) == null)
             {
-                var user = new ApplicationUser
-                {
-                    UserName = _user,
-                    Email = _user
-                };
-                // var result = await _userManager.CreateAsync(user, model.Password);
+                var user = new ApplicationUser { UserName = _user, Email = _user };
                 var result = await _userManager.CreateAsync(user, password);
                 if (result.Succeeded)
                 {
-                    await _userManager.AddToRoleAsync(user, _role[0]);
-                   // await _userManager.AddToRoleAsync(user, _role[1]);
-                   // await _userManager.AddToRoleAsync(user, _role[2]);
+                    foreach (var rol in _role)
+                    {
+                        await _userManager.AddToRoleAsync(user, rol);
+                    }
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     var _result = await _userManager.ConfirmEmailAsync(user, code);
                 }
-                /*  if (_firma.GetAll().FirstOrDefault(f => f.firma_name == user.UserName && f.firma_email == user.Email) == null)
-                  {
-                      var pp = new _firma();
-                      pp.firma_Id = Guid.NewGuid().ToString();
-                      pp.firma_name = user.UserName;
-                      pp.firma_telefon = user.PhoneNumber;
-                      pp.firma_unvan = "";
-                      pp.firma_email = user.Email;
-                      pp.userId = user.Id;
-                      await _firma.InsertAsync(pp);
-
-                  }*/
             }
-
         }
 
         public string Hash(string password)

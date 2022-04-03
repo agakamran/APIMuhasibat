@@ -71,7 +71,17 @@ namespace APIMuhasibat.Models.ViewModels
         //public string telefon { get; set; }
         //public string MachineName { get; set; }
         //public string komuser { get; set; }
-    }   
+    }
+    public class ApplicationRole : IdentityRole
+    {
+        public ApplicationRole() : base() { }
+        public ApplicationRole(string roleName) : base(roleName)
+        { }
+        public bool create { get; set; }
+        public bool reade { get; set; }
+        public bool update { get; set; }
+        public bool delete { get; set; }
+    }
     [Table("Navbars")]
    public class Navbar
     {
@@ -333,4 +343,36 @@ namespace APIMuhasibat.Models.ViewModels
            //}
            return NavbarList;
        }*/
+
+
+
+    /*public class ApplicationUser : IdentityUser
+   {
+       public string CustomTag { get; set; }
+       public string CustomTagBis { get; set; }
+   }
+   public class Teacher : ApplicationUser
+   {
+       public string TeacherIdentificationNumber { get; set; }
+       public ICollection<Course> Courses { get; set; }
+   }
+   public class Student : ApplicationUser
+   {
+       public ICollection<StudentGroup> Groups { get; set; }
+   }
+   public class Parent : ApplicationUser
+   {
+       public ICollection<Student> Children { get; set; }
+   }
+   public class Course
+   {
+       public int Id { get; set; }
+       public string Title { get; set; }
+       public string Category { get; set; }
+   }
+   public class StudentGroup
+   {
+       public int Id { get; set; }
+       public string Name { get; set; }
+   }*/
 }
