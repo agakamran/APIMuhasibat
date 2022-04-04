@@ -19,7 +19,7 @@ namespace APIMuhasibat.Models.ViewModels
         Nullable<long> _providername = null;
         string _photoUrl = null;
         string _IP = null;
-        decimal _percent = 0;
+       // decimal _percent = 0;
         List<RefreshToken> _refreshTokens = null;
         public string FirstName
         {
@@ -51,11 +51,11 @@ namespace APIMuhasibat.Models.ViewModels
             get { return _IP; }
             set { if (value != null) { _IP = value; } }
         }
-        public decimal percent
-        {
-            get { return _percent; }
-            set { if (value > 0) { _percent = value; } }
-        }
+        //public decimal percent
+        //{
+        //    get { return _percent; }
+        //    set { if (value > 0) { _percent = value; } }
+        //}
         [JsonIgnore]
         public List<RefreshToken> RefreshTokens
         {

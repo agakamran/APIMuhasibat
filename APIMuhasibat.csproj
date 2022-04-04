@@ -30,6 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Images\profile\" />
     <Folder Include="Uploade\eqaime\" />
     <Folder Include="Uploade\eqaime\" />
   </ItemGroup>

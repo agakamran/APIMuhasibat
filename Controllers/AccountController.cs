@@ -19,6 +19,7 @@ using System.Threading.Tasks;
 using APIMuhasibat.Services;
 using System.IO;
 using System.Collections;
+using Microsoft.AspNetCore.Hosting;
 //using System.Web.Http;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -29,6 +30,7 @@ namespace APIMuhasibat.Controllers
     [ApiController]
     public  class AccountController : ControllerBase
     {
+        private readonly IHostingEnvironment _host;
         private readonly IRepository<Shirket> _firma = null;
         private readonly ApplicationDbContext db;      
         private readonly UserManager<ApplicationUser> _userManager;
@@ -59,6 +61,7 @@ namespace APIMuhasibat.Controllers
             IUserValidator<ApplicationUser> userValid,
             IPasswordValidator<ApplicationUser> passValid,
             IPasswordHasher<ApplicationUser> passwordHash,
+            IHostingEnvironment host,
             IRepository<logger> log,
             ILoggerFactory loggerFactory
             //IAntiforgery antiforgery, IRepository<payment> pa,  IRepository<Customer> cu, IRepository<Price> pr,  IRepository<invoice> inv,     IHostingEnvironment hostingEnvironment,
@@ -77,6 +80,7 @@ namespace APIMuhasibat.Controllers
             passwordHasher = passwordHash;
             _log = log;
             _loggerFactory = loggerFactory;
+            _host = host;
             //_pa = pa; _cu = cu;  _pr = pr;  _inv = inv;    _hostingEnvironment = hostingEnvironment;
             //_antiforgery = antiforgery;
         }
@@ -131,6 +135,7 @@ namespace APIMuhasibat.Controllers
                     if (result.Succeeded)
                     {
                         _logger.LogInformation("User logged in.");
+                        var _percent=_firma.GetAll().FirstOrDefault(k=>k.Email==model.Email).Shirpercent;
                         var user = await _userManager.FindByEmailAsync(model.Email);
                         var tokenString = BuildToken(user);
                         var use = new
@@ -138,10 +143,11 @@ namespace APIMuhasibat.Controllers
                             uid = user.Id,
                             displayName = user.UserName,
                             email = user.Email,
-                            providerId = user.providerId,
+                          //  providerId = user.providerId,
                             photoUrl = user.photoUrl,
                             isEmailConfirmed = user.EmailConfirmed,
                             phoneNumber = user.PhoneNumber,
+                            percent = _percent,
                             token = tokenString,
                             mesage = ""
                         };
@@ -405,7 +411,105 @@ namespace APIMuhasibat.Controllers
             // If we got this far, something failed, redisplay form
             return Ok(model);
         }
-       
+        [HttpPost]
+        //[ValidateAntiForgeryToken]
+        [Route("profil")]
+        public async Task<IActionResult> profil([FromBody] IndexViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState.Values);
+            }
+            //  string nameIdentifier = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            var user = await _userManager.FindByEmailAsync(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value);
+            // var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+            }
+            var email = user.Email;
+            if (model.Email != email)
+            {
+                var setEmailResult = await _userManager.SetEmailAsync(user, model.Email);
+                if (!setEmailResult.Succeeded)
+                {
+                    throw new ApplicationException($"Unexpected error occurred setting email for user with ID '{user.Id}'.");
+                }
+            }
+            var d = _firma.GetAll().FirstOrDefault(f => f.userId == user.Id && f.Email == user.Email);
+            var phoneNumber = user.PhoneNumber;
+            if (d == null)
+            {
+                var pp = new Shirket();
+                pp.ShId = Guid.NewGuid().ToString();
+                pp.Shiricrachi = user.UserName;
+               // pp.firma_telefon = user.PhoneNumber;
+                pp.Unvan = "Owner";
+                pp.Email = user.Email;
+                pp.userId = user.Id;
+                pp.Shirpercent = model.percent;
+                await _firma.InsertAsync(pp);
+                return Ok();
+            }
+            else if (d.Shirpercent != model.percent ||model.photoUrl == null)
+            {
+                d.ShId = d.ShId;
+                d.Shirpercent= model.percent;
+                await _firma.EditAsync(d);
+                 phoneNumber = model.PhoneNumber ;
+            }
+            //test
+            if (model.PhoneNumber != phoneNumber || model.photoUrl != user.photoUrl)
+            {
+                var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, model.PhoneNumber);
+                user.photoUrl = model.photoUrl;
+                var setphotoUrl = await _userManager.UpdateAsync(user);
+
+                if (!setPhoneResult.Succeeded)
+                {
+                    throw new ApplicationException($"Unexpected error occurred setting phone number for user with ID '{user.Id}'.");
+                }
+            }
+            //if (model.photoUrl != user.photoUrl)
+            //{
+            //    user.photoUrl = model.photoUrl;
+            //    var setphotoUrl = await _userManager.UpdateAsync(user);
+            //    if (!setphotoUrl.Succeeded)
+            //    {
+            //        throw new ApplicationException($"Unexpected error occurred setting phone number for user with ID '{user.Id}'.");
+            //    }
+            //}
+            StatusMessage = "Your profile has been updated";
+            return Ok(new { StatusMessage = "Your profile has been updated" });
+        }
+        #region ----------items_photo--------------------------------------------
+
+        [HttpPost]
+        [Route("uplodeAvatar")]
+        public async Task<IActionResult> uplodeAvatar()
+        {
+            if (!ModelState.IsValid) { return BadRequest(ModelState); }
+            else
+            {
+               // var pp = new prodphoto();
+                //pp.photoId = Guid.NewGuid().ToString();
+                var file = Request.Form.Files["file"];
+                // string exten = Path.GetExtension(file.FileName);
+                // string url = "Images/profile/" +  exten;
+                string _path = _host.ContentRootPath + "\\Images\\profile\\";
+                if (!(Directory.Exists(_path))) { Directory.CreateDirectory(_path); }
+                if (file.Length > 0)
+                {
+                    var path = Path.Combine(_path, file.FileName);
+                    using (var stream = new FileStream(path, FileMode.Create))
+                    {
+                        await file.CopyToAsync(stream);
+                    }
+                }
+                return Ok();
+            }
+        }
+        #endregion
         /*
          [HttpGet]
          [AllowAnonymous]
@@ -666,74 +770,7 @@ namespace APIMuhasibat.Controllers
              //  ViewData["ReturnUrl"] = returnUrl;
              return BadRequest(returnUrl);
          }
-         [HttpPost]
-         //[ValidateAntiForgeryToken]
-         [Route("profil")]
-         public async Task<IActionResult> profil([FromBody] IndexViewModel model)
-         {
-             if (!ModelState.IsValid)
-             {
-                 return BadRequest(ModelState.Values);
-             }
-             //  string nameIdentifier = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-             var user = await _userManager.FindByEmailAsync(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value);
-             // var user = await _userManager.GetUserAsync(User);
-             if (user == null)
-             {
-                 throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
-             }
-             var email = user.Email;
-             if (model.Email != email)
-             {
-                 var setEmailResult = await _userManager.SetEmailAsync(user, model.Email);
-                 if (!setEmailResult.Succeeded)
-                 {
-                     throw new ApplicationException($"Unexpected error occurred setting email for user with ID '{user.Id}'.");
-                 }
-             }
-             var d = _firma.GetAll().FirstOrDefault(f => f.userId == user.Id && f.firma_email == user.Email);
-             var phoneNumber = user.PhoneNumber;
-             if (d == null)
-             {
-                 var pp = new B_firma();
-                 pp.firma_Id = Guid.NewGuid().ToString();
-                 pp.firma_name = user.UserName;
-                 pp.firma_telefon = user.PhoneNumber;
-                 pp.firma_unvan = "Owner";
-                 pp.firma_email = user.Email;
-                 pp.userId = user.Id;
-                 await _firma.InsertAsync(pp);
-                 return Ok();
-             }
-             else if (model.photoUrl == null)
-             {
-                 d.firma_Id = d.firma_Id;
-                 d.firma_telefon = model.PhoneNumber;
-                 await _firma.EditAsync(d);
-
-                 model.PhoneNumber = phoneNumber;
-             }
-             //test
-             if (model.PhoneNumber != phoneNumber)
-             {
-                 var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, model.PhoneNumber);
-                 if (!setPhoneResult.Succeeded)
-                 {
-                     throw new ApplicationException($"Unexpected error occurred setting phone number for user with ID '{user.Id}'.");
-                 }
-             }
-             if (model.photoUrl != user.photoUrl)
-             {
-                 user.photoUrl = model.photoUrl;
-                 var setphotoUrl = await _userManager.UpdateAsync(user);
-                 if (!setphotoUrl.Succeeded)
-                 {
-                     throw new ApplicationException($"Unexpected error occurred setting phone number for user with ID '{user.Id}'.");
-                 }
-             }
-             StatusMessage = "Your profile has been updated";
-             return Ok(new { StatusMessage = "Your profile has been updated" });
-         }
+       
          [Authorize]
          [HttpGet]
          [Route("_getUsers")]

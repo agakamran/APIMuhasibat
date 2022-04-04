@@ -57,7 +57,7 @@ namespace APIMuhasibat.Models.ViewModels
                 {
                     foreach (var rol in _role)
                     {
-                        await _userManager.AddToRoleAsync(user, rol);
+                        if (rol == "Administrator") {await _userManager.AddToRoleAsync(user, rol); }                        
                     }
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     var _result = await _userManager.ConfirmEmailAsync(user, code);
