@@ -1,25 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Kamran\\Proektler\\API\\CommercialSolution\\APIMuhasibat\\APIMuhasibat.csproj": {}
+    "D:\\Programmer\\Angular\\CommercialSolution\\APIMuhasibat\\APIMuhasibat.csproj": {}
   },
   "projects": {
-    "E:\\Kamran\\Proektler\\API\\CommercialSolution\\APIMuhasibat\\APIMuhasibat.csproj": {
+    "D:\\Programmer\\Angular\\CommercialSolution\\APIMuhasibat\\APIMuhasibat.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Kamran\\Proektler\\API\\CommercialSolution\\APIMuhasibat\\APIMuhasibat.csproj",
+        "projectUniqueName": "D:\\Programmer\\Angular\\CommercialSolution\\APIMuhasibat\\APIMuhasibat.csproj",
         "projectName": "APIMuhasibat",
-        "projectPath": "E:\\Kamran\\Proektler\\API\\CommercialSolution\\APIMuhasibat\\APIMuhasibat.csproj",
-        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
-        "outputPath": "E:\\Kamran\\Proektler\\API\\CommercialSolution\\APIMuhasibat\\obj\\",
+        "projectPath": "D:\\Programmer\\Angular\\CommercialSolution\\APIMuhasibat\\APIMuhasibat.csproj",
+        "packagesPath": "C:\\Users\\adm\\.nuget\\packages\\",
+        "outputPath": "D:\\Programmer\\Angular\\CommercialSolution\\APIMuhasibat\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\adm\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -102,8 +100,8 @@
           "warn": true,
           "downloadDependencies": [
             {
-              "name": "Microsoft.NETCore.App.Host.win-x64",
-              "version": "[5.0.15, 5.0.15]"
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[5.0.0, 5.0.0]"
             }
           ],
           "frameworkReferences": {
@@ -114,7 +112,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     }

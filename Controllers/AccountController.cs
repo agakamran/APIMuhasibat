@@ -135,7 +135,7 @@ namespace APIMuhasibat.Controllers
                     if (result.Succeeded)
                     {
                         _logger.LogInformation("User logged in.");
-                        var _percent=_firma.GetAll().FirstOrDefault(k=>k.Email==model.Email).Shirpercent;
+                        var _percent=_firma.GetAll().FirstOrDefault(k=>k.Email==model.Email);
                         var user = await _userManager.FindByEmailAsync(model.Email);
                         var tokenString = BuildToken(user);
                         var use = new
@@ -146,8 +146,8 @@ namespace APIMuhasibat.Controllers
                           //  providerId = user.providerId,
                             photoUrl = user.photoUrl,
                             isEmailConfirmed = user.EmailConfirmed,
-                            phoneNumber = user.PhoneNumber,
-                            percent = _percent,
+                            phoneNumber = user?.PhoneNumber ,
+                            percent = _percent?.Shirpercent,
                             token = tokenString,
                             mesage = ""
                         };

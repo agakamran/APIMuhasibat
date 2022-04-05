@@ -156,6 +156,11 @@ namespace APIMuhasibat
                 FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "Uploade")),
                 RequestPath = new PathString("/Uploade")
             });
+            app.UseStaticFiles(new StaticFileOptions()
+            {                
+                 FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "Images")),
+                RequestPath = new PathString("/Images")
+            });
             //--------------------------------------------
             app.UseEndpoints(endpoints =>
             {
