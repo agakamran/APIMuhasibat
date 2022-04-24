@@ -179,10 +179,10 @@ namespace APIMuhasibat.Controllers
                 {
                     await _roleManager.CreateAsync(new ApplicationRole
                     {
-                        reade = _b,
-                        create = _b,
-                        delete = _b,
-                        update = _b,
+                      CanAccess  = _b,
+                      CanAdd = _b,
+                      CanDelete = _b,
+                      CanUpdate = _b,
                         Id = Guid.NewGuid().ToString(),
                         Name = rol,
                         NormalizedName = rol.ToUpper()

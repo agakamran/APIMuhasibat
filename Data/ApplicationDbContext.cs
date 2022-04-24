@@ -1,6 +1,7 @@
 ﻿using APIMuhasibat.Models;
 using APIMuhasibat.Models.LOGER;
 using APIMuhasibat.Models.ViewModels;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,48 +14,40 @@ namespace APIMuhasibat.Data
         {
         }
         //https://docs.microsoft.com/en-us/aspnet/core/security/authentication/customize-identity-model?view=aspnetcore-6.0
-        protected override void OnModelCreating(ModelBuilder builder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(builder);
-            // builder.Conventions.Remove<Plua>
-            // Customize the ASP.NET Identity model and override the defaults if needed.
-            // For example, you can rename the ASP.NET Identity table names and more.
-            // Add your customizations after calling base.OnModelCreating(builder);
-            //modelBuilder.Entity<IdentityUser>(b =>
-            //{
-            //    b.ToTable("kamUsers");
-            //});
-
-            //modelBuilder.Entity<IdentityUserClaim<string>>(b =>
-            //{
-            //    b.ToTable("kamUserClaims");
-            //});
-
-            //modelBuilder.Entity<IdentityUserLogin<string>>(b =>
-            //{
-            //    b.ToTable("kamUserLogins");
-            //});
-
-            //modelBuilder.Entity<IdentityUserToken<string>>(b =>
-            //{
-            //    b.ToTable("kamUserTokens");
-            //});
-
-            //modelBuilder.Entity<IdentityRole>(b =>
-            //{
-            //    b.ToTable("kamRoles");
-            //});
-
-            //modelBuilder.Entity<IdentityRoleClaim<string>>(b =>
-            //{
-            //    b.ToTable("kamRoleClaims");
-            //});
-
-            //modelBuilder.Entity<IdentityUserRole<string>>(b =>
-            //{
-            //    b.ToTable("kamUserRoles");
-            //});
-        }      
+            base.OnModelCreating(modelBuilder);
+            #region .
+            modelBuilder.Entity<ApplicationUser>(b =>
+            {
+                b.ToTable("kUsers");
+            });
+            modelBuilder.Entity<IdentityUserClaim<string>>(b =>
+            {
+                b.ToTable("kUserClaims");
+            });
+            modelBuilder.Entity<IdentityUserLogin<string>>(b =>
+            {
+                b.ToTable("kUserLogins");
+            });
+            modelBuilder.Entity<IdentityUserToken<string>>(b =>
+            {
+                b.ToTable("kUserTokens");
+            });
+            modelBuilder.Entity<ApplicationRole>(b =>
+            {
+                b.ToTable("kRoles");
+            });
+            modelBuilder.Entity<IdentityRoleClaim<string>>(b =>
+            {
+                b.ToTable("RoleClaims");
+            });
+            modelBuilder.Entity<IdentityUserRole<string>>(b =>
+            {
+                b.ToTable("kUserRoles");
+            });
+            #endregion
+        }
         public DbSet<Navbar> navbars { get; set; }
         public DbSet<NavbarRole> navroles { get; set; }
         public DbSet<Shirket> shirkets { get; set; }

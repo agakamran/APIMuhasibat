@@ -549,7 +549,7 @@ namespace APIMuhasibat.Controllers
         [Route("_getshirket")]
         public IEnumerable<Shirket> _getshirket(string id)
         {
-            if (id != null)
+            if (id != null && id != "undefined")
             {
                 return _shi.GetAll().Where(c => c.ShId == id);
             }

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace APIMuhasibat.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220404145306_int")]
-    partial class @int
+    [Migration("20220423095526_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -517,6 +517,18 @@ namespace APIMuhasibat.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<bool>("CanAccess")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("CanAdd")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("CanDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("CanUpdate")
+                        .HasColumnType("bit");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -529,18 +541,6 @@ namespace APIMuhasibat.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
-                    b.Property<bool>("create")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("delete")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("reade")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("update")
-                        .HasColumnType("bit");
-
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedName")
@@ -548,7 +548,7 @@ namespace APIMuhasibat.Migrations
                         .HasDatabaseName("RoleNameIndex")
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
-                    b.ToTable("AspNetRoles");
+                    b.ToTable("kRoles");
                 });
 
             modelBuilder.Entity("APIMuhasibat.Models.ViewModels.ApplicationUser", b =>
@@ -631,7 +631,7 @@ namespace APIMuhasibat.Migrations
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.ToTable("AspNetUsers");
+                    b.ToTable("kUsers");
                 });
 
             modelBuilder.Entity("APIMuhasibat.Models.ViewModels.Navbar", b =>
@@ -830,7 +830,7 @@ namespace APIMuhasibat.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetRoleClaims");
+                    b.ToTable("RoleClaims");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -854,7 +854,7 @@ namespace APIMuhasibat.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserClaims");
+                    b.ToTable("kUserClaims");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
@@ -876,7 +876,7 @@ namespace APIMuhasibat.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserLogins");
+                    b.ToTable("kUserLogins");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
@@ -891,7 +891,7 @@ namespace APIMuhasibat.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetUserRoles");
+                    b.ToTable("kUserRoles");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -910,7 +910,7 @@ namespace APIMuhasibat.Migrations
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("AspNetUserTokens");
+                    b.ToTable("kUserTokens");
                 });
 
             modelBuilder.Entity("APIMuhasibat.Models.Activler", b =>

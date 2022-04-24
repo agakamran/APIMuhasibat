@@ -77,10 +77,11 @@ namespace APIMuhasibat.Models.ViewModels
         public ApplicationRole() : base() { }
         public ApplicationRole(string roleName) : base(roleName)
         { }
-        public bool create { get; set; }
-        public bool reade { get; set; }
-        public bool update { get; set; }
-        public bool delete { get; set; }
+        public bool CanAccess { get; set; }
+        public bool CanAdd { get; set; }
+        public bool CanUpdate { get; set; }
+        public bool CanDelete { get; set; }
+       
     }
     [Table("Navbars")]
    public class Navbar

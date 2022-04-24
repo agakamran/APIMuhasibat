@@ -389,6 +389,7 @@ namespace APIMuhasibat.Controllers
                        });
             return res.ToList();
         }
+        
         [Authorize(Roles = "Administrator")]
         [HttpPost]
         [Route("_addnavrol")]
